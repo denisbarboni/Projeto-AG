@@ -1,0 +1,50 @@
+
+.modal-dialog {
+    width: 300px;
+}
+.modal-footer {
+    height: 70px;
+    margin: 0;
+}
+.modal-footer .btn {
+    font-weight: bold;
+}
+.modal-footer .progress {
+    display: none;
+    height: 32px;
+    margin: 0;
+}
+.input-group-addon {
+    color: #fff;
+    background: #3276B1;
+}
+
+/* FORMATAÇÃO PLANOS */
+.plano-basico{
+    width: 120px;
+    height: 118px;
+    background-color: #808080;
+    font: 27px Arial, arial, sans-serif;
+    color: #ffffff;
+    text-align: center;
+}
+.plano-padrao{
+    width: 120px;
+    height: 118px;
+    background-color: #808080;
+    font: 27px Arial, arial, sans-serif;
+    color: #ffffff;
+    text-align: center;
+
+}
+.plano-premium{
+    width: 120px;
+    height: 118px;
+    background-color: #808080;
+    font: 27px Arial, arial, sans-serif;
+    color: #ffffff;
+    text-align: center;
+}
+.container-fluid {
+    background: #EEE;
+}
