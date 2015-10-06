@@ -1,0 +1,15 @@
+Seleciona o diretório
+
+git init   -- caso não tenha git vinculado
+
+git remote add origin @@@ssh    -- vincula ao projet no github
+
+git pull origin master    - puxa tudo do raiz para a pasta 
+
+git add "nome" ou .     puxa somente um arquivo especifico ou todos ( . )
+
+git commit -m "mensagem de commit"    -- commit nas alterações
+
+git push origin master    -- subir mesmo
+
+get fetch origin   -- atualizar
