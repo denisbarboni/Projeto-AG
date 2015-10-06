@@ -1,0 +1,10 @@
+D:\Dropbox\Projetos C#\ConsoleApplication1\AlgGenetico\bin\Debug\AlgGenetico.dll
+D:\Dropbox\Projetos C#\ConsoleApplication1\AlgGenetico\bin\Debug\AlgGenetico.pdb
+D:\Dropbox\Projetos C#\ConsoleApplication1\AlgGenetico\obj\Debug\AlgGenetico.dll
+D:\Dropbox\Projetos C#\ConsoleApplication1\AlgGenetico\obj\Debug\AlgGenetico.pdb
+D:\Dropbox\Projetos C#\ConsoleApplication1\AlgGenetico\obj\Debug\AlgGenetico.csprojResolveAssemblyReference.cache
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AlgGenetico\bin\Debug\AlgGenetico.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AlgGenetico\bin\Debug\AlgGenetico.pdb
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AlgGenetico\obj\Debug\AlgGenetico.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AlgGenetico\obj\Debug\AlgGenetico.pdb
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AlgGenetico\obj\Debug\AlgGenetico.csprojResolveAssemblyReference.cache
