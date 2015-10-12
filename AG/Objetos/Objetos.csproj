@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlterarSenha.cs" />
     <Compile Include="Configuracao.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="Login.cs" />

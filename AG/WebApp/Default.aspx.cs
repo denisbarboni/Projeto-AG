@@ -70,6 +70,15 @@ namespace WebApp
         {
             Sair();
         }
+
+        [WebMethod]
+        public static void Logoff()
+        {
+            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session.RemoveAll();
+            HttpContext.Current.Session.Abandon();
+            //HttpContext.Current.Response.Redirect("Login.aspx");
+        }
         #endregion
 
         #region SalvarConfig
@@ -302,7 +311,7 @@ namespace WebApp
 
             foreach (Sku sku in dao.GetSku(id))
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheSkus" + sku.Id_Sku, "$( document ).ready(function() { \n $(\"#tblSku\").append('<tr id=\"rowSku" + sku.Id_Sku + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeSku" + sku.Id_Sku + "\" name=\"txtNomeSku" + sku.Id_Sku + "\" placeholder=\"Nome do Sku\" class=\"form-control\" value=\""+ sku.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtPesoSku" + sku.Id_Sku + "\" name=\"txtPesoSku" + sku.Id_Sku + "\" placeholder=\"Peso do Sku\" class=\"form-control\" value=\"" + sku.Peso_Caixa + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanPesoSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-floppy-disk saveRowSku\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowSku\"></button></td></tr>'); $(\"#spanNomeSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanPesoSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); });\n\n", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheSkus" + sku.Id_Sku, "$( document ).ready(function() { \n $(\"#tblSku\").append('<tr id=\"rowSku" + sku.Id_Sku + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeSku" + sku.Id_Sku + "\" name=\"txtNomeSku" + sku.Id_Sku + "\" placeholder=\"Nome do Sku\" class=\"form-control\" value=\""+ sku.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtPesoSku" + sku.Id_Sku + "\" name=\"txtPesoSku" + sku.Id_Sku + "\" placeholder=\"Peso do Sku\" class=\"form-control\" value=\"" + sku.Peso_Caixa + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanPesoSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowSku\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowSku\"></button></td></tr>'); $(\"#spanNomeSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanPesoSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); });\n\n", true);
             }
         }
 
@@ -364,7 +373,7 @@ namespace WebApp
 
             foreach (Unidade un in dao.GetUnidade(id))
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheUnidade" + un.Codigo_Un, "$( document ).ready(function() { \n $(\"#tblUnidade\").append('<tr id=\"rowUnidade" + un.Codigo_Un + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtCodUnidade" + un.Codigo_Un + "\" name=\"txtCodUnidade" + un.Codigo_Un + "\" placeholder=\"Código da Unidade\" class=\"form-control\" value=\"" + un.Codigo_Un + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanCodUnidade" + un.Codigo_Un + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeUnidade" + un.Codigo_Un + "\" name=\"txtNomeUnidade" + un.Codigo_Un + "\" placeholder=\"Nome da Unidade\" class=\"form-control\" value=\"" + un.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeUnidade" + un.Codigo_Un + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-floppy-disk saveRowUnidade\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowUnidade\"></button></td></tr>'); $(\"#spanCodUnidade" + un.Codigo_Un + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanNomeUnidade" + un.Codigo_Un + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); });\n\n", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheUnidade" + un.Codigo_Un, "$( document ).ready(function() { \n $(\"#tblUnidade\").append('<tr id=\"rowUnidade" + un.Codigo_Un + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtCodUnidade" + un.Codigo_Un + "\" name=\"txtCodUnidade" + un.Codigo_Un + "\" placeholder=\"Código da Unidade\" class=\"form-control\" value=\"" + un.Codigo_Un + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanCodUnidade" + un.Codigo_Un + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeUnidade" + un.Codigo_Un + "\" name=\"txtNomeUnidade" + un.Codigo_Un + "\" placeholder=\"Nome da Unidade\" class=\"form-control\" value=\"" + un.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeUnidade" + un.Codigo_Un + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowUnidade\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowUnidade\"></button></td></tr>'); $(\"#spanCodUnidade" + un.Codigo_Un + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanNomeUnidade" + un.Codigo_Un + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); });\n\n", true);
             }
         }
 
@@ -668,6 +677,38 @@ namespace WebApp
                     return "False1";
                 else
                     return "False2";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        #endregion
+
+        #region AlterarSenha
+        [WebMethod]
+        public static string AlterarSenha(string senha, string newsenha, string newsenha2)
+        {
+            try
+            {
+                DAO dao = new DAO();
+
+                int rtn = dao.AlterarSenha(new AlterarSenha() {
+                    idUser = idUserStatic,
+                    Senha = senha,
+                    SenhaNova = newsenha,
+                    SenhaNova2 = newsenha2
+                });
+
+                if (rtn > 0)
+                    return "True";
+                else if (rtn == -1)
+                    return "False1";
+                else if (rtn == 0)
+                    return "False2";
+                else
+                    return "False";
+
             }
             catch (Exception ex)
             {

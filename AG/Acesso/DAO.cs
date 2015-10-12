@@ -1102,5 +1102,61 @@ namespace Acesso
             }
         }
         #endregion
+
+        #region AlterarSenha
+        public int AlterarSenha(AlterarSenha altSenha)
+        {
+            try
+            {
+                conn = new NpgsqlConnection(strConn);
+                conn.Open();
+
+                var query = "SELECT * FROM usuario WHERE IdUsuario = @id and Senha = @senha";
+
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", altSenha.idUser);
+                cmd.Parameters.AddWithValue("@senha", altSenha.Senha);
+
+                NpgsqlDataReader rd = cmd.ExecuteReader();
+
+                bool ok = false;
+
+                if (rd.Read()) ok = true;
+
+                rd.Close();
+
+                if (ok)
+                {
+                    if (altSenha.SenhaNova.Equals(altSenha.SenhaNova2) && altSenha.SenhaNova != "" && altSenha.SenhaNova2 != "")
+                    {
+                        query = "UPDATE usuario SET senha = @senha WHERE idUsuario = @id";
+
+                        cmd = new NpgsqlCommand(query, conn);
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@senha", altSenha.Senha);
+                        cmd.Parameters.AddWithValue("@id", altSenha.idUser);
+
+                        return cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        #endregion
     }
 }

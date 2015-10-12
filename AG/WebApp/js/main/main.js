@@ -43,7 +43,7 @@ $("#btnSalvarConfig").click(function () {
     });
 });
 
-$('#btnLogar').click(function () {
+$("#btnLogar").click(function () {
     var dataString = JSON.stringify({
         user: $('#txtLogin').val(), //pega as variasis dos textbox e joga no data do json
         senha: $('#txtSenha').val()
@@ -71,3 +71,53 @@ $('#btnLogar').click(function () {
         }
     });
 });
+
+function altSenha() {
+    var senha = $('#txtSenhaAntiga').val();
+    var newsenha = $('#txtSenhaNova').val();
+    var newsenha2 = $('#txtSenhaNovaNovamente').val();
+
+    var dataString = JSON.stringify({
+        senha: senha,
+        newsenha: newsenha,
+        newsenha2: newsenha2
+    });
+
+    $.ajax({ //chama o webmethod logar
+        type: "POST",
+        url: "Default.aspx/AlterarSenha",
+        data: dataString,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (rtn) {
+            if (rtn.d == "False1") {
+                $('#lblErro').text("Senhas não conferem ou invalidas!");
+                $('#modalErro').modal('show'); //se explodir exception no no metodo Logar, retorna 
+            }
+            else if (rtn.d == "False2") {
+                $('#lblErro').text("Senha antiga incorreta!");
+                $('#modalErro').modal('show'); //se explodir exception no no metodo Logar, retorna 
+            }
+            else if (rtn.d == "True") {
+                $('#lblSucess').text("Senha alterada com sucesso!");
+                $('#modalSucess').modal('show'); //se explodir exception no no metodo Logar, retorna 
+                $.ajax({ //chama o webmethod logar
+                    type: "POST",
+                    url: "Default.aspx/Logoff",
+                    data: dataString,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () {
+                        setTimeout(function () {
+                            window.location.href = "login.aspx"
+                        }, 1500);
+                    }
+                });
+            }
+            else {
+                $('#lblErro').text(rtn.d + "\n - Algum erro inesperado aconteceu!\nPor favor, entre em contato com o suporte.");
+                $('#modalErro').modal('show'); //se explodir exception no no metodo Logar, retorna 
+            }
+        }
+    });
+}

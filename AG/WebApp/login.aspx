@@ -29,7 +29,7 @@
                         <label class="control-label">Senha</label>
                         <div class="input-group">
                             <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-share"></span>
+                                <span class="glyphicon glyphicon-lock"></span>
                             </div>
                             <asp:TextBox ID="txtSenha" runat="server" ClientIDMode="Static" CssClass="form-control" placeholder="Senha" required TextMode="Password" MaxLength="030"></asp:TextBox>
                         </div>
@@ -68,6 +68,6 @@
 
     <script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/main/main.js"></script>
 </body>
 </html>

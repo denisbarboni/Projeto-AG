@@ -245,7 +245,7 @@
 
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-user"></span>Account</a>
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-user"></span>Conta</a>
                                                 </h4>
                                             </div>
 
@@ -254,48 +254,12 @@
                                                     <table class="table">
                                                         <tr>
                                                             <td>
-                                                                <a href="#tabtab4" data-toggle="tab">Change Password</a>
+                                                                <a href="#tabtab7" data-toggle="tab">Perfil</a>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <a href="#tabtab5" data-toggle="tab">Change Password</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="#tabtab6" data-toggle="tab">Change Password</a>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="panel panel-default">
-
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user"></span>Account</a>
-                                                </h4>
-                                            </div>
-
-                                            <div id="collapseThree" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <table class="table">
-                                                        <tr>
-                                                            <td>
-                                                                <a href="#tabtab7" data-toggle="tab">Change Password</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="#tabtab8" data-toggle="tab">Change Password</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="#tabtab9" data-toggle="tab">Change Password</a>
+                                                                <a href="#tabtab8" data-toggle="tab">Alterar Senha</a>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -381,8 +345,8 @@
                                                             <th>&nbsp</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>                                                        
-                                                        <%--aqui vai os setores via jquery--%>                                                        
+                                                    <tbody>
+                                                        <%--aqui vai os setores via jquery--%>
                                                     </tbody>
                                                 </table>
                                                 <button class="btn btn-primary pull-right" id="addJob">Adicionar Job</button>
@@ -400,35 +364,62 @@
                                                             <%--  style="width: 20%" --%>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>                                                                                                                
+                                                    <tbody>
                                                     </tbody>
                                                 </table>
                                                 <button class="btn btn-primary pull-right" id="addVelocidade">Adicionar Velocidade</button>
                                             </div>
-                                            
+
                                             <div class="tab-pane fade in" id="tabtab7" style="padding-bottom: 25px;">
-                                                Teste7
+                                                Editar perfil
                                             </div>
 
-                                            <div class="tab-pane fade in" id="tabtab8" style="padding-bottom: 25px;">
-                                                Teste8
-                                            </div>
+                                            <div class="tab-pane fade in" id="tabtab8">
+                                                <div class="form-group">
+                                                    <label class="control-label">Senha antiga</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-lock"></span>
+                                                        </div>
+                                                        <input id="txtSenhaAntiga" type="text" class="form-control" placeholder="Senha Antiga" required maxlength="30" />
+                                                    </div>
+                                                </div>
 
-                                            <div class="tab-pane fade in" id="tabtab9" style="padding-bottom: 25px;">
-                                                Teste9
-                                            </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Nova senha</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-lock"></span>
+                                                        </div>
+                                                        <input id="txtSenhaNova" type="text" class="form-control" placeholder="Senha Nova" required maxlength="30" />
+                                                    </div>
+                                                </div>
 
+                                                <div class="form-group">
+                                                    <label class="control-label">Nova senha novamente</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-lock"></span>
+                                                        </div>
+                                                        <input id="txtSenhaNovaNovamente" type="text" class="form-control" placeholder="Senha nova novamente" required maxlength="30" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary btn-block" id="btnAltSenha" onclick="altSenha();">Alterar</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
 
                     <div class="tab-pane fade in" id="tab2">
-                        Teste
+                        Teste                    
                     </div>
+
                 </div>
             </div>
 
@@ -444,6 +435,29 @@
                                 <div class="modal-body">
                                     <p>
                                         <asp:Label ID="lblErro" runat="server" Text="Verifique seu usuário e/ou sua senha."></asp:Label>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="modal fade" id="modalSucess" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Sucesso!</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        <asp:Label ID="lblSucess" runat="server" Text="Verifique seu usuário e/ou sua senha."></asp:Label>
                                     </p>
                                 </div>
                                 <div class="modal-footer">
