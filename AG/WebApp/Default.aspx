@@ -27,10 +27,13 @@
     <%--jquery para manipulação da tabela de sku--%>
 
     <script src="./js/AddRemEdtTableUnidade.js"></script>
-    <%--jquery para manipulação da tabela de sku--%>
+    <%--jquery para manipulação da tabela de unidade--%>
 
     <script src="./js/AddRemEdtTableJob.js"></script>
-    <%--jquery para manipulação da tabela de sku--%>
+    <%--jquery para manipulação da tabela de job--%>
+
+    <script src="./js/AddRemEdtTableVelocidade.js"></script>
+    <%--jquery para manipulação da tabela de velocidade--%>
 
     <script>
         $(document).ready(function () {
@@ -372,9 +375,9 @@
                                                 <table class="table table-hover" id="tblJob">
                                                     <thead>
                                                         <tr>
-                                                            <th style="width: 40%">Sku do Job</th>
-                                                            <th style="width: 40%">Quantidade</th>
-                                                            <th style="width: 20%">&nbsp</th>
+                                                            <th>Sku do Job</th>
+                                                            <th>Quantidade</th>
+                                                            <th>&nbsp</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>                                                        
@@ -385,9 +388,23 @@
                                             </div>
 
                                             <div class="tab-pane fade in" id="tabtab6" style="padding-bottom: 25px;">
-                                                Teste6
+                                                <table class="table table-hover" id="tblVelocidade">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Máquina</th>
+                                                            <th>Setor</th>
+                                                            <th>Sku</th>
+                                                            <th>Velocidade</th>
+                                                            <th>&nbsp</th>
+                                                            <%--  style="width: 20%" --%>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>                                                                                                                
+                                                    </tbody>
+                                                </table>
+                                                <button class="btn btn-primary pull-right" id="addVelocidade">Adicionar Velocidade</button>
                                             </div>
-
+                                            
                                             <div class="tab-pane fade in" id="tabtab7" style="padding-bottom: 25px;">
                                                 Teste7
                                             </div>
@@ -409,7 +426,7 @@
                     </div>
 
                     <div class="tab-pane fade in" id="tab2">
-                        Algoritmo Aqui
+                        Teste
                     </div>
                 </div>
             </div>

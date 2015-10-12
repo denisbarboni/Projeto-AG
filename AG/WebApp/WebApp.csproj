@@ -67,12 +67,14 @@
     <Content Include="Default.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="algoritimo\index.aspx" />
+    <Content Include="js\AddRemEdtTableVelocidade.js" />
     <Content Include="js\AddRemEdtTableJob.js" />
     <Content Include="js\AddRemEdtTableUnidade.js" />
     <Content Include="js\AddRemEdtTableSku.js" />
     <Content Include="js\AddRemEdtTableSetor.js" />
     <Content Include="js\AddRemEdtTableMaq.js" />
     <Content Include="js\main.js" />
+    <Content Include="js\validateConfig.js" />
     <Content Include="login.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

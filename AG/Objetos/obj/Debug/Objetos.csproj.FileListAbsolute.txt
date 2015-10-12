@@ -3,3 +3,8 @@ D:\Dropbox\Projetos C#\Algoritimo Genetico\Objetos\bin\Debug\Objetos.pdb
 D:\Dropbox\Projetos C#\Algoritimo Genetico\Objetos\obj\Debug\Objetos.csprojResolveAssemblyReference.cache
 D:\Dropbox\Projetos C#\Algoritimo Genetico\Objetos\obj\Debug\Objetos.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\Objetos\obj\Debug\Objetos.pdb
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Objetos\bin\Debug\Objetos.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Objetos\bin\Debug\Objetos.pdb
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Objetos\obj\Debug\Objetos.csprojResolveAssemblyReference.cache
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Objetos\obj\Debug\Objetos.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Objetos\obj\Debug\Objetos.pdb

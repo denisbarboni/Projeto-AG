@@ -12,5 +12,6 @@ namespace Objetos
         public Maquina Maquina { get; set; }
         public Sku Sku { get; set; }
         public double Velocidade_Hr { get; set; }
+        public int idUser { get; set; }
     }
 }

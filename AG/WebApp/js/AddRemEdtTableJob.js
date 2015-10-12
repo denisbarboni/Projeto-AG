@@ -13,7 +13,7 @@
             success: function (rtn) {
                 idJob = rtn.d;
 
-                $("#tblJob").append('<tr id="rowJob' + idJob + '"><td style="width:40%; "><div class="form-group has-feedback"><select id="selJobSku' + idJob + '" class="form-control"></select><span class="glyphicon form-control-feedback" id="spanJobSku' + idJob + '"></span></div></td><td style="width:40%; "><div class="form-group has-feedback"><input type="text" id="txtQtdeJob' + idJob + '" name="txtQtdeJob' + idJob + '" placeholder="Quantidade da Job" class="form-control" /><span class="glyphicon form-control-feedback" id="spanQtdeJob' + idJob + '"></span></div></td><td style="width:20%; "><button class="btn btn-primary glyphicon glyphicon-floppy-disk saveRowJob"></button><button class="btn btn-danger glyphicon glyphicon-remove remRowJob"></button></td></tr>');
+                $("#tblJob").append('<tr id="rowJob' + idJob + '"><td><div class="form-group has-feedback"><select id="selJobSku' + idJob + '" class="form-control"></select><span class="glyphicon form-control-feedback" id="spanJobSku' + idJob + '"></span></div></td><td><div class="form-group has-feedback"><input type="text" id="txtQtdeJob' + idJob + '" name="txtQtdeJob' + idJob + '" placeholder="Quantidade da Job" class="form-control" /><span class="glyphicon form-control-feedback" id="spanQtdeJob' + idJob + '"></span></div></td><td style="width:15%; "><button class="btn btn-primary glyphicon glyphicon-floppy-disk saveRowJob"></button> <button class="btn btn-danger glyphicon glyphicon-remove remRowJob"></button></td></tr>');
 
                 $("#addJob").attr('disabled', true);
 

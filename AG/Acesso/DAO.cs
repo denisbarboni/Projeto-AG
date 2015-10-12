@@ -954,5 +954,153 @@ namespace Acesso
             }
         }
         #endregion
+
+        #region Job
+        public List<Velocidade> GetVel(int idUser)
+        {
+            try
+            {
+                conn = new NpgsqlConnection(strConn);
+                conn.Open();
+
+                var query = "SELECT * FROM velocidade WHERE idUser = @idUser";
+
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@idUser", idUser);
+
+                NpgsqlDataReader rd = cmd.ExecuteReader();
+
+                List<Velocidade> lstVel = new List<Velocidade>();
+
+                while (rd.Read())
+                {
+                    lstVel.Add(new Velocidade()
+                    {
+                        Id_Velocidade = Convert.ToInt32(rd[0].ToString()),
+                        Setor = new Setor() { Id_Setor = Convert.ToInt32(rd[1].ToString()) },
+                        Maquina = new Maquina() { Id_Maquina = Convert.ToInt32(rd[2].ToString()) },
+                        Sku = new Sku() { Id_Sku = Convert.ToInt32(rd[3].ToString()) },
+                        Velocidade_Hr = Convert.ToDouble(rd[4].ToString()),
+                        idUser = Convert.ToInt32(rd[5].ToString())
+                    });
+                }
+
+                return lstVel;
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public Boolean VerificaExistenciaVelocidade(int id)
+        {
+            try
+            {
+                conn = new NpgsqlConnection(strConn);
+                conn.Open();
+
+                var query = "SELECT * FROM velocidade WHERE id_velocidade = @id";
+
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                NpgsqlDataReader rd = cmd.ExecuteReader();
+
+                if (rd.Read()) return true; else return false;
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public Boolean AddEdtVel(Velocidade vel)
+        {
+            try
+            {
+                if (VerificaExistenciaVelocidade(vel.Id_Velocidade))
+                {
+                    conn = new NpgsqlConnection(strConn);
+                    conn.Open();
+
+                    var query = "UPDATE velocidade SET id_maquina = @id_maq, id_setor = @id_setor, id_sku = @id_sku, velocidade_hora = @vel_hr WHERE id_velocidade = @id_velocidade and iduser = @user";
+
+                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id_sku", vel.Sku.Id_Sku);
+                    cmd.Parameters.AddWithValue("@id_maq", vel.Maquina.Id_Maquina);
+                    cmd.Parameters.AddWithValue("@id_setor", vel.Setor.Id_Setor);
+                    cmd.Parameters.AddWithValue("@vel_hr", vel.Velocidade_Hr);
+                    cmd.Parameters.AddWithValue("@user", vel.idUser);
+
+                    return Convert.ToBoolean(cmd.ExecuteNonQuery());
+                }
+                else
+                {
+                    conn = new NpgsqlConnection(strConn);
+                    conn.Open();
+
+                    var query = "INSERT INTO velocidade VALUES (@id_vel, @id_setor, @id_maq, @id_sku, @vel_hr, @user);";
+
+                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id_vel", vel.Id_Velocidade);
+                    cmd.Parameters.AddWithValue("@id_sku", vel.Sku.Id_Sku);
+                    cmd.Parameters.AddWithValue("@id_maq", vel.Maquina.Id_Maquina);
+                    cmd.Parameters.AddWithValue("@id_setor", vel.Setor.Id_Setor);
+                    cmd.Parameters.AddWithValue("@vel_hr", vel.Velocidade_Hr);
+                    cmd.Parameters.AddWithValue("@user", vel.idUser);
+
+                    return Convert.ToBoolean(cmd.ExecuteNonQuery());
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public Int32 RemVel(int id)
+        {
+            try
+            {
+                if (VerificaExistenciaVelocidade(id))
+                {
+                    conn = new NpgsqlConnection(strConn);
+                    conn.Open();
+
+                    var query = "DELETE FROM velocidade WHERE id_velocidade = @id";
+
+                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    return cmd.ExecuteNonQuery();
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        #endregion
     }
 }
