@@ -15,24 +15,25 @@
 
     <script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
 
-    <script src="./js/AddRemEdtTableMaq.js"></script>
+    <script type="text/javascript" src="./js/main/main.js"></script>
+
+    <script src="./js/tbls/AddRemEdtTableMaq.js"></script>
     <%--jquery para manipulação da tabela de máquinas--%>
 
-    <script src="./js/AddRemEdtTableSetor.js"></script>
+    <script src="./js/tbls/AddRemEdtTableSetor.js"></script>
     <%--jquery para manipulação da tabela de setor--%>
 
-    <script src="./js/AddRemEdtTableSku.js"></script>
+    <script src="./js/tbls/AddRemEdtTableSku.js"></script>
     <%--jquery para manipulação da tabela de sku--%>
 
-    <script src="./js/AddRemEdtTableUnidade.js"></script>
+    <script src="./js/tbls/AddRemEdtTableUnidade.js"></script>
     <%--jquery para manipulação da tabela de unidade--%>
 
-    <script src="./js/AddRemEdtTableJob.js"></script>
+    <script src="./js/tbls/AddRemEdtTableJob.js"></script>
     <%--jquery para manipulação da tabela de job--%>
 
-    <script src="./js/AddRemEdtTableVelocidade.js"></script>
+    <script src="./js/tbls/AddRemEdtTableVelocidade.js"></script>
     <%--jquery para manipulação da tabela de velocidade--%>
 
     <script>
