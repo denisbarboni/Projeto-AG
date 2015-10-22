@@ -716,5 +716,114 @@ namespace WebApp
             }
         }
         #endregion
+
+        #region Algoritimo
+        private void executaAlgGenetico()
+        {
+            //Define a solu��o
+            AlgGenetico.Algoritimo.Solucao = Convert.ToInt32(config.SolucaoMax);
+            // Ler o arquivo com os genes e respectivos valores e configura as vari�veis de Jobs e Maquinas que est�o no arquivo TXT
+            AlgGenetico.Algoritimo.lerArquivo(idUserStatic);
+            //taxa de crossover de 60%
+            AlgGenetico.Algoritimo.TaxaDeCrossover = config.TaxaCrossover;
+            //taxa de muta��o de 3%
+            AlgGenetico.Algoritimo.TaxaDeMutacao = config.TaxaMutacao;
+            //elitismo
+            bool eltismo = config.Eltismo;
+            //tamanho da popula��o
+            int tamPop = config.TotalPopulacao;
+            //numero m�ximo de gera��es
+            int numMaxGeracoes = config.TotalGeracao;
+
+            //define o n�mero de genes do indiv�duo baseado na solu��o
+            int numGenes = AlgGenetico.Algoritimo.Jobs.Length;
+
+            //cria a primeira popula��o aleat�ria
+            AlgGenetico.Populacao populacao = new AlgGenetico.Populacao(numGenes, tamPop);
+
+            bool temSolucao = false;
+            int geracao = 0;
+
+            //Console.WriteLine("Iniciando... Aptid�o da solu��o: " + Algoritimo.Solucao);
+            Label1.Text = "Iniciando... Aptid�o da solu��o: " + AlgGenetico.Algoritimo.Solucao;
+
+            //loop at� o crit�rio de parada
+            while (!temSolucao && geracao < numMaxGeracoes)
+            {
+                geracao++;
+
+                //cria nova populacao
+                populacao = AlgGenetico.Algoritimo.novaGeracao(populacao, eltismo);
+
+                //Console.WriteLine("Gera��o " + geracao + " | Aptid�o: " + populacao.getIndivduo(0).Aptidao + " | Melhor: " + populacao.getIndivduo(0).Genes);
+                Label2.Text = "Gera��o " + geracao + " | Aptid�o: " + populacao.getIndivduo(0).Aptidao + " | Melhor: " + populacao.getIndivduo(0).Genes;
+                
+
+                //verifica se tem a solucao
+                temSolucao = populacao.temSolocao(AlgGenetico.Algoritimo.Solucao);
+            }
+
+            if (geracao == numMaxGeracoes)
+            {
+                //Console.WriteLine("N�mero Maximo de Gera��es | " + populacao.getIndivduo(0).Genes + " " + populacao.getIndivduo(0).Aptidao);
+                Label4.Text = "N�mero Maximo de Gera��es | " + populacao.getIndivduo(0).Genes + " " + populacao.getIndivduo(0).Aptidao;
+            }
+
+            if (temSolucao)
+            {
+
+                //Console.WriteLine("Encontrado resultado na gera��o " + geracao + " | " + populacao.getIndivduo(0).Genes + " (Aptid�o: " + populacao.getIndivduo(0).Aptidao + ")");
+                Label4.Text = "Encontrado resultado na gera��o " + geracao + " | ";
+
+                //var teste = populacao.getIndivduo(0).Genes;
+
+                //// Create new data series and set it's visual attributes
+                //Series series = new Series("StrackedBar");
+                //series.ChartType = SeriesChartType.StackedBar;
+                //series.BorderWidth = 3;
+                //series.ShadowOffset = 2;
+
+                //for (int i = 0; i < teste.Length - 3; i++)
+                //{
+                //    string separaJobMaq = teste.Substring(i, 4);
+                //    Label4.Text += separaJobMaq.Substring(0, 3) + " - " + separaJobMaq.Substring(3, 1) + "<br>";
+                //    i += 3;
+
+                //    int condParada = 0;
+
+                //    for (int j = 0; j < series.Points.Count; j++)
+                //    {
+                //        condParada = 0;
+                //        if (series.Points[j].Label.Equals(separaJobMaq.Substring(3, 1)))
+                //        {
+                //            condParada = 1;
+                //            double[] ed = series.Points[j].YValues;
+                //            ed[0] += populacao.getIndivduo(0).getCustoMaquina(separaJobMaq);
+                //            series.Points[j].YValues = ed;
+                //        }
+                //    }
+
+                //    if (condParada == 0)
+                //    {
+                //        double[] ins = new double[2];
+                //        ins[0] = populacao.getIndivduo(0).getCustoMaquina(separaJobMaq);
+
+                //        series.Points.Add(new DataPoint()
+                //        {
+                //            Label = separaJobMaq.Substring(3, 1),
+                //            YValues = ins
+                //        });
+                //    }
+                //}
+
+                //Chart1.Series.Add(series);
+                //Chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
+            }
+        }
+        #endregion
+        protected void btnVaiTeste_ServerClick(object sender, EventArgs e)
+        {
+            executaAlgGenetico();
+        }
     }
 }

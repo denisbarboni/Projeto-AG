@@ -1158,5 +1158,70 @@ namespace Acesso
             }
         }
         #endregion
+
+        #region Algoritimo
+        public List<VelMaqJobsSku> returnVelMaqJobsSku(int idUser)
+        {
+            try
+            {
+                conn = new NpgsqlConnection(strConn);
+                conn.Open();
+
+                var query = "select * from velocidade v join maquina m on m.id_maquina = v.id_maquina join job j on v.id_sku = j.id_sku join sku s on s.id_sku = v.id_sku where v.iduser = @id and m.iduser = @id and j.iduser = @id and s.iduser = @id";
+
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", idUser);
+
+                NpgsqlDataReader rd = cmd.ExecuteReader();
+                List<VelMaqJobsSku> lstVelMaqJobsSku = new List<VelMaqJobsSku>();
+
+                while (rd.Read())
+                {
+                    lstVelMaqJobsSku.Add(new VelMaqJobsSku()
+                    {
+                        Vel = new Velocidade()
+                        {
+                            Id_Velocidade = Convert.ToInt32(rd[0].ToString()),
+                            Setor = new Setor() { Id_Setor = Convert.ToInt32(rd[1].ToString()) },
+                            Maquina = new Maquina() { Id_Maquina = Convert.ToInt32(rd[2].ToString()) },
+                            Sku = new Sku() { Id_Sku = Convert.ToInt32(rd[3].ToString()) },
+                            Velocidade_Hr = Convert.ToDouble(rd[4].ToString()),
+                            idUser = Convert.ToInt32(rd[5].ToString())
+                        },
+                        Maq = new Maquina()
+                        {
+                            Id_Maquina = Convert.ToInt32(rd[6].ToString()),
+                            Descricao = rd[7].ToString(),
+                            idUser = Convert.ToInt32(rd[8].ToString())
+                        },
+                        Job = new Job()
+                        {
+                            Id_Job = Convert.ToInt32(rd[9].ToString()),
+                            Sku = new Sku() { Id_Sku = Convert.ToInt32(rd[10].ToString()) },
+                            Qtde = Convert.ToDouble(rd[11].ToString()),
+                            idUser = Convert.ToInt32(rd[12].ToString())
+                        },
+                        Sku = new Sku()
+                        {
+                            Id_Sku = Convert.ToInt32(rd[13].ToString()),
+                            Descricao = rd[14].ToString(),
+                            Peso_Caixa = Convert.ToDouble(rd[15].ToString()),
+                            idUser = Convert.ToInt32(rd[16].ToString())
+                        }
+                    });
+                }
+
+                return lstVelMaqJobsSku;
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        #endregion
     }
 }

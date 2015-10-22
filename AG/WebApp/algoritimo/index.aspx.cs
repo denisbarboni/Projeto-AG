@@ -22,7 +22,7 @@ namespace WebApp
             //Define a solu��o
             AlgGenetico.Algoritimo.Solucao = 100000;
             // Ler o arquivo com os genes e respectivos valores e configura as vari�veis de Jobs e Maquinas que est�o no arquivo TXT
-            AlgGenetico.Algoritimo.lerArquivo();
+            AlgGenetico.Algoritimo.lerArquivo(1);
             //taxa de crossover de 60%
             AlgGenetico.Algoritimo.TaxaDeCrossover = 0.6;
             //taxa de muta��o de 3%

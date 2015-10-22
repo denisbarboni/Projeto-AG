@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using Acesso;
+using System.Collections.Generic;
+using Objetos;
 
 namespace AlgGenetico
 {
@@ -191,28 +194,40 @@ namespace AlgGenetico
         }
 
 
-        public static void lerArquivo()
+        public static void lerArquivo(int idUser)
         {
 
             try
             {
-                StreamReader file = new StreamReader("C:/Users/dbsbo/Desktop/amendoim2.txt");
-                string line = null;
+                //StreamReader file = new StreamReader("C:/Users/dbsbo/Desktop/amendoim2.txt");
+                //string line = null;
                 jobs = "";
                 maquinas = "";
 
-                while ((line = file.ReadLine()) != null)
+                DAO dao = new DAO();
+
+                List<VelMaqJobsSku> lstRtn = dao.returnVelMaqJobsSku(idUser);
+
+                //while ((line = file.ReadLine()) != null)
+                //{
+
+                //    string[] vgene = line.Split(',');
+                //    jobs = vgene[0].Substring(0, 3);
+                //    maquinas = vgene[0].Substring(3, 1);
+
+                //}
+
+                foreach (var item in lstRtn)
                 {
-
-                    string[] vGene = line.Split(',');
-                    Jobs = vGene[0].Substring(0, 3);
-                    Maquinas = vGene[0].Substring(3, 1);
-
+                    Jobs = item.Sku.Descricao + ",";
+                    Maquinas = item.Maq.Descricao + ",";
                 }
 
-                int tamanho = (Jobs.Length / Maquinas.Length);
+                //int tamanho = (Jobs.Length / Maquinas.Length);
+
+                int tamanho = Jobs.Length - 1;
                 Algoritimo.jobs = Jobs.Substring(0, tamanho);
-                file.Close();
+                //file.Close();
             }
             catch (Exception e)
             {

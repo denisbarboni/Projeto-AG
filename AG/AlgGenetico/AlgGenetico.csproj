@@ -44,6 +44,16 @@
     <Compile Include="Populacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Acesso\Acesso.csproj">
+      <Project>{25e5d650-ad35-4853-85c4-403c497eba3f}</Project>
+      <Name>Acesso</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Objetos\Objetos.csproj">
+      <Project>{fe92cf03-17ab-45cc-8037-826b2fd70607}</Project>
+      <Name>Objetos</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

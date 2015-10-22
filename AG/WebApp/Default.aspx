@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="Default.aspx.cs" Inherits="WebApp.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="Default.aspx.cs" Inherits="WebApp.Default" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 
@@ -45,7 +45,11 @@
             });
         });
 
+        function setarTexto(texto, id) {
+            $("#" + id).val(texto);
+        }
     </script>
+
 </head>
 <body>
     <nav class="navbar navbar-default">
@@ -417,7 +421,26 @@
                     </div>
 
                     <div class="tab-pane fade in" id="tab2">
-                        Teste                    
+                        <div class="container">
+                            <div class="row">
+
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div>
+                                        <button runat="server" class="container btn btn-primary" onserverclick="btnVaiTeste_ServerClick" id="btnVaiTeste">Vai</button>
+                                    </div>
+                                    <div>
+                                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                                    </div>
+                                    <div>
+                                        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+                                    </div>
+                                    <div>
+                                        <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
 
                 </div>
