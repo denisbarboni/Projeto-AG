@@ -152,4 +152,6 @@ ALTER TABLE job add constraint fk_job_user foreign key (idUser) references usuar
 ALTER TABLE velocidade ADD COLUMN IdUser int not null;
 ALTER TABLE velocidade add constraint fk_velocidade_user foreign key (idUser) references usuario (IdUsuario);
 
+ALTER TABLE velocidade ALTER COLUMN velocidade_hora type numeric(10,4);
+
 select  * from usuario

@@ -1,10 +1,10 @@
-﻿$("#configNavbar").click(function () {
+﻿function configNavbar() {
     $("#EltismoSim").prop("checked", true); //marca o sim pois somente trabalha com sim 
     $('#EltismoNao').attr('disabled', true); // e desativa o não para n ser clicado. 
-});
+};
 
-$("#btnSalvarConfig").click(function () {
-    $(this).attr("disabled", true); //enable false no botão ao clicar
+function btnSalvarConfig() {
+    $("#btnSalvarCfg").attr("disabled", true); //enable false no botão ao clicar
     $("#btnFecharModalConfig").attr("disabled", true); //enable false no botão fechar
 
     var dataConfig = JSON.stringify({
@@ -30,7 +30,7 @@ $("#btnSalvarConfig").click(function () {
                 }, 2500);
 
                 setTimeout(function () {
-                    $('#btnSalvarConfig').removeAttr("disabled"); //botão enbale true após 3,2 seg.
+                    $('#btnSalvarCfg').removeAttr("disabled"); //botão enbale true após 3,2 seg.
                     $('#btnFecharModalConfig').removeAttr("disabled");
                 }, 3200);
 
@@ -41,7 +41,7 @@ $("#btnSalvarConfig").click(function () {
             }
         }
     });
-});
+};
 
 $("#btnLogar").click(function () {
     var dataString = JSON.stringify({
@@ -118,6 +118,27 @@ function altSenha() {
                 $('#lblErro').text(rtn.d + "\n - Algum erro inesperado aconteceu!\nPor favor, entre em contato com o suporte.");
                 $('#modalErro').modal('show'); //se explodir exception no no metodo Logar, retorna 
             }
+        }
+    });
+}
+
+function rodarAg() {
+    var page = '<%= getPage %>';
+
+    var dataString = JSON.stringify({
+        pg: page
+    });
+
+    $.ajax({ //chama o webmethod logar
+        type: "POST",
+        url: "Default.aspx/RodarAg",
+        data: dataString,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (rtn) {
+            $("#divtext1").text(rtn.d.text1);
+            $("#divtext2").text(rtn.d.text2);
+            $("#divtext3").text(rtn.d.text3);
         }
     });
 }

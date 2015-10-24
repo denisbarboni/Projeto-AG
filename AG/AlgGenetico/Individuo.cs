@@ -1,5 +1,4 @@
-﻿using Acesso;
-using System;
+﻿using System;
 using System.Collections;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -18,17 +17,17 @@ namespace AlgGenetico
             genes = "";
             Random r = new Random();
 
-            string maquinas = Algoritimo.Maquinas.Substring(0, Algoritimo.Maquinas.Length-1);
+            string maquinas = Algoritimo.Maquinas;
             string jobs = Algoritimo.Jobs;
             string escolhido;
 
             escolhido = "";
 
-            for (int i = 0; i < numGenes; i += jobs.Length)
+            for (int i = 0; i < numGenes; i += 3)
             {
 
-                escolhido += jobs + ",";
-                escolhido += maquinas;
+                escolhido += jobs.Substring(i, 3);
+                escolhido += maquinas[r.Next(maquinas.Length)];
             }
             this.genes = escolhido;
             geraAptidao();
@@ -47,14 +46,13 @@ namespace AlgGenetico
             if (r.NextDouble() <= Algoritimo.TaxaDeMutacao)
             {
 
-                string maquinas = Algoritimo.Maquinas.Substring(0, Algoritimo.Maquinas.Length - 1);
+                string maquinas = Algoritimo.Maquinas;
                 //sorteia o ponto de corte
                 while (!pontoCerto)
                 {
-                    var separa = genes.Split(',');
-                    posAleatoria = r.Next(separa[0].Length);
+                    posAleatoria = r.Next(genes.Length);
                     string tempo = genes.Substring(posAleatoria, 1);
-                    Match matchTempo = Regex.Match(tempo, "[a-z A-Z\\s]");
+                    Match matchTempo = Regex.Match(tempo, "[A-Z\\s]");
                     if (matchTempo.Success)
                     {
                         pontoCerto = true;
@@ -86,7 +84,7 @@ namespace AlgGenetico
 
             double valorGene = 0.00;
 
-            // Pensar como colocar isso din�mico!        
+            // Pensar como colocar isso din�mico!
             double maquinaA = 0;
             double maquinaB = 0;
             double maquinaC = 0;
@@ -109,115 +107,112 @@ namespace AlgGenetico
 
             custo = new Hashtable();
 
-            try
-            {
-                //StreamReader file = new StreamReader("C:/Users/dbsbo/Desktop/amendoim2.txt");
-                //string line = null;
+            //try
+            //{
+            //    StreamReader file = new StreamReader("C:/Users/dbsbo/Desktop/amendoim2.txt");
+            //    string line = null;
 
-                //while ((line = file.ReadLine()) != null)
-                //{
-                //    string[] vGene = line.Split(',');
-                //    var t = vGene[1].Replace('.', ',');
-                //    custo[vGene[0]] = t;
-                //}
+            //    while ((line = file.ReadLine()) != null)
+            //    {
+            //        string[] vGene = line.Split(',');
+            //        var t = vGene[1].Replace('.', ',');
+            //        custo[vGene[0]] = t;
+            //    }
 
-                DAO dao = new DAO();
-
-                foreach (var item in dao.returnVelMaqJobsSku(1))
+                foreach (var item in Algoritimo.lst)
                 {
-                    custo[item.Maq.Descricao] = item.Job.Qtde * item.Sku.Peso_Caixa;
+                    custo[item.Maq.Descricao] = item.Job.Qtde * item.Sku.Peso_Caixa * item.Vel.Velocidade_Hr;
                 }
 
-                //file.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-                Console.Write(e.StackTrace);
-            }
+            //    file.Close();
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.ToString());
+            //    Console.Write(e.StackTrace);
+            //}
             // Solu��o = 463		
             //		genes = "001E002H003B004G005E006H007D008E009E010H011H012E013G014E015H016D017H018D019D020B021E022B023E024F025A026E027H028D029E030B031B032G033E034H035D036G037E038C039H040E041C042E043H044G045H046H047C048B049E050B051E052F053A054E055H056D057E058H059B060G061E062H063E064C065E066C067H068E069E070E071A072D073H074D075C076A077E078B079E080F081A082E083H084C085E086H087B088G089E090H091D092D093E094E095A096E097D098E099H100E101H102G103C104A105D106B107E108F109A110E111H112G113E114D115E116E117G118G119G";
-            for (int i = 0; i < genes.Length; i += genes.Length)
+            for (int i = 0; i < genes.Length; i += 4)
             {
+                var maq = genes.Substring(i + 3, i + 4 - (i + 3));
 
-                var separa = genes.Split(',');
-
-                switch (separa[1])
+                switch (maq)
                 {
-                    case "maq1":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                    case "A":
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaA += valorGene;
                         break;
                     case "B":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaB += valorGene;
                         break;
                     case "C":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaC += valorGene;
                         break;
                     case "D":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaD += valorGene;
                         break;
                     case "E":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaE += valorGene;
                         break;
                     case "F":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaF += valorGene;
                         break;
                     case "G":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaG += valorGene;
                         break;
                     case "H":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaH += valorGene;
                         break;
                     case "I":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaI += valorGene;
                         break;
                     case "J":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaJ += valorGene;
                         break;
                     case "K":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaK += valorGene;
                         break;
                     case "L":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaL += valorGene;
                         break;
                     case "M":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaM += valorGene;
                         break;
                     case "N":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaN += valorGene;
                         break;
                     case "O":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaO += valorGene;
                         break;
                     case "P":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaP += valorGene;
                         break;
                     case "Q":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaQ += valorGene;
                         break;
                     case "R":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaR += valorGene;
                         break;
                     case "S":
-                        valorGene = Convert.ToDouble(custo[separa[1]]);
+                        valorGene = Convert.ToDouble(custo[maq]);
                         maquinaS += valorGene;
                         break;
                     default:
@@ -225,7 +220,6 @@ namespace AlgGenetico
                 }
                 //			System.out.println(genes.substring(i, i+4)+";"+valorGene+";");
             }
-
             aptidao = maquinaA > maquinaB ? maquinaA : maquinaB;
             aptidao = aptidao > maquinaC ? aptidao : maquinaC;
             aptidao = aptidao > maquinaD ? aptidao : maquinaD;

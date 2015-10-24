@@ -71,7 +71,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#" data-toggle="modal" data-target="#modalConfiguracoes" id="configNavbar">Configurações</a>
+                                <a href="#" data-toggle="modal" data-target="#modalConfiguracoes" id="configNavbar" onclick="configNavbar();">Configurações</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#" id="sairNavbar" runat="server" onserverclick="sairNavbar_ServerClick">Sair</a></li>
@@ -153,9 +153,9 @@
                     </div>
                     <div class="modal-footer">
                         <asp:Button Text="Fechar" ID="btnFecharModalConfig" CssClass="btn btn-default" data-dismiss="modal" runat="server" AutoPostBack="false" OnClick="btnFecharModalConfig_Click" />
-                        <button type="button" id="btnSalvarConfig" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+                        <a id="btnSalvarCfg" onclick="btnSalvarConfig();" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
                             Salvar configurações
-                        </button>
+                        </a>
                     </div>
                 </form>
             </div>
@@ -426,17 +426,11 @@
 
                                 <div class="col-xs-12 col-sm-6 col-md-6">
                                     <div>
-                                        <button runat="server" class="container btn btn-primary" onserverclick="btnVaiTeste_ServerClick" id="btnVaiTeste">Vai</button>
+                                        <button runat="server" class="container btn btn-primary" onclick="rodarAg();" id="btnVaiTeste">Vai</button>
                                     </div>
-                                    <div>
-                                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-                                    </div>
-                                    <div>
-                                        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-                                    </div>
-                                    <div>
-                                        <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
-                                    </div>
+                                    <div id="divtext1"></div>
+                                    <div id="divtext2"></div>
+                                    <div id="divtext3"></div>
                                 </div>
 
                             </div>
@@ -480,7 +474,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <asp:Label ID="lblSucess" runat="server" Text="Verifique seu usuário e/ou sua senha."></asp:Label>
+                                        <asp:Label ID="lblSucess" runat="server" Text="Sucess"></asp:Label>
                                     </p>
                                 </div>
                                 <div class="modal-footer">

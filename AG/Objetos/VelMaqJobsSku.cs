@@ -11,5 +11,6 @@ namespace Objetos
         public Maquina Maq { get; set; }
         public Job Job { get; set; }
         public Sku Sku { get; set; }
+        public int Indice { get; set; }
     }
 }

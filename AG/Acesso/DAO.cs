@@ -1133,7 +1133,7 @@ namespace Acesso
 
                         cmd = new NpgsqlCommand(query, conn);
                         cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@senha", altSenha.Senha);
+                        cmd.Parameters.AddWithValue("@senha", altSenha.SenhaNova);
                         cmd.Parameters.AddWithValue("@id", altSenha.idUser);
 
                         return cmd.ExecuteNonQuery();

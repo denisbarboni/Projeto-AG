@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Acesso;
+using Objetos;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using Acesso;
-using System.Collections.Generic;
-using Objetos;
 
 namespace AlgGenetico
 {
@@ -15,7 +15,7 @@ namespace AlgGenetico
         public static double taxaDeMutacao;
         public static string maquinas;
         public static string jobs;
-
+        public static List<VelMaqJobsSku> lst;
 
         public static Populacao novaGeracao(Populacao populacao, bool elitismo)
         {
@@ -217,15 +217,19 @@ namespace AlgGenetico
 
                 //}
 
+                int i = 0;
                 foreach (var item in lstRtn)
                 {
-                    Jobs = item.Sku.Descricao + ",";
-                    Maquinas = item.Maq.Descricao + ",";
+                    Jobs = item.Sku.Descricao;
+                    Maquinas = item.Maq.Descricao;
+                    item.Indice = i++;
                 }
 
                 //int tamanho = (Jobs.Length / Maquinas.Length);
 
-                int tamanho = Jobs.Length - 1;
+                Algoritimo.lst = lstRtn;
+
+                int tamanho = (Jobs.Length / Maquinas.Length);
                 Algoritimo.jobs = Jobs.Substring(0, tamanho);
                 //file.Close();
             }
@@ -234,6 +238,6 @@ namespace AlgGenetico
                 Console.WriteLine(e.ToString());
                 Console.Write(e.StackTrace);
             }
-        }   
+        }
     }
 }

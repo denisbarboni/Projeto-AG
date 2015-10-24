@@ -66,7 +66,6 @@
     <Content Include="css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="algoritimo\index.aspx" />
     <Content Include="js\tbls\AddRemEdtTableVelocidade.js" />
     <Content Include="js\tbls\AddRemEdtTableJob.js" />
     <Content Include="js\tbls\AddRemEdtTableUnidade.js" />
@@ -91,13 +90,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="algoritimo\index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="algoritimo\index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

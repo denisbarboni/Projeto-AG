@@ -16,6 +16,14 @@ namespace WebApp
         static Configuracao config;
         static int idUserStatic;
 
+        public Page getPage
+        {
+            get
+            {
+                return this.Page;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (HttpContext.Current.Session["logado"] == null || HttpContext.Current.Session["logado"].ToString() != "True")
@@ -718,8 +726,12 @@ namespace WebApp
         #endregion
 
         #region Algoritimo
-        private void executaAlgGenetico()
-        {
+        [WebMethod]
+        public static RodouAG RodarAg(Page pg) {
+            var text1 = "";
+            var text2 = "";
+            var text3 = "";
+            
             //Define a solu��o
             AlgGenetico.Algoritimo.Solucao = Convert.ToInt32(config.SolucaoMax);
             // Ler o arquivo com os genes e respectivos valores e configura as vari�veis de Jobs e Maquinas que est�o no arquivo TXT
@@ -744,8 +756,11 @@ namespace WebApp
             bool temSolucao = false;
             int geracao = 0;
 
+            
+            pg.ClientScript.RegisterStartupScript(pg.GetType(), "alert", "<script>alert('Hai');</script>");
+
             //Console.WriteLine("Iniciando... Aptid�o da solu��o: " + Algoritimo.Solucao);
-            Label1.Text = "Iniciando... Aptid�o da solu��o: " + AlgGenetico.Algoritimo.Solucao;
+            text1 = "Iniciando... Aptid�o da solu��o: " + AlgGenetico.Algoritimo.Solucao;
 
             //loop at� o crit�rio de parada
             while (!temSolucao && geracao < numMaxGeracoes)
@@ -756,7 +771,7 @@ namespace WebApp
                 populacao = AlgGenetico.Algoritimo.novaGeracao(populacao, eltismo);
 
                 //Console.WriteLine("Gera��o " + geracao + " | Aptid�o: " + populacao.getIndivduo(0).Aptidao + " | Melhor: " + populacao.getIndivduo(0).Genes);
-                Label2.Text = "Gera��o " + geracao + " | Aptid�o: " + populacao.getIndivduo(0).Aptidao + " | Melhor: " + populacao.getIndivduo(0).Genes;
+                text2 = "Gera��o " + geracao + " | Aptid�o: " + populacao.getIndivduo(0).Aptidao + " | Melhor: " + populacao.getIndivduo(0).Genes;
                 
 
                 //verifica se tem a solucao
@@ -766,14 +781,14 @@ namespace WebApp
             if (geracao == numMaxGeracoes)
             {
                 //Console.WriteLine("N�mero Maximo de Gera��es | " + populacao.getIndivduo(0).Genes + " " + populacao.getIndivduo(0).Aptidao);
-                Label4.Text = "N�mero Maximo de Gera��es | " + populacao.getIndivduo(0).Genes + " " + populacao.getIndivduo(0).Aptidao;
+                text3 = "N�mero Maximo de Gera��es | " + populacao.getIndivduo(0).Genes + " " + populacao.getIndivduo(0).Aptidao;
             }
 
             if (temSolucao)
             {
 
                 //Console.WriteLine("Encontrado resultado na gera��o " + geracao + " | " + populacao.getIndivduo(0).Genes + " (Aptid�o: " + populacao.getIndivduo(0).Aptidao + ")");
-                Label4.Text = "Encontrado resultado na gera��o " + geracao + " | ";
+                text3 = "Encontrado resultado na gera��o " + geracao + " | ";
 
                 //var teste = populacao.getIndivduo(0).Genes;
 
@@ -819,11 +834,9 @@ namespace WebApp
                 //Chart1.Series.Add(series);
                 //Chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
             }
-        }
+
+            return new RodouAG() { text1 = text1, text2 = text2, text3 = text3 };
+        }       
         #endregion
-        protected void btnVaiTeste_ServerClick(object sender, EventArgs e)
-        {
-            executaAlgGenetico();
-        }
     }
 }
