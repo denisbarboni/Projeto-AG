@@ -16,13 +16,8 @@ namespace WebApp
         static Configuracao config;
         static int idUserStatic;
 
-        public Page getPage
-        {
-            get
-            {
-                return this.Page;
-            }
-        }
+        static Page pg;
+        static Type tp;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,7 +40,11 @@ namespace WebApp
                 carregarJob(idUserStatic);
                 carregarVelocidade(idUserStatic);
             }
+
+            pg = this.Page;
+            tp = this.GetType();
         }
+
         #region CarregarConfigs
         private void carregarConfigs(int id)
         {
@@ -727,7 +726,7 @@ namespace WebApp
 
         #region Algoritimo
         [WebMethod]
-        public static RodouAG RodarAg(Page pg) {
+        public static RodouAG RodarAg() {
             var text1 = "";
             var text2 = "";
             var text3 = "";
@@ -755,9 +754,8 @@ namespace WebApp
 
             bool temSolucao = false;
             int geracao = 0;
-
             
-            pg.ClientScript.RegisterStartupScript(pg.GetType(), "alert", "<script>alert('Hai');</script>");
+            ScriptManager.RegisterClientScriptBlock(pg, tp, "alert12321312", "alert('Teste');", true);
 
             //Console.WriteLine("Iniciando... Aptid�o da solu��o: " + Algoritimo.Solucao);
             text1 = "Iniciando... Aptid�o da solu��o: " + AlgGenetico.Algoritimo.Solucao;

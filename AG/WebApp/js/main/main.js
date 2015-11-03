@@ -123,16 +123,10 @@ function altSenha() {
 }
 
 function rodarAg() {
-    var page = '<%= getPage %>';
-
-    var dataString = JSON.stringify({
-        pg: page
-    });
-
     $.ajax({ //chama o webmethod logar
         type: "POST",
         url: "Default.aspx/RodarAg",
-        data: dataString,
+        data: {},
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (rtn) {
