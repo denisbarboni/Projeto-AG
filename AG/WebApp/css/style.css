@@ -80,3 +80,7 @@
     -webkit-border-radius:0 !important;
 }
 
+.TestStyle {
+    height: 100%;
+    width:100%;
+}

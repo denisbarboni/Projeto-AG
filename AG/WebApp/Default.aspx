@@ -1,5 +1,11 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="Default.aspx.cs" Inherits="WebApp.Default" EnableEventValidation="false" %>
 
+<%@ Register Assembly="DevExpress.XtraCharts.v15.1.Web, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraCharts.Web" TagPrefix="dxchartsui" %>
+
+<%@ Register Assembly="DevExpress.XtraCharts.v15.1.Web, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraCharts.Web.Designer" TagPrefix="dxchartdesigner" %>
+
+<%@ Register Assembly="DevExpress.XtraCharts.v15.1, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraCharts" TagPrefix="cc1" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -50,8 +56,14 @@
         }
     </script>
 
+    <script type="text/javascript">
+         function Resized() {
+             chart.SetWidth(document.body.offsetWidth);
+         }
+    </script>
+
 </head>
-<body>
+<body onResize="Resized()">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -153,8 +165,7 @@
                     </div>
                     <div class="modal-footer">
                         <asp:Button Text="Fechar" ID="btnFecharModalConfig" CssClass="btn btn-default" data-dismiss="modal" runat="server" AutoPostBack="false" OnClick="btnFecharModalConfig_Click" />
-                        <a id="btnSalvarCfg" onclick="btnSalvarConfig();" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
-                            Salvar configurações
+                        <a id="btnSalvarCfg" onclick="btnSalvarConfig();" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">Salvar configurações
                         </a>
                     </div>
                 </form>
@@ -424,16 +435,49 @@
                         <div class="container">
                             <div class="row">
 
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <div>
-                                        <button runat="server" class="container btn btn-primary" onclick="rodarAg();" id="btnVaiTeste">Vai</button>
-                                    </div>
+                                <div class="col-xs-12 col-sm-11 col-md-11">
+                                    <button runat="server" class="btn btn-primary btn-block" id="btnVaiTeste" onclick="return rodarAg();">Vai</button>
+                                    <button runat="server" class="btn btn-primary btn-block" id="Button1" onserverclick="btnVaiTeste_ServerClick">Vai2</button>
                                     <div id="divtext1"></div>
                                     <div id="divtext2"></div>
                                     <div id="divtext3"></div>
                                 </div>
 
-                            </div>
+                                <div class="col-xs-12 col-sm-11 col-md-11">
+                                    <div id="teste" style="margin-top: 13px; text-align: center;">
+                                        <dxchartsui:WebChartControl ID="WebChartControl1" runat="server" EnableCallBacks="false" ClientInstanceName="chart" Width="1024" Height="1024">
+                                            <fillstyle>
+                                                <OptionsSerializable>
+                                                    <cc1:SolidFillOptions HiddenSerializableString="to be serialized" />
+                                                </OptionsSerializable>
+                                             </fillstyle>
+                                             <seriestemplate>
+                                                 <ViewSerializable>
+                                                    <cc1:SideBySideBarSeriesView HiddenSerializableString="to be serialized">
+                                                    </cc1:SideBySideBarSeriesView>
+                                                 </ViewSerializable>
+                                                 <LabelSerializable>
+                                                    <cc1:SideBySideBarSeriesLabel HiddenSerializableString="to be serialized">
+                                                        <FillStyle>
+                                                            <OptionsSerializable>
+                                                                <cc1:SolidFillOptions HiddenSerializableString="to be serialized" />
+                                                            </OptionsSerializable>
+                                                         </FillStyle>
+                                                     </cc1:SideBySideBarSeriesLabel>
+                                                 </LabelSerializable>
+                                                 <PointOptionsSerializable>
+                                                    <cc1:PointOptions HiddenSerializableString="to be serialized">
+                                                    </cc1:PointOptions>
+                                                 </PointOptionsSerializable>
+                                                 <LegendPointOptionsSerializable>
+                                                    <cc1:PointOptions HiddenSerializableString="to be serialized">
+                                                    </cc1:PointOptions>
+                                                 </LegendPointOptionsSerializable>
+                                            </seriestemplate>
+                                        </dxchartsui:WebChartControl>
+                                    </div>
+                                </div>
+                             </div>
                         </div>
                     </div>
 

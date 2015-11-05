@@ -8,6 +8,9 @@ using Acesso;
 using Objetos;
 using System.Web.Services;
 using System.Web.Script.Services;
+using System.Collections;
+using DevExpress.XtraCharts;
+using System.Reflection;
 
 namespace WebApp
 {
@@ -18,6 +21,8 @@ namespace WebApp
 
         static Page pg;
         static Type tp;
+
+        static List<Genes> lstGenes;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,6 +48,7 @@ namespace WebApp
 
             pg = this.Page;
             tp = this.GetType();
+            //this.WebChartControl1.Visible = false;
         }
 
         #region CarregarConfigs
@@ -226,7 +232,7 @@ namespace WebApp
                 return ex.Message;
             }
         }
-        
+
         [WebMethod]
         public static string RemMaq(string id)
         {
@@ -318,7 +324,7 @@ namespace WebApp
 
             foreach (Sku sku in dao.GetSku(id))
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheSkus" + sku.Id_Sku, "$( document ).ready(function() { \n $(\"#tblSku\").append('<tr id=\"rowSku" + sku.Id_Sku + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeSku" + sku.Id_Sku + "\" name=\"txtNomeSku" + sku.Id_Sku + "\" placeholder=\"Nome do Sku\" class=\"form-control\" value=\""+ sku.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtPesoSku" + sku.Id_Sku + "\" name=\"txtPesoSku" + sku.Id_Sku + "\" placeholder=\"Peso do Sku\" class=\"form-control\" value=\"" + sku.Peso_Caixa + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanPesoSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowSku\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowSku\"></button></td></tr>'); $(\"#spanNomeSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanPesoSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); });\n\n", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheSkus" + sku.Id_Sku, "$( document ).ready(function() { \n $(\"#tblSku\").append('<tr id=\"rowSku" + sku.Id_Sku + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeSku" + sku.Id_Sku + "\" name=\"txtNomeSku" + sku.Id_Sku + "\" placeholder=\"Nome do Sku\" class=\"form-control\" value=\"" + sku.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtPesoSku" + sku.Id_Sku + "\" name=\"txtPesoSku" + sku.Id_Sku + "\" placeholder=\"Peso do Sku\" class=\"form-control\" value=\"" + sku.Peso_Caixa + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanPesoSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowSku\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowSku\"></button></td></tr>'); $(\"#spanNomeSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanPesoSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); });\n\n", true);
             }
         }
 
@@ -459,8 +465,8 @@ namespace WebApp
 
                 foreach (Sku sku in lstSku)
                 {
-                    if(sku.Id_Sku == idSku)
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + sku.Id_Sku, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selJobSku\" value=\"" + sku.Id_Sku + "\" selected>"+ sku.Descricao +"</option>'); });", true);
+                    if (sku.Id_Sku == idSku)
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + sku.Id_Sku, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selJobSku\" value=\"" + sku.Id_Sku + "\" selected>" + sku.Descricao + "</option>'); });", true);
                     else
                         ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + sku.Id_Sku, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selJobSku\" value=\"" + sku.Id_Sku + "\">" + sku.Descricao + "</option>'); });", true);
                 }
@@ -650,9 +656,9 @@ namespace WebApp
                 {
                     idUser = idUserStatic,
                     Id_Velocidade = idvel,
-                    Maquina = new Maquina() { Id_Maquina = maq},
-                    Setor = new Setor() { Id_Setor = setor},
-                    Sku = new Sku() { Id_Sku = sku},
+                    Maquina = new Maquina() { Id_Maquina = maq },
+                    Setor = new Setor() { Id_Setor = setor },
+                    Sku = new Sku() { Id_Sku = sku },
                     Velocidade_Hr = Convert.ToDouble(vel)
                 }))
                 {
@@ -700,7 +706,8 @@ namespace WebApp
             {
                 DAO dao = new DAO();
 
-                int rtn = dao.AlterarSenha(new AlterarSenha() {
+                int rtn = dao.AlterarSenha(new AlterarSenha()
+                {
                     idUser = idUserStatic,
                     Senha = senha,
                     SenhaNova = newsenha,
@@ -726,11 +733,12 @@ namespace WebApp
 
         #region Algoritimo
         [WebMethod]
-        public static RodouAG RodarAg() {
+        public static RodouAG RodarAg()
+        {
             var text1 = "";
             var text2 = "";
             var text3 = "";
-            
+
             //Define a solu��o
             AlgGenetico.Algoritimo.Solucao = Convert.ToInt32(config.SolucaoMax);
             // Ler o arquivo com os genes e respectivos valores e configura as vari�veis de Jobs e Maquinas que est�o no arquivo TXT
@@ -754,10 +762,7 @@ namespace WebApp
 
             bool temSolucao = false;
             int geracao = 0;
-            
-            ScriptManager.RegisterClientScriptBlock(pg, tp, "alert12321312", "alert('Teste');", true);
 
-            //Console.WriteLine("Iniciando... Aptid�o da solu��o: " + Algoritimo.Solucao);
             text1 = "Iniciando... Aptid�o da solu��o: " + AlgGenetico.Algoritimo.Solucao;
 
             //loop at� o crit�rio de parada
@@ -768,73 +773,108 @@ namespace WebApp
                 //cria nova populacao
                 populacao = AlgGenetico.Algoritimo.novaGeracao(populacao, eltismo);
 
-                //Console.WriteLine("Gera��o " + geracao + " | Aptid�o: " + populacao.getIndivduo(0).Aptidao + " | Melhor: " + populacao.getIndivduo(0).Genes);
                 text2 = "Gera��o " + geracao + " | Aptid�o: " + populacao.getIndivduo(0).Aptidao + " | Melhor: " + populacao.getIndivduo(0).Genes;
-                
 
-                //verifica se tem a solucao
                 temSolucao = populacao.temSolocao(AlgGenetico.Algoritimo.Solucao);
             }
 
             if (geracao == numMaxGeracoes)
             {
-                //Console.WriteLine("N�mero Maximo de Gera��es | " + populacao.getIndivduo(0).Genes + " " + populacao.getIndivduo(0).Aptidao);
                 text3 = "N�mero Maximo de Gera��es | " + populacao.getIndivduo(0).Genes + " " + populacao.getIndivduo(0).Aptidao;
             }
 
             if (temSolucao)
             {
-
-                //Console.WriteLine("Encontrado resultado na gera��o " + geracao + " | " + populacao.getIndivduo(0).Genes + " (Aptid�o: " + populacao.getIndivduo(0).Aptidao + ")");
                 text3 = "Encontrado resultado na gera��o " + geracao + " | ";
-
-                //var teste = populacao.getIndivduo(0).Genes;
-
-                //// Create new data series and set it's visual attributes
-                //Series series = new Series("StrackedBar");
-                //series.ChartType = SeriesChartType.StackedBar;
-                //series.BorderWidth = 3;
-                //series.ShadowOffset = 2;
-
-                //for (int i = 0; i < teste.Length - 3; i++)
-                //{
-                //    string separaJobMaq = teste.Substring(i, 4);
-                //    Label4.Text += separaJobMaq.Substring(0, 3) + " - " + separaJobMaq.Substring(3, 1) + "<br>";
-                //    i += 3;
-
-                //    int condParada = 0;
-
-                //    for (int j = 0; j < series.Points.Count; j++)
-                //    {
-                //        condParada = 0;
-                //        if (series.Points[j].Label.Equals(separaJobMaq.Substring(3, 1)))
-                //        {
-                //            condParada = 1;
-                //            double[] ed = series.Points[j].YValues;
-                //            ed[0] += populacao.getIndivduo(0).getCustoMaquina(separaJobMaq);
-                //            series.Points[j].YValues = ed;
-                //        }
-                //    }
-
-                //    if (condParada == 0)
-                //    {
-                //        double[] ins = new double[2];
-                //        ins[0] = populacao.getIndivduo(0).getCustoMaquina(separaJobMaq);
-
-                //        series.Points.Add(new DataPoint()
-                //        {
-                //            Label = separaJobMaq.Substring(3, 1),
-                //            YValues = ins
-                //        });
-                //    }
-                //}
-
-                //Chart1.Series.Add(series);
-                //Chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
             }
 
+            var t = populacao.getIndivduo(0).Genes;
+
+            lstGenes = new List<Genes>();
+
+            for (int i = 0; i < t.Length; i += 4)
+            {
+                var sku = t.Substring(i, 4).Substring(0, 3);
+                var maq = t.Substring(i, 4).Substring(3, 1);
+
+                DAO dao = new DAO();
+                var vlr = dao.getValorGene(sku, maq);
+
+                DateTime inicio;
+                DateTime fim;
+
+                inicio = DateTime.Now.Date.AddMinutes((DateTime.Now.Hour * 60) + DateTime.Now.Minute);
+                fim = DateTime.Now.Date.AddMinutes((DateTime.Now.Hour * 60) + DateTime.Now.Minute + vlr);
+
+                foreach (var item in lstGenes)
+                {
+                    if(maq == item.Maq) {
+                        inicio = item.Final.AddMinutes(30);
+                        fim = inicio.AddMinutes(vlr);
+                    }
+                }
+
+                lstGenes.Add(new Genes() { Sku = sku, Maq = maq, Inicio = inicio, Final = fim });
+            }
+
+            MethodInfo mtd = pg.GetType().GetMethod("teste");
+            //mtd.Invoke(pg, null);
+
             return new RodouAG() { text1 = text1, text2 = text2, text3 = text3 };
-        }       
+        }
+
+        public string teste()
+        {        
+            foreach (var item in lstGenes)
+            {
+                    Series series = new Series(item.Sku, ViewType.SideBySideGantt);
+                    //this.WebChartControl1.Series.Add(series1);
+                    //series.Label.Visible = false;
+                    ((GanttSeriesView)series.View).BarWidth = 2.5;
+
+                    // Add points to the first series.
+                    series.ArgumentScaleType = ScaleType.Qualitative;
+                    series.ValueScaleType = ScaleType.DateTime;
+
+                    series.Points.Add(new SeriesPoint(item.Maq, new DateTime[] {
+                    item.Inicio,
+                    item.Final
+                }));
+
+                    this.WebChartControl1.Series.Add(series);
+            }
+
+            // Create the second Gantt series and set its properties.
+
+            // Add a constant line.
+            //ConstantLine deadline = new ConstantLine("Deadline", new DateTime(2015, 11, 06));
+            //deadline.ShowInLegend = false;
+            //deadline.Title.Alignment = ConstantLineTitleAlignment.Far;
+            //deadline.Color = System.Drawing.Color.Red;
+            //((GanttDiagram)this.WebChartControl1.Diagram).AxisY.ConstantLines.Add(deadline);
+
+            // Customize the chart.
+            //ganttChart.Size = New System.Drawing.Size(500, 300)
+            WebChartControl1.Legend.AlignmentHorizontal = LegendAlignmentHorizontal.Right;
+            WebChartControl1.Legend.AlignmentVertical = LegendAlignmentVertical.TopOutside;
+            WebChartControl1.Legend.Direction = LegendDirection.LeftToRight;
+            ((GanttDiagram)WebChartControl1.Diagram).AxisX.Title.Text = "Máquinas";
+            ((GanttDiagram)WebChartControl1.Diagram).AxisX.Title.Visible = true;
+            ((GanttDiagram)WebChartControl1.Diagram).AxisY.Interlaced = true;
+            ((GanttDiagram)WebChartControl1.Diagram).AxisY.GridSpacing = 10;
+            ((GanttDiagram)WebChartControl1.Diagram).AxisY.Label.Angle = -30;
+            ((GanttDiagram)WebChartControl1.Diagram).AxisY.Label.Antialiasing = true;
+            ((GanttDiagram)WebChartControl1.Diagram).AxisY.DateTimeOptions.Format = DateTimeFormat.LongDate;
+
+            //this.WebChartControl1.Visible = true;
+
+            return "";
+        }
         #endregion
+
+        protected void btnVaiTeste_ServerClick(object sender, EventArgs e)
+        {
+            teste();
+        }
     }
 }

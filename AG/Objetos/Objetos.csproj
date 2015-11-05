@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AlterarSenha.cs" />
     <Compile Include="Configuracao.cs" />
+    <Compile Include="Genes.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="RodouAG.cs" />

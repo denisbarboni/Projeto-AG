@@ -94,6 +94,24 @@ namespace WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnVaiTeste;
         
         /// <summary>
+        /// Controle Button1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button1;
+        
+        /// <summary>
+        /// Controle WebChartControl1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::DevExpress.XtraCharts.Web.WebChartControl WebChartControl1;
+        
+        /// <summary>
         /// Controle lblErro.
         /// </summary>
         /// <remarks>

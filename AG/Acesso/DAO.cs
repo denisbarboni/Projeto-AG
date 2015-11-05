@@ -1222,6 +1222,37 @@ namespace Acesso
                 conn.Close();
             }
         }
+
+        //retorna o valor do gene gerado
+        public double getValorGene(string dSku, string dMaq)
+        {
+            try
+            {
+                conn = new NpgsqlConnection(strConn);
+                conn.Open();
+
+                var query = "SELECT sku.peso_caixa * quantidade * velocidade_hora FROM maquina, sku, job, velocidade WHERE maquina.id_maquina = velocidade.id_maquina and sku.id_sku = velocidade.id_sku and job.id_sku = sku.id_sku and sku.nome_sku = @dsku and maquina.nome = @dmaq";
+
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@dsku", dSku);
+                cmd.Parameters.AddWithValue("@dmaq", dMaq);
+
+                NpgsqlDataReader rd = cmd.ExecuteReader();
+
+                if (rd.Read())
+                    return Convert.ToDouble(rd[0].ToString());
+                else
+                    return 0;
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         #endregion
     }
 }
