@@ -13,3 +13,5 @@ git commit -m "mensagem de commit"    -- commit nas alterações
 git push origin master    -- subir mesmo
 
 get fetch origin   -- atualizar
+
+cd "D:\Dropbox\Projeto c#\Algoritimo Genetico"
