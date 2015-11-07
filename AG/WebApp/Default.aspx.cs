@@ -48,7 +48,7 @@ namespace WebApp
 
             pg = this.Page;
             tp = this.GetType();
-            //this.WebChartControl1.Visible = false;
+            this.WebChartControl1.Visible = false;
         }
 
         #region CarregarConfigs
@@ -202,7 +202,7 @@ namespace WebApp
 
             foreach (Maquina maq in dao.GetMaq(id))
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheMaqs" + maq.Id_Maquina, "$( document ).ready(function() {\n$(\"#tblMaquina\").append('<tr id=\"rowMaq" + maq.Id_Maquina + "\" ><td style=\"width:85%; \"><div class=\"form-group has-feedback\" ><input type=\"text\" id =\"txtNomeMaquina" + maq.Id_Maquina + "\" name=\"txtNomeMaquina" + maq.Id_Maquina + "\" placeholder =\"Nome da Máquina\" class=\"form-control\" value =\"" + maq.Descricao + "\" disabled/><span class=\"glyphicon form-control-feedback\" id=\"spanNomeMaquina" + maq.Id_Maquina + "\"></span></div></td><td style=\"width:15%; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowMaq\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowMaq\"></button></td></tr>');\n$(\"#spanNomeMaquina" + maq.Id_Maquina + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success');\n});\n\n", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheMaqs" + maq.Id_Maquina, "$( document ).ready(function() {\n $(\"#tblMaquina\").append('<tr id=\"rowMaq" + maq.Id_Maquina + "\" ><td style=\"width:85%; \"><div class=\"form-group has-feedback\" ><input type=\"text\" id =\"txtNomeMaquina" + maq.Id_Maquina + "\" name=\"txtNomeMaquina" + maq.Id_Maquina + "\" placeholder =\"Nome da Máquina\" class=\"form-control\" value =\"" + maq.Descricao + "\" disabled/><span class=\"glyphicon form-control-feedback\" id=\"spanNomeMaquina" + maq.Id_Maquina + "\"></span></div></td><td style=\"width:15%; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowMaq\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowMaq\"></button></td></tr>');\n $(\"#spanNomeMaquina" + maq.Id_Maquina + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success');\n});\n\n", true);
             }
         }
 
@@ -263,7 +263,7 @@ namespace WebApp
 
             foreach (Setor set in dao.GetSetor(id))
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheSetores" + set.Id_Setor, "$( document ).ready(function() {\n$(\"#tblSetor\").append('<tr id=\"rowSetor" + set.Id_Setor + "\" ><td style=\"width:85%; \"><div class=\"form-group has-feedback\" ><input type=\"text\" id =\"txtNomeSetor" + set.Id_Setor + "\" name=\"txtNomeSetor" + set.Id_Setor + "\" placeholder =\"Nome do Setor\" class=\"form-control\" value =\"" + set.Descricao + "\" disabled/><span class=\"glyphicon form-control-feedback\" id=\"spanNomeSetor" + set.Id_Setor + "\"></span></div></td><td style=\"width:15%; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowSetor\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowSetor\"></button></td></tr>');\n$(\"#spanNomeSetor" + set.Id_Setor + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success');\n});\n\n", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheSetores" + set.Id_Setor, "$( document ).ready(function() {\n $(\"#tblSetor\").append('<tr id=\"rowSetor" + set.Id_Setor + "\" ><td style=\"width:85%; \"><div class=\"form-group has-feedback\" ><input type=\"text\" id =\"txtNomeSetor" + set.Id_Setor + "\" name=\"txtNomeSetor" + set.Id_Setor + "\" placeholder =\"Nome do Setor\" class=\"form-control\" value =\"" + set.Descricao + "\" disabled/><span class=\"glyphicon form-control-feedback\" id=\"spanNomeSetor" + set.Id_Setor + "\"></span></div></td><td style=\"width:15%; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowSetor\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowSetor\"></button></td></tr>');\n $(\"#spanNomeSetor" + set.Id_Setor + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
             }
         }
 
@@ -324,7 +324,7 @@ namespace WebApp
 
             foreach (Sku sku in dao.GetSku(id))
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheSkus" + sku.Id_Sku, "$( document ).ready(function() { \n $(\"#tblSku\").append('<tr id=\"rowSku" + sku.Id_Sku + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeSku" + sku.Id_Sku + "\" name=\"txtNomeSku" + sku.Id_Sku + "\" placeholder=\"Nome do Sku\" class=\"form-control\" value=\"" + sku.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtPesoSku" + sku.Id_Sku + "\" name=\"txtPesoSku" + sku.Id_Sku + "\" placeholder=\"Peso do Sku\" class=\"form-control\" value=\"" + sku.Peso_Caixa + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanPesoSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowSku\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowSku\"></button></td></tr>'); $(\"#spanNomeSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanPesoSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); });\n\n", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheSkus" + sku.Id_Sku, "$( document ).ready(function() { \n $(\"#tblSku\").append('<tr id=\"rowSku" + sku.Id_Sku + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeSku" + sku.Id_Sku + "\" name=\"txtNomeSku" + sku.Id_Sku + "\" placeholder=\"Nome do Sku\" class=\"form-control\" value=\"" + sku.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtPesoSku" + sku.Id_Sku + "\" name=\"txtPesoSku" + sku.Id_Sku + "\" placeholder=\"Peso do Sku\" class=\"form-control\" value=\"" + sku.Peso_Caixa + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanPesoSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowSku\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowSku\"></button></td></tr>'); $(\"#spanNomeSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanPesoSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
             }
         }
 
@@ -386,7 +386,7 @@ namespace WebApp
 
             foreach (Unidade un in dao.GetUnidade(id))
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheUnidade" + un.Codigo_Un, "$( document ).ready(function() { \n $(\"#tblUnidade\").append('<tr id=\"rowUnidade" + un.Codigo_Un + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtCodUnidade" + un.Codigo_Un + "\" name=\"txtCodUnidade" + un.Codigo_Un + "\" placeholder=\"Código da Unidade\" class=\"form-control\" value=\"" + un.Codigo_Un + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanCodUnidade" + un.Codigo_Un + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeUnidade" + un.Codigo_Un + "\" name=\"txtNomeUnidade" + un.Codigo_Un + "\" placeholder=\"Nome da Unidade\" class=\"form-control\" value=\"" + un.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeUnidade" + un.Codigo_Un + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowUnidade\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowUnidade\"></button></td></tr>'); $(\"#spanCodUnidade" + un.Codigo_Un + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanNomeUnidade" + un.Codigo_Un + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); });\n\n", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheUnidade" + un.Codigo_Un, "$( document ).ready(function() { \n $(\"#tblUnidade\").append('<tr id=\"rowUnidade" + un.Codigo_Un + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtCodUnidade" + un.Codigo_Un + "\" name=\"txtCodUnidade" + un.Codigo_Un + "\" placeholder=\"Código da Unidade\" class=\"form-control\" value=\"" + un.Codigo_Un + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanCodUnidade" + un.Codigo_Un + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeUnidade" + un.Codigo_Un + "\" name=\"txtNomeUnidade" + un.Codigo_Un + "\" placeholder=\"Nome da Unidade\" class=\"form-control\" value=\"" + un.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeUnidade" + un.Codigo_Un + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowUnidade\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowUnidade\"></button></td></tr>'); $(\"#spanCodUnidade" + un.Codigo_Un + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanNomeUnidade" + un.Codigo_Un + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
             }
         }
 
@@ -447,7 +447,7 @@ namespace WebApp
 
             foreach (Job job in dao.GetJob(id))
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + job.Id_Job, "$( document ).ready(function() { \n $(\"#tblJob\").append('<tr id=\"rowJob" + job.Id_Job + "\"><td><div class=\"form-group has-feedback\"><select id=\"selJobSku" + job.Id_Job + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanJobSku" + job.Id_Job + "\"></span></div></td><td><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtQtdeJob" + job.Id_Job + "\" name=\"txtQtdeJob" + job.Id_Job + "\" placeholder=\"Quantidade da Job\" class=\"form-control\" value=\"" + job.Qtde + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanQtdeJob" + job.Id_Job + "\"></span></div></td><td style=\"width:15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowJob\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowJob\"></button></td></tr>'); $(\"#spanJobSku" + job.Id_Job + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanQtdeJob" + job.Id_Job + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); });\n\n", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + job.Id_Job, "$( document ).ready(function() { \n $(\"#tblJob\").append('<tr id=\"rowJob" + job.Id_Job + "\"><td><div class=\"form-group has-feedback\"><select id=\"selJobSku" + job.Id_Job + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanJobSku" + job.Id_Job + "\"></span></div></td><td><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtQtdeJob" + job.Id_Job + "\" name=\"txtQtdeJob" + job.Id_Job + "\" placeholder=\"Quantidade da Job\" class=\"form-control\" value=\"" + job.Qtde + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanQtdeJob" + job.Id_Job + "\"></span></div></td><td style=\"width:15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowJob\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowJob\"></button></td></tr>'); \n $(\"#spanJobSku" + job.Id_Job + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanQtdeJob" + job.Id_Job + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
 
                 var seletor = "#selJobSku" + job.Id_Job;
 
@@ -463,12 +463,14 @@ namespace WebApp
 
                 List<Sku> lstSku = dao.GetSku(idUserStatic);
 
+                var sel = seletor.Substring(1);
+
                 foreach (Sku sku in lstSku)
                 {
                     if (sku.Id_Sku == idSku)
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + sku.Id_Sku, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selJobSku\" value=\"" + sku.Id_Sku + "\" selected>" + sku.Descricao + "</option>'); });", true);
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + sel + "" + sku.Id_Sku, "$(document).ready(function() { \n $(\"" + seletor + "\").append('<option name=\"selJobSku\" value=\"" + sku.Id_Sku + "\" selected>" + sku.Descricao + "</option>'); \n});\n", true);
                     else
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + sku.Id_Sku, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selJobSku\" value=\"" + sku.Id_Sku + "\">" + sku.Descricao + "</option>'); });", true);
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + sel + "" + sku.Id_Sku, "$(document).ready(function() { \n $(\"" + seletor + "\").append('<option name=\"selJobSku\" value=\"" + sku.Id_Sku + "\">" + sku.Descricao + "</option>'); \n});\n", true);
                 }
             }
             catch (Exception ex)
@@ -543,7 +545,7 @@ namespace WebApp
 
             foreach (Velocidade vel in dao.GetVel(id))
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelocidades" + vel.Id_Velocidade, "$( document ).ready(function() { \n $(\"#tblVelocidade\").append('<tr id=\"rowVelocidade" + vel.Id_Velocidade + "\"><td style=\"width: 20 %; \"><div class=\"form-group has-feedback\"><select id=\"selVelMaq" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelMaq" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 20 %; \"><div class=\"form-group has-feedback\"><select id=\"selVelSetor" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelSetor" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 20 %; \"><div class=\"form-group has-feedback\"><select id=\"selVelSku" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelSku" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 20 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtVelVelocidade" + vel.Id_Velocidade + "\" name=\"txtVelVelocidade" + vel.Id_Velocidade + "\" placeholder=\"Velocidade por hora\" class=\"form-control\" value=\"" + vel.Velocidade_Hr + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanVelVelocidade" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width:20 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowVelocidade\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowVelocidade\"></button></td></tr>'); $(\"#spanVelMaq" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelSetor" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelSku" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelVelocidade" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); });\n\n", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelocidades" + vel.Id_Velocidade, "$( document ).ready(function() { \n $(\"#tblVelocidade\").append('<tr id=\"rowVelocidade" + vel.Id_Velocidade + "\"><td><div class=\"form-group has-feedback\"><select id=\"selVelMaq" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelMaq" + vel.Id_Velocidade + "\"></span></div></td><td><div class=\"form-group has-feedback\"><select id=\"selVelSetor" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelSetor" + vel.Id_Velocidade + "\"></span></div></td><td><div class=\"form-group has-feedback\"><select id=\"selVelSku" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelSku" + vel.Id_Velocidade + "\"></span></div></td><td><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtVelVelocidade" + vel.Id_Velocidade + "\" name=\"txtVelVelocidade" + vel.Id_Velocidade + "\" placeholder=\"Velocidade por hora\" class=\"form-control\" value=\"" + vel.Velocidade_Hr + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanVelVelocidade" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 15%;\"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowVelocidade\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowVelocidade\"></button></td></tr>'); \n$(\"#spanVelMaq" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelSetor" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelSku" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelVelocidade" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
 
                 var seletor = "#selVelMaq" + vel.Id_Velocidade;
                 var seletor2 = "#selVelSetor" + vel.Id_Velocidade;
@@ -563,12 +565,14 @@ namespace WebApp
 
                 List<Maquina> lstMaq = dao.GetMaq(idUserStatic);
 
+                var sel = seletor.Substring(1);
+
                 foreach (Maquina maq in lstMaq)
                 {
                     if (maq.Id_Maquina == idMaq)
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelMaq" + maq.Id_Maquina, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selVelMaq\" value=\"" + maq.Id_Maquina + "\" selected>" + maq.Descricao + "</option>'); });", true);
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelMaq" + sel + "" + maq.Id_Maquina, "$(document).ready(function() { \n$(\"" + seletor + "\").append('<option name=\"selVelMaq\" value=\"" + maq.Id_Maquina + "\" selected>" + maq.Descricao + "</option>'); \n});", true);
                     else
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelMaq" + maq.Id_Maquina, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selVelMaq\" value=\"" + maq.Id_Maquina + "\">" + maq.Descricao + "</option>'); });", true);
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelMaq" + sel + "" + maq.Id_Maquina, "$(document).ready(function() { \n$(\"" + seletor + "\").append('<option name=\"selVelMaq\" value=\"" + maq.Id_Maquina + "\">" + maq.Descricao + "</option>'); \n});", true);
                 }
             }
             catch (Exception ex)
@@ -585,12 +589,14 @@ namespace WebApp
 
                 List<Setor> lstSetor = dao.GetSetor(idUserStatic);
 
+                var sel = seletor.Substring(1);
+
                 foreach (Setor set in lstSetor)
                 {
                     if (set.Id_Setor == idSetor)
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelSetor" + set.Id_Setor, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selVelSetor\" value=\"" + set.Id_Setor + "\" selected>" + set.Descricao + "</option>'); });", true);
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelSetor" + sel + "" + set.Id_Setor, "$(document).ready(function() { \n$(\"" + seletor + "\").append('<option name=\"selVelSetor\" value=\"" + set.Id_Setor + "\" selected>" + set.Descricao + "</option>'); \n});", true);
                     else
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelSetor" + set.Id_Setor, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selVelSetor\" value=\"" + set.Id_Setor + "\">" + set.Descricao + "</option>'); });", true);
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelSetor" + sel + "" + set.Id_Setor, "$(document).ready(function() { \n$(\"" + seletor + "\").append('<option name=\"selVelSetor\" value=\"" + set.Id_Setor + "\">" + set.Descricao + "</option>'); \n});", true);
                 }
             }
             catch (Exception ex)
@@ -607,12 +613,14 @@ namespace WebApp
 
                 List<Sku> lstSku = dao.GetSku(idUserStatic);
 
+                var sel = seletor.Substring(1);
+
                 foreach (Sku sku in lstSku)
                 {
                     if (sku.Id_Sku == idSku)
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelSku" + sku.Id_Sku, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selVelSku\" value=\"" + sku.Id_Sku + "\" selected>" + sku.Descricao + "</option>'); });", true);
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelSku" + sel + "" + sku.Id_Sku, "$(document).ready(function() { \n$(\"" + seletor + "\").append('<option name=\"selVelSku\" value=\"" + sku.Id_Sku + "\" selected>" + sku.Descricao + "</option>'); \n});", true);
                     else
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelSku" + sku.Id_Sku, "$(document).ready(function() { $(\"" + seletor + "\").append('<option name=\"selVelSku\" value=\"" + sku.Id_Sku + "\">" + sku.Descricao + "</option>'); });", true);
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelSku" + sel + "" + sku.Id_Sku, "$(document).ready(function() { \n$(\"" + seletor + "\").append('<option name=\"selVelSku\" value=\"" + sku.Id_Sku + "\">" + sku.Descricao + "</option>'); \n});", true);
                 }
             }
             catch (Exception ex)
@@ -757,13 +765,18 @@ namespace WebApp
             //define o n�mero de genes do indiv�duo baseado na solu��o
             int numGenes = AlgGenetico.Algoritimo.Jobs.Length;
 
+            if(numGenes == 0)
+            {
+                return new RodouAG() { text1 = "O algotirimo não pode trabalhar sem nenhum dado lançado!", text2 = "", text3 = "" };
+            }
+
             //cria a primeira popula��o aleat�ria
             AlgGenetico.Populacao populacao = new AlgGenetico.Populacao(numGenes, tamPop);
 
             bool temSolucao = false;
             int geracao = 0;
 
-            text1 = "Iniciando... Aptid�o da solu��o: " + AlgGenetico.Algoritimo.Solucao;
+            text1 = "Iniciando... Aptidão da solução: " + AlgGenetico.Algoritimo.Solucao;
 
             //loop at� o crit�rio de parada
             while (!temSolucao && geracao < numMaxGeracoes)
@@ -773,19 +786,19 @@ namespace WebApp
                 //cria nova populacao
                 populacao = AlgGenetico.Algoritimo.novaGeracao(populacao, eltismo);
 
-                text2 = "Gera��o " + geracao + " | Aptid�o: " + populacao.getIndivduo(0).Aptidao + " | Melhor: " + populacao.getIndivduo(0).Genes;
+                text2 = "Geração " + geracao + " | Aptidão: " + populacao.getIndivduo(0).Aptidao + " | Melhor: " + populacao.getIndivduo(0).Genes;
 
                 temSolucao = populacao.temSolocao(AlgGenetico.Algoritimo.Solucao);
             }
 
             if (geracao == numMaxGeracoes)
             {
-                text3 = "N�mero Maximo de Gera��es | " + populacao.getIndivduo(0).Genes + " " + populacao.getIndivduo(0).Aptidao;
+                text3 = "Número Maximo de Gerações | " + populacao.getIndivduo(0).Genes + " " + populacao.getIndivduo(0).Aptidao;
             }
 
             if (temSolucao)
             {
-                text3 = "Encontrado resultado na gera��o " + geracao + " | ";
+                text3 = "Encontrado resultado na geração " + geracao + " | ";
             }
 
             var t = populacao.getIndivduo(0).Genes;
@@ -815,10 +828,7 @@ namespace WebApp
                 }
 
                 lstGenes.Add(new Genes() { Sku = sku, Maq = maq, Inicio = inicio, Final = fim });
-            }
-
-            MethodInfo mtd = pg.GetType().GetMethod("teste");
-            //mtd.Invoke(pg, null);
+            }            
 
             return new RodouAG() { text1 = text1, text2 = text2, text3 = text3 };
         }
@@ -866,7 +876,7 @@ namespace WebApp
             ((GanttDiagram)WebChartControl1.Diagram).AxisY.Label.Antialiasing = true;
             ((GanttDiagram)WebChartControl1.Diagram).AxisY.DateTimeOptions.Format = DateTimeFormat.LongDate;
 
-            //this.WebChartControl1.Visible = true;
+            this.WebChartControl1.Visible = true;
 
             return "";
         }
