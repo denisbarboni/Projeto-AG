@@ -30,12 +30,9 @@ Data	    Evento
 
 COMPATIBILIDADE
 
-Segue abaixo os requisitos:
-
-Requisitos Ferramentas
-
-Navegadores	Browser: Mozila Firefox; Chrome; Internet Explorer; Microsoft Edge
-
+Segue abaixo os requisitos:<br>
+Requisitos Ferramentas<br>
+Navegadores	Browser: Mozila Firefox; Chrome; Internet Explorer; Microsoft Edge<br>
 Versões: Necessário a mais atual ou compatível com HTML5, CSS3 e JS
 
 Tecnologias
