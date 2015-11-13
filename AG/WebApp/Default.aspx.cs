@@ -840,7 +840,7 @@ namespace WebApp
                     Series series = new Series(item.Sku, ViewType.SideBySideGantt);
                     //this.WebChartControl1.Series.Add(series1);
                     //series.Label.Visible = false;
-                    ((GanttSeriesView)series.View).BarWidth = 2.5;
+                    ((GanttSeriesView)series.View).BarWidth = 1.5;
 
                     // Add points to the first series.
                     series.ArgumentScaleType = ScaleType.Qualitative;

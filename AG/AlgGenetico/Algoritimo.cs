@@ -229,7 +229,7 @@ namespace AlgGenetico
 
                 Algoritimo.lst = lstRtn;
 
-                int tamanho = (Jobs.Length / Maquinas.Length);
+                int tamanho = Jobs.Length / Maquinas.Length;
                 Algoritimo.jobs = Jobs.Substring(0, tamanho);
                 //file.Close();
             }

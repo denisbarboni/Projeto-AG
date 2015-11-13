@@ -532,7 +532,7 @@ namespace Acesso
                 conn = new NpgsqlConnection(strConn);
                 conn.Open();
 
-                var query = "SELECT * FROM Sku WHERE idUser = @idUser";
+                var query = "SELECT * FROM Sku WHERE idUser = @idUser ORDER BY nome_sku";
 
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@idUser", idUser);
@@ -571,7 +571,7 @@ namespace Acesso
                 conn = new NpgsqlConnection(strConn);
                 conn.Open();
 
-                var query = "SELECT * FROM sku WHERE id_sku = @id";
+                var query = "SELECT * FROM sku WHERE id_sku = @id ORDER BY nome_sku";
 
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
@@ -675,7 +675,7 @@ namespace Acesso
                 conn = new NpgsqlConnection(strConn);
                 conn.Open();
 
-                var query = "SELECT * FROM unidade WHERE idUser = @idUser";
+                var query = "SELECT * FROM unidade WHERE idUser = @idUser ORDER BY nome";
 
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@idUser", idUser);
@@ -713,7 +713,7 @@ namespace Acesso
                 conn = new NpgsqlConnection(strConn);
                 conn.Open();
 
-                var query = "SELECT * FROM unidade WHERE codigo = @cod and iduser = @id";
+                var query = "SELECT * FROM unidade WHERE codigo = @cod and iduser = @id ORDER BY nome";
 
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@cod", cod);
@@ -817,7 +817,7 @@ namespace Acesso
                 conn = new NpgsqlConnection(strConn);
                 conn.Open();
 
-                var query = "SELECT * FROM job WHERE idUser = @idUser";
+                var query = "SELECT * FROM job WHERE idUser = @idUser ORDER BY id_sku";
 
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@idUser", idUser);
@@ -859,7 +859,7 @@ namespace Acesso
                 conn = new NpgsqlConnection(strConn);
                 conn.Open();
 
-                var query = "SELECT * FROM job WHERE id_job = @id";
+                var query = "SELECT * FROM job WHERE id_job = @id ORDER BY id_sku";
 
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
@@ -1167,7 +1167,7 @@ namespace Acesso
                 conn = new NpgsqlConnection(strConn);
                 conn.Open();
 
-                var query = "select * from velocidade v join maquina m on m.id_maquina = v.id_maquina join job j on v.id_sku = j.id_sku join sku s on s.id_sku = v.id_sku where v.iduser = @id and m.iduser = @id and j.iduser = @id and s.iduser = @id";
+                var query = "select * from velocidade v join maquina m on m.id_maquina = v.id_maquina join job j on v.id_sku = j.id_sku join sku s on s.id_sku = v.id_sku where v.iduser = @id and m.iduser = @id and j.iduser = @id and s.iduser = @id order by m.nome, s.nome_sku";
 
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", idUser);

@@ -121,7 +121,7 @@ namespace AlgGenetico
 
                 foreach (var item in Algoritimo.lst)
                 {
-                    custo[item.Maq.Descricao] = item.Job.Qtde * item.Sku.Peso_Caixa * item.Vel.Velocidade_Hr;
+                    custo[item.Sku.Descricao + "" + item.Maq.Descricao] = item.Job.Qtde * item.Sku.Peso_Caixa * item.Vel.Velocidade_Hr;
                 }
 
             //    file.Close();
@@ -135,84 +135,86 @@ namespace AlgGenetico
             //		genes = "001E002H003B004G005E006H007D008E009E010H011H012E013G014E015H016D017H018D019D020B021E022B023E024F025A026E027H028D029E030B031B032G033E034H035D036G037E038C039H040E041C042E043H044G045H046H047C048B049E050B051E052F053A054E055H056D057E058H059B060G061E062H063E064C065E066C067H068E069E070E071A072D073H074D075C076A077E078B079E080F081A082E083H084C085E086H087B088G089E090H091D092D093E094E095A096E097D098E099H100E101H102G103C104A105D106B107E108F109A110E111H112G113E114D115E116E117G118G119G";
             for (int i = 0; i < genes.Length; i += 4)
             {
-                var maq = genes.Substring(i + 3, i + 4 - (i + 3));
+                var maq = genes.Substring(i + 3,1);
+
+                var gene = genes.Substring(i, 4);
 
                 switch (maq)
                 {
                     case "A":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaA += valorGene;
                         break;
                     case "B":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaB += valorGene;
                         break;
                     case "C":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaC += valorGene;
                         break;
                     case "D":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaD += valorGene;
                         break;
                     case "E":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaE += valorGene;
                         break;
                     case "F":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaF += valorGene;
                         break;
                     case "G":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaG += valorGene;
                         break;
                     case "H":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaH += valorGene;
                         break;
                     case "I":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaI += valorGene;
                         break;
                     case "J":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaJ += valorGene;
                         break;
                     case "K":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaK += valorGene;
                         break;
                     case "L":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaL += valorGene;
                         break;
                     case "M":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaM += valorGene;
                         break;
                     case "N":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaN += valorGene;
                         break;
                     case "O":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaO += valorGene;
                         break;
                     case "P":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaP += valorGene;
                         break;
                     case "Q":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaQ += valorGene;
                         break;
                     case "R":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaR += valorGene;
                         break;
                     case "S":
-                        valorGene = Convert.ToDouble(custo[maq]);
+                        valorGene = Convert.ToDouble(custo[gene]);
                         maquinaS += valorGene;
                         break;
                     default:
