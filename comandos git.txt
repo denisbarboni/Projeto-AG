@@ -14,4 +14,4 @@ git push origin master    -- subir mesmo
 
 get fetch origin   -- atualizar
 
-cd "D:\Dropbox\Projetos C#\Algoritimo Genetico"
+cd "D:\Dropbox\Projeto c#\Algoritimo Genetico"

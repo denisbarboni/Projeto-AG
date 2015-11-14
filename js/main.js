@@ -6,7 +6,10 @@
 
 function main() {
 
-(function () {
+
+
+
+    (function () {
    'use strict';
 
    /* ==============================================
