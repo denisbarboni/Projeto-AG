@@ -123,6 +123,14 @@ function altSenha() {
 }
 
 function rodarAg() {
+    var solucao = $("#txtDefineSolucao").val();
+
+    $("#btnVaiTeste").hide();
+
+    $("#divtext1").text("Iniciando... Aptidão da solução: " + solucao);
+    $("#divtext2").text("");
+    $("#divtext3").text("");
+
     $.ajax({ //chama o webmethod logar
         type: "POST",
         url: "Default.aspx/RodarAg",
@@ -130,9 +138,20 @@ function rodarAg() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (rtn) {
+            $("#Button1").show(); 
+
             $("#divtext1").text(rtn.d.text1);
             $("#divtext2").text(rtn.d.text2);
-            $("#divtext3").text(rtn.d.text3);   
+            $("#divtext3").text(rtn.d.text3);
         }
     });
+}
+
+function teste() {
+    var i = 0;
+
+    while (i < 100000) {
+        $("#divtext1").text(i);
+        i++;
+    }
 }

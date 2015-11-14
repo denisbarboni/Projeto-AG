@@ -118,6 +118,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="js\jquery.min.map" />
+    <None Include="Properties\PublishProfiles\algjssp.pubxml" />
+    <None Include="Properties\PublishProfiles\Teste de publicação.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

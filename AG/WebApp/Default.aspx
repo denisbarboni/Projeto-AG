@@ -57,13 +57,13 @@
     </script>
 
     <script type="text/javascript">
-         function Resized() {
-             chart.SetWidth(document.body.offsetWidth);
-         }
+        function Resized() {
+            chart.SetWidth(document.body.offsetWidth);
+        }
     </script>
 
 </head>
-<body onResize="Resized()">
+<body onresize="Resized()">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -437,10 +437,12 @@
 
                                 <div class="col-xs-12 col-sm-11 col-md-11">
                                     <button runat="server" class="btn btn-primary btn-block" id="btnVaiTeste" onclick="return rodarAg();">Vai</button>
-                                    <button runat="server" class="btn btn-primary btn-block" id="Button1" onserverclick="btnVaiTeste_ServerClick">Vai2</button>
+                                    
                                     <div id="divtext1"></div>
                                     <div id="divtext2"></div>
                                     <div id="divtext3"></div>
+
+                                    <button runat="server" class="btn btn-primary btn-block" id="Button1" onserverclick="btnVaiTeste_ServerClick">Vai2</button>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-11 col-md-11">
@@ -451,7 +453,7 @@
                                                     <cc1:SolidFillOptions HiddenSerializableString="to be serialized" />
                                                 </OptionsSerializable>
                                              </fillstyle>
-                                             <seriestemplate>
+                                            <seriestemplate>
                                                  <ViewSerializable>
                                                     <cc1:SideBySideBarSeriesView HiddenSerializableString="to be serialized">
                                                     </cc1:SideBySideBarSeriesView>
@@ -477,7 +479,7 @@
                                         </dxchartsui:WebChartControl>
                                     </div>
                                 </div>
-                             </div>
+                            </div>
                         </div>
                     </div>
 

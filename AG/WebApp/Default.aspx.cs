@@ -46,7 +46,7 @@ namespace WebApp
                 carregarVelocidade(idUserStatic);
             }
 
-            pg = this.Page;
+            pg = this;
             tp = this.GetType();
             this.WebChartControl1.Visible = false;
         }
@@ -165,33 +165,33 @@ namespace WebApp
         [WebMethod]
         public static string PegarProximoId(string tbl)
         {
-            var sequence = "";
+            //var sequence = "";
 
-            switch (tbl)
-            {
-                case "maquina":
-                    sequence = "nextmaquina";
-                    break;
-                case "setor":
-                    sequence = "nextsetor";
-                    break;
-                case "unidade":
-                    sequence = "nextunidade";
-                    break;
-                case "job":
-                    sequence = "nextjob";
-                    break;
-                case "sku":
-                    sequence = "nextsku";
-                    break;
-                case "velocidade":
-                    sequence = "nextvelocidade";
-                    break;
-            }
+            //switch (tbl)
+            //{
+            //    case "maquina":
+            //        sequence = "nextmaquina";
+            //        break;
+            //    case "setor":
+            //        sequence = "nextsetor";
+            //        break;
+            //    case "unidade":
+            //        sequence = "nextunidade";
+            //        break;
+            //    case "job":
+            //        sequence = "nextjob";
+            //        break;
+            //    case "sku":
+            //        sequence = "nextsku";
+            //        break;
+            //    case "velocidade":
+            //        sequence = "nextvelocidade";
+            //        break;
+            //}
 
             DAO dao = new DAO();
 
-            return dao.PegarProximoId(sequence).ToString();
+            return dao.PegarProximoId(tbl).ToString();
         }
         #endregion
 
@@ -786,19 +786,24 @@ namespace WebApp
                 //cria nova populacao
                 populacao = AlgGenetico.Algoritimo.novaGeracao(populacao, eltismo);
 
-                text2 = "Geração " + geracao + " | Aptidão: " + populacao.getIndivduo(0).Aptidao + " | Melhor: " + populacao.getIndivduo(0).Genes;
+                text2 = "Geração " + geracao + " | Aptidão: " + populacao.getIndivduo(0).Aptidao + " | Melhor: ";
+
+                for (int i = 0; i < populacao.getIndivduo(0).Genes.Length; i+=4)
+                {
+                    text2 += populacao.getIndivduo(0).Genes.Substring(i, 4) + "\n";
+                }
 
                 temSolucao = populacao.temSolocao(AlgGenetico.Algoritimo.Solucao);
             }
 
             if (geracao == numMaxGeracoes)
             {
-                text3 = "Número Maximo de Gerações | " + populacao.getIndivduo(0).Genes + " " + populacao.getIndivduo(0).Aptidao;
+                text3 = "Número Maximo de Gerações atingido! Solução acima foi a melhor encontrada!";
             }
 
             if (temSolucao)
             {
-                text3 = "Encontrado resultado na geração " + geracao + " | ";
+                text3 = "Encontrado resultado na geração " + geracao;
             }
 
             var t = populacao.getIndivduo(0).Genes;
@@ -834,7 +839,9 @@ namespace WebApp
         }
 
         public string teste()
-        {        
+        {
+            this.WebChartControl1.Series.Clear();
+
             foreach (var item in lstGenes)
             {
                     Series series = new Series(item.Sku, ViewType.SideBySideGantt);

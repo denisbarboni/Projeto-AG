@@ -1,0 +1,16 @@
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\Acesso.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\Acesso.pdb
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\Mono.Security.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\Npgsql.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\Objetos.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\Objetos.pdb
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\Npgsql.xml
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\de\Npgsql.resources.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\es\Npgsql.resources.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\fi\Npgsql.resources.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\fr\Npgsql.resources.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\ja\Npgsql.resources.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\bin\Release\zh-CN\Npgsql.resources.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\obj\Release\Acesso.csprojResolveAssemblyReference.cache
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\obj\Release\Acesso.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Acesso\obj\Release\Acesso.pdb

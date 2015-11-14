@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Objetos;
-using Npgsql;
+using System.Data.SqlClient;
 
 namespace Acesso
 {
     public class DAO
     {
         private string strConn;
-        private string server = "127.0.0.1";
-        private string port = "5432";
-        private string user = "postgres";
-        private string pass = "dbotter";
-        private string db = "agjssp";
+        //private string server = "127.0.0.1";
+        //private string port = "5432";
+        //private string user = "algjssp1_botter";
+        //private string pass = "algjssp";
+        //private string db = "algjssp1_algjssp";
 
-        private NpgsqlConnection conn;
+        private SqlConnection conn;
 
         public DAO()
         {
-            strConn = String.Format("Server={0};Port={1};Userid={2};Password={3};Database={4};", server, port, user, pass, db);
+            //strConn = String.Format("Server={0};Port={1};Userid={2};Password={3};Database={4};", server, port, user, pass, db);
+            strConn = "Server=tcp:xd08uqfyjs.database.windows.net,1433;Database=algjssp;User ID=algjssp@xd08uqfyjs;Password=*Ximbalaie3#;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         }
 
         #region Plano e login
@@ -28,15 +27,15 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM plano WHERE IdPlano = @id";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read())
                 {
@@ -53,7 +52,7 @@ namespace Acesso
                     return null;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -67,16 +66,16 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM usuario WHERE Login = @login and SENHA = @senha";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@login", l.User);
                 cmd.Parameters.AddWithValue("@senha", l.Senha);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read())
                 {
@@ -93,7 +92,7 @@ namespace Acesso
                     return null;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -109,15 +108,15 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM Configuracao WHERE IdUser = @id";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read())
                 {
@@ -137,13 +136,13 @@ namespace Acesso
                     return null;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
             finally
             {
-                conn.Clone();
+                conn.Close();
             }
         }
 
@@ -151,12 +150,12 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
-                var query = "INSERT INTO configuracao VALUES (@id, @SolucaoMax, @TaxaCrossover, @TaxaMutacao, true, @TotalPopulacao, @totalGeracao);";
+                var query = "INSERT INTO configuracao VALUES (@SolucaoMax, @TaxaCrossover, @TaxaMutacao, true, @TotalPopulacao, @totalGeracao);";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
 
                 cmd.Parameters.AddWithValue("@id", cfg.IdConfig);
                 cmd.Parameters.AddWithValue("@SolucaoMax", cfg.SolucaoMax);
@@ -168,7 +167,7 @@ namespace Acesso
 
                 return Convert.ToBoolean(cmd.ExecuteNonQuery());
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -182,12 +181,12 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "UPDATE configuracao SET SolucaoMax = @SolucaoMax, TaxaCrossover = @TaxaCrossover, TaxaMutacao = @TaxaMutacao, TotalPopulacao = @TotalPopulacao, TotalGeracao = @TotalGeracao WHERE IdUser = @id";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
 
                 cmd.Parameters.AddWithValue("@SolucaoMax", cfg.SolucaoMax);
                 cmd.Parameters.AddWithValue("@TaxaCrossover", Convert.ToDouble(cfg.TaxaCrossover));
@@ -199,7 +198,7 @@ namespace Acesso
 
                 return Convert.ToBoolean(cmd.ExecuteNonQuery());
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -211,18 +210,18 @@ namespace Acesso
         #endregion
 
         #region pegaProximoId
-        public int PegarProximoId(string sequence)
+        public int PegarProximoId(string tbl)
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
-                var query = "select nextval('" + sequence + "')";
+                var query = "select IDENT_CURRENT('" + tbl + "') + 1";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read())
                 {
@@ -233,7 +232,7 @@ namespace Acesso
                     return 0;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -249,15 +248,15 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM maquina WHERE idUser = @idUser";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@idUser", idUser);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 List<Maquina> lstMaq = new List<Maquina>();
 
@@ -273,7 +272,7 @@ namespace Acesso
 
                 return lstMaq;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -287,19 +286,19 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM maquina WHERE id_maquina = @id";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read()) return true; else return false;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -315,12 +314,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaMaq(maq.Id_Maquina))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "UPDATE maquina SET nome = @nome WHERE id_maquina = @id and iduser = @user";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@nome", maq.Descricao);
                     cmd.Parameters.AddWithValue("@id", maq.Id_Maquina);
                     cmd.Parameters.AddWithValue("@user", maq.idUser);
@@ -329,12 +328,12 @@ namespace Acesso
                 }
                 else
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "INSERT INTO maquina VALUES (@id, @nome, @user);";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", maq.Id_Maquina);
                     cmd.Parameters.AddWithValue("@nome", maq.Descricao);
                     cmd.Parameters.AddWithValue("@user", maq.idUser);
@@ -342,7 +341,7 @@ namespace Acesso
                     return Convert.ToBoolean(cmd.ExecuteNonQuery());
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -358,12 +357,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaMaq(id))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "DELETE FROM maquina WHERE id_maquina = @id";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     return cmd.ExecuteNonQuery();
@@ -373,7 +372,7 @@ namespace Acesso
                     return -1;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -389,15 +388,15 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM Setor WHERE idUser = @idUser";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@idUser", idUser);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 List<Setor> lstSetor = new List<Setor>();
 
@@ -413,7 +412,7 @@ namespace Acesso
 
                 return lstSetor;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -427,19 +426,19 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM setor WHERE id_setor = @id";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read()) return true; else return false;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -455,12 +454,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaSetor(setor.Id_Setor))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "UPDATE setor SET nome = @nome WHERE id_setor = @id and iduser = @user";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@nome", setor.Descricao);
                     cmd.Parameters.AddWithValue("@id", setor.Id_Setor);
                     cmd.Parameters.AddWithValue("@user", setor.idUser);
@@ -469,12 +468,12 @@ namespace Acesso
                 }
                 else
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
-                    var query = "INSERT INTO setor VALUES (@id, @nome, @user);";
+                    var query = "INSERT INTO setor VALUES (@nome, @user);";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", setor.Id_Setor);
                     cmd.Parameters.AddWithValue("@nome", setor.Descricao);
                     cmd.Parameters.AddWithValue("@user", setor.idUser);
@@ -482,7 +481,7 @@ namespace Acesso
                     return Convert.ToBoolean(cmd.ExecuteNonQuery());
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -498,12 +497,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaSetor(id))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "DELETE FROM setor WHERE id_setor = @id";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     return cmd.ExecuteNonQuery();
@@ -513,7 +512,7 @@ namespace Acesso
                     return -1;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -529,15 +528,15 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM Sku WHERE idUser = @idUser ORDER BY nome_sku";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@idUser", idUser);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 List<Sku> lstSku = new List<Sku>();
 
@@ -554,7 +553,7 @@ namespace Acesso
 
                 return lstSku;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -568,19 +567,19 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM sku WHERE id_sku = @id ORDER BY nome_sku";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read()) return true; else return false;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -596,12 +595,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaSku(sku.Id_Sku))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "UPDATE sku SET nome_sku = @nome_sku, peso_caixa = @peso WHERE id_sku = @id_sku and iduser = @user";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@nome_sku", sku.Descricao);
                     cmd.Parameters.AddWithValue("@id_sku", sku.Id_Sku);
                     cmd.Parameters.AddWithValue("@peso", sku.Peso_Caixa);
@@ -611,12 +610,12 @@ namespace Acesso
                 }
                 else
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
-                    var query = "INSERT INTO sku VALUES (@id, @nome, @peso, @user);";
+                    var query = "INSERT INTO sku VALUES (@nome, @peso, @user);";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", sku.Id_Sku);
                     cmd.Parameters.AddWithValue("@nome", sku.Descricao);
                     cmd.Parameters.AddWithValue("@user", sku.idUser);
@@ -625,7 +624,7 @@ namespace Acesso
                     return Convert.ToBoolean(cmd.ExecuteNonQuery());
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -641,12 +640,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaSku(id))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "DELETE FROM sku WHERE id_sku = @id";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     return cmd.ExecuteNonQuery();
@@ -656,7 +655,7 @@ namespace Acesso
                     return -1;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -672,15 +671,15 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM unidade WHERE idUser = @idUser ORDER BY nome";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@idUser", idUser);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 List<Unidade> lstMaq = new List<Unidade>();
 
@@ -696,7 +695,7 @@ namespace Acesso
 
                 return lstMaq;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -710,20 +709,20 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM unidade WHERE codigo = @cod and iduser = @id ORDER BY nome";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@cod", cod);
                 cmd.Parameters.AddWithValue("@id", id);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read()) return true; else return false;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -739,12 +738,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaUnidade(un.Codigo_Un, un.idUser))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "UPDATE unidade SET nome = @nome WHERE codigo = @cod and iduser = @user";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@nome", un.Descricao);
                     cmd.Parameters.AddWithValue("@cod", un.Codigo_Un);
                     cmd.Parameters.AddWithValue("@user", un.idUser);
@@ -753,12 +752,12 @@ namespace Acesso
                 }
                 else
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "INSERT INTO unidade VALUES (@cod, @nome, @user);";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@cod", un.Codigo_Un);
                     cmd.Parameters.AddWithValue("@nome", un.Descricao);
                     cmd.Parameters.AddWithValue("@user", un.idUser);
@@ -766,7 +765,7 @@ namespace Acesso
                     return Convert.ToBoolean(cmd.ExecuteNonQuery());
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -782,12 +781,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaUnidade(cod, idUser))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "DELETE FROM unidade WHERE codigo = @cod and iduser = @id";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@cod", cod);
                     cmd.Parameters.AddWithValue("@id", idUser);
 
@@ -798,7 +797,7 @@ namespace Acesso
                     return -1;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -814,15 +813,15 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM job WHERE idUser = @idUser ORDER BY id_sku";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@idUser", idUser);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 List<Job> lstJob = new List<Job>();
 
@@ -842,7 +841,7 @@ namespace Acesso
 
                 return lstJob;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -856,19 +855,19 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM job WHERE id_job = @id ORDER BY id_sku";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read()) return true; else return false;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -884,12 +883,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaJob(job.Id_Job))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "UPDATE job SET id_sku = @id_sku, quantidade = @qtde WHERE id_job = @id_job and iduser = @user";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id_sku", job.Sku.Id_Sku);
                     cmd.Parameters.AddWithValue("@qtde", job.Qtde);
                     cmd.Parameters.AddWithValue("@id_job", job.Id_Job);
@@ -899,12 +898,12 @@ namespace Acesso
                 }
                 else
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
-                    var query = "INSERT INTO job VALUES (@id_job, @id_sku, @qtde, @user);";
+                    var query = "INSERT INTO job VALUES (@id_sku, @qtde, @user);";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id_sku", job.Sku.Id_Sku);
                     cmd.Parameters.AddWithValue("@qtde", job.Qtde);
                     cmd.Parameters.AddWithValue("@id_job", job.Id_Job);
@@ -913,7 +912,7 @@ namespace Acesso
                     return Convert.ToBoolean(cmd.ExecuteNonQuery());
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -929,12 +928,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaJob(id))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "DELETE FROM job WHERE id_job = @id";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     return cmd.ExecuteNonQuery();
@@ -944,7 +943,7 @@ namespace Acesso
                     return -1;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -960,15 +959,15 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM velocidade WHERE idUser = @idUser";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@idUser", idUser);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 List<Velocidade> lstVel = new List<Velocidade>();
 
@@ -987,7 +986,7 @@ namespace Acesso
 
                 return lstVel;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -1001,19 +1000,19 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM velocidade WHERE id_velocidade = @id";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read()) return true; else return false;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -1029,12 +1028,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaVelocidade(vel.Id_Velocidade))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "UPDATE velocidade SET id_maquina = @id_maq, id_setor = @id_setor, id_sku = @id_sku, velocidade_hora = @vel_hr WHERE id_velocidade = @id_velocidade and iduser = @user";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id_sku", vel.Sku.Id_Sku);
                     cmd.Parameters.AddWithValue("@id_maq", vel.Maquina.Id_Maquina);
                     cmd.Parameters.AddWithValue("@id_setor", vel.Setor.Id_Setor);
@@ -1045,12 +1044,12 @@ namespace Acesso
                 }
                 else
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
-                    var query = "INSERT INTO velocidade VALUES (@id_vel, @id_setor, @id_maq, @id_sku, @vel_hr, @user);";
+                    var query = "INSERT INTO velocidade VALUES (@id_setor, @id_maq, @id_sku, @vel_hr, @user);";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id_vel", vel.Id_Velocidade);
                     cmd.Parameters.AddWithValue("@id_sku", vel.Sku.Id_Sku);
                     cmd.Parameters.AddWithValue("@id_maq", vel.Maquina.Id_Maquina);
@@ -1061,7 +1060,7 @@ namespace Acesso
                     return Convert.ToBoolean(cmd.ExecuteNonQuery());
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -1077,12 +1076,12 @@ namespace Acesso
             {
                 if (VerificaExistenciaVelocidade(id))
                 {
-                    conn = new NpgsqlConnection(strConn);
+                    conn = new SqlConnection(strConn);
                     conn.Open();
 
                     var query = "DELETE FROM velocidade WHERE id_velocidade = @id";
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     return cmd.ExecuteNonQuery();
@@ -1092,7 +1091,7 @@ namespace Acesso
                     return -1;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -1108,16 +1107,16 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT * FROM usuario WHERE IdUsuario = @id and Senha = @senha";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", altSenha.idUser);
                 cmd.Parameters.AddWithValue("@senha", altSenha.Senha);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 bool ok = false;
 
@@ -1131,7 +1130,7 @@ namespace Acesso
                     {
                         query = "UPDATE usuario SET senha = @senha WHERE idUsuario = @id";
 
-                        cmd = new NpgsqlCommand(query, conn);
+                        cmd = new SqlCommand(query, conn);
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@senha", altSenha.SenhaNova);
                         cmd.Parameters.AddWithValue("@id", altSenha.idUser);
@@ -1148,7 +1147,7 @@ namespace Acesso
                     return 0;
                 }
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -1164,15 +1163,15 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "select * from velocidade v join maquina m on m.id_maquina = v.id_maquina join job j on v.id_sku = j.id_sku join sku s on s.id_sku = v.id_sku where v.iduser = @id and m.iduser = @id and j.iduser = @id and s.iduser = @id order by m.nome, s.nome_sku";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", idUser);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
                 List<VelMaqJobsSku> lstVelMaqJobsSku = new List<VelMaqJobsSku>();
 
                 while (rd.Read())
@@ -1213,7 +1212,7 @@ namespace Acesso
 
                 return lstVelMaqJobsSku;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -1228,23 +1227,23 @@ namespace Acesso
         {
             try
             {
-                conn = new NpgsqlConnection(strConn);
+                conn = new SqlConnection(strConn);
                 conn.Open();
 
                 var query = "SELECT sku.peso_caixa * quantidade * velocidade_hora FROM maquina, sku, job, velocidade WHERE maquina.id_maquina = velocidade.id_maquina and sku.id_sku = velocidade.id_sku and job.id_sku = sku.id_sku and sku.nome_sku = @dsku and maquina.nome = @dmaq";
 
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@dsku", dSku);
                 cmd.Parameters.AddWithValue("@dmaq", dMaq);
 
-                NpgsqlDataReader rd = cmd.ExecuteReader();
+                SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read())
                     return Convert.ToDouble(rd[0].ToString());
                 else
                     return 0;
             }
-            catch (NpgsqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }

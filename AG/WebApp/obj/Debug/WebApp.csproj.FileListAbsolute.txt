@@ -35,16 +35,7 @@ D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\WebApp.pdb
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Acesso.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\AlgGenetico.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Objetos.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Npgsql.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Mono.Security.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Objetos.pdb
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Npgsql.xml
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\de\Npgsql.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\es\Npgsql.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\fi\Npgsql.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\fr\Npgsql.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\ja\Npgsql.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\zh-CN\Npgsql.resources.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\obj\Debug\WebApp.csprojResolveAssemblyReference.cache
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\obj\Debug\WebApp.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\obj\Debug\WebApp.pdb
