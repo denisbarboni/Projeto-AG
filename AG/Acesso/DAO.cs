@@ -331,7 +331,7 @@ namespace Acesso
                     conn = new SqlConnection(strConn);
                     conn.Open();
 
-                    var query = "INSERT INTO maquina VALUES (@id, @nome, @user);";
+                    var query = "INSERT INTO maquina VALUES (@nome, @user);";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", maq.Id_Maquina);
@@ -1039,6 +1039,7 @@ namespace Acesso
                     cmd.Parameters.AddWithValue("@id_setor", vel.Setor.Id_Setor);
                     cmd.Parameters.AddWithValue("@vel_hr", vel.Velocidade_Hr);
                     cmd.Parameters.AddWithValue("@user", vel.idUser);
+                    cmd.Parameters.AddWithValue("@id_velocidade", vel.Id_Velocidade);
 
                     return Convert.ToBoolean(cmd.ExecuteNonQuery());
                 }
@@ -1223,18 +1224,19 @@ namespace Acesso
         }
 
         //retorna o valor do gene gerado
-        public double getValorGene(string dSku, string dMaq)
+        public double getValorGene(string dSku, string dMaq, int dIdUser)
         {
             try
             {
                 conn = new SqlConnection(strConn);
                 conn.Open();
 
-                var query = "SELECT sku.peso_caixa * quantidade * velocidade_hora FROM maquina, sku, job, velocidade WHERE maquina.id_maquina = velocidade.id_maquina and sku.id_sku = velocidade.id_sku and job.id_sku = sku.id_sku and sku.nome_sku = @dsku and maquina.nome = @dmaq";
+                var query = "SELECT sku.peso_caixa * quantidade * velocidade_hora FROM maquina, sku, job, velocidade WHERE maquina.id_maquina = velocidade.id_maquina and sku.id_sku = velocidade.id_sku and job.id_sku = sku.id_sku and sku.nome_sku = @dsku and maquina.nome = @dmaq and velocidade.IdUser = @idUser";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@dsku", dSku);
                 cmd.Parameters.AddWithValue("@dmaq", dMaq);
+                cmd.Parameters.AddWithValue("@idUser", dIdUser);
 
                 SqlDataReader rd = cmd.ExecuteReader();
 
@@ -1242,6 +1244,86 @@ namespace Acesso
                     return Convert.ToDouble(rd[0].ToString());
                 else
                     return 0;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void setarResultado(List<Genes> lstGenes, int idUser)
+        {
+            SqlTransaction trans = null;
+            try
+            {
+                conn = new SqlConnection(strConn);
+                conn.Open();
+
+                trans = conn.BeginTransaction();
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.Transaction = trans;
+
+                cmd.CommandText = "DELETE FROM resultado WHERE idUser = @idUser";
+                cmd.Parameters.AddWithValue("@idUser", idUser);
+                cmd.ExecuteNonQuery();
+
+                foreach (var item in lstGenes)
+                {
+                    cmd.CommandText = "INSERT INTO resultado VALUES (@sku, @maq, @inicio, @fim, @idUser);";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@sku", item.Sku);
+                    cmd.Parameters.AddWithValue("@maq", item.Maq);
+                    cmd.Parameters.AddWithValue("@inicio", item.Inicio);
+                    cmd.Parameters.AddWithValue("@fim", item.Final);
+                    cmd.Parameters.AddWithValue("@idUser", idUser);
+                    cmd.ExecuteNonQuery();
+                }
+
+                trans.Commit();
+            }
+            catch (SqlException ex)
+            {
+                trans.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public List<Genes> getResultado(int idUser)
+        {
+            try
+            {
+                conn = new SqlConnection(strConn);
+                conn.Open();
+
+                var query = "SELECT * FROM resultado WHERE IdUser = @id ORDER BY maq";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", idUser);
+
+                SqlDataReader rd = cmd.ExecuteReader();
+
+                List<Genes> lstRtn = new List<Genes>();
+
+                while (rd.Read())
+                {
+                    lstRtn.Add(new Genes()
+                    {
+                        Sku = rd[1].ToString(),
+                        Maq = rd[2].ToString(),
+                        Inicio = Convert.ToDateTime(rd[3].ToString()),
+                        Final = Convert.ToDateTime(rd[4].ToString())
+                    });
+                }
+
+                return lstRtn;
             }
             catch (SqlException ex)
             {

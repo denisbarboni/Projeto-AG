@@ -48,7 +48,9 @@ namespace WebApp
 
             pg = this;
             tp = this.GetType();
-            this.WebChartControl1.Visible = false;
+            //this.WebChartControl1.Visible = false;
+
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "visiblefalsegrafico", "$( document ).ready(function() {\n $('#verGrafico').hide(); \n});\n\n", true);
         }
 
         #region CarregarConfigs
@@ -545,7 +547,7 @@ namespace WebApp
 
             foreach (Velocidade vel in dao.GetVel(id))
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelocidades" + vel.Id_Velocidade, "$( document ).ready(function() { \n $(\"#tblVelocidade\").append('<tr id=\"rowVelocidade" + vel.Id_Velocidade + "\"><td><div class=\"form-group has-feedback\"><select id=\"selVelMaq" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelMaq" + vel.Id_Velocidade + "\"></span></div></td><td><div class=\"form-group has-feedback\"><select id=\"selVelSetor" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelSetor" + vel.Id_Velocidade + "\"></span></div></td><td><div class=\"form-group has-feedback\"><select id=\"selVelSku" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelSku" + vel.Id_Velocidade + "\"></span></div></td><td><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtVelVelocidade" + vel.Id_Velocidade + "\" name=\"txtVelVelocidade" + vel.Id_Velocidade + "\" placeholder=\"Velocidade por hora\" class=\"form-control\" value=\"" + vel.Velocidade_Hr + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanVelVelocidade" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 15%;\"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowVelocidade\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowVelocidade\"></button></td></tr>'); \n$(\"#spanVelMaq" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelSetor" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelSku" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelVelocidade" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelocidades" + vel.Id_Velocidade, "$( document ).ready(function() { \n $(\"#tblVelocidade\").append('<tr id=\"rowVelocidade" + vel.Id_Velocidade + "\"><td><div class=\"form-group has-feedback\"><select id=\"selVelMaq" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelMaq" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 22%;\"><div class=\"form-group has-feedback\"><select id=\"selVelSetor" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelSetor" + vel.Id_Velocidade + "\"></span></div></td><td><div class=\"form-group has-feedback\"><select id=\"selVelSku" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelSku" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 25%;\"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtVelVelocidade" + vel.Id_Velocidade + "\" name=\"txtVelVelocidade" + vel.Id_Velocidade + "\" placeholder=\"Velocidade por hora\" class=\"form-control\" value=\"" + vel.Velocidade_Hr + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanVelVelocidade" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 15%;\"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowVelocidade\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowVelocidade\"></button></td></tr>'); \n$(\"#spanVelMaq" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelSetor" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelSku" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelVelocidade" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
 
                 var seletor = "#selVelMaq" + vel.Id_Velocidade;
                 var seletor2 = "#selVelSetor" + vel.Id_Velocidade;
@@ -809,89 +811,38 @@ namespace WebApp
             var t = populacao.getIndivduo(0).Genes;
 
             lstGenes = new List<Genes>();
+            DAO dao;
 
             for (int i = 0; i < t.Length; i += 4)
             {
                 var sku = t.Substring(i, 4).Substring(0, 3);
                 var maq = t.Substring(i, 4).Substring(3, 1);
 
-                DAO dao = new DAO();
-                var vlr = dao.getValorGene(sku, maq);
+                dao = new DAO();
+                var vlr = dao.getValorGene(sku, maq, idUserStatic);
 
                 DateTime inicio;
                 DateTime fim;
 
-                inicio = DateTime.Now.Date.AddMinutes((DateTime.Now.Hour * 60) + DateTime.Now.Minute);
-                fim = DateTime.Now.Date.AddMinutes((DateTime.Now.Hour * 60) + DateTime.Now.Minute + vlr);
+                inicio = DateTime.Now.Date.AddHours(DateTime.Now.Hour + DateTime.Now.Minute);
+                fim = DateTime.Now.Date.AddHours((DateTime.Now.Hour + vlr) + DateTime.Now.Minute);
 
                 foreach (var item in lstGenes)
                 {
                     if(maq == item.Maq) {
                         inicio = item.Final.AddMinutes(30);
-                        fim = inicio.AddMinutes(vlr);
+                        fim = inicio.AddHours(vlr);
                     }
                 }
 
                 lstGenes.Add(new Genes() { Sku = sku, Maq = maq, Inicio = inicio, Final = fim });
-            }            
+            }
+
+            dao = new DAO();
+            dao.setarResultado(lstGenes, idUserStatic);
 
             return new RodouAG() { text1 = text1, text2 = text2, text3 = text3 };
         }
-
-        public string teste()
-        {
-            this.WebChartControl1.Series.Clear();
-
-            foreach (var item in lstGenes)
-            {
-                    Series series = new Series(item.Sku, ViewType.SideBySideGantt);
-                    //this.WebChartControl1.Series.Add(series1);
-                    //series.Label.Visible = false;
-                    ((GanttSeriesView)series.View).BarWidth = 1.5;
-
-                    // Add points to the first series.
-                    series.ArgumentScaleType = ScaleType.Qualitative;
-                    series.ValueScaleType = ScaleType.DateTime;
-
-                    series.Points.Add(new SeriesPoint(item.Maq, new DateTime[] {
-                    item.Inicio,
-                    item.Final
-                }));
-
-                    this.WebChartControl1.Series.Add(series);
-            }
-
-            // Create the second Gantt series and set its properties.
-
-            // Add a constant line.
-            //ConstantLine deadline = new ConstantLine("Deadline", new DateTime(2015, 11, 06));
-            //deadline.ShowInLegend = false;
-            //deadline.Title.Alignment = ConstantLineTitleAlignment.Far;
-            //deadline.Color = System.Drawing.Color.Red;
-            //((GanttDiagram)this.WebChartControl1.Diagram).AxisY.ConstantLines.Add(deadline);
-
-            // Customize the chart.
-            //ganttChart.Size = New System.Drawing.Size(500, 300)
-            WebChartControl1.Legend.AlignmentHorizontal = LegendAlignmentHorizontal.Right;
-            WebChartControl1.Legend.AlignmentVertical = LegendAlignmentVertical.TopOutside;
-            WebChartControl1.Legend.Direction = LegendDirection.LeftToRight;
-            ((GanttDiagram)WebChartControl1.Diagram).AxisX.Title.Text = "Máquinas";
-            ((GanttDiagram)WebChartControl1.Diagram).AxisX.Title.Visible = true;
-            ((GanttDiagram)WebChartControl1.Diagram).AxisY.Interlaced = true;
-            ((GanttDiagram)WebChartControl1.Diagram).AxisY.GridSpacing = 10;
-            ((GanttDiagram)WebChartControl1.Diagram).AxisY.Label.Angle = -30;
-            ((GanttDiagram)WebChartControl1.Diagram).AxisY.Label.Antialiasing = true;
-            ((GanttDiagram)WebChartControl1.Diagram).AxisY.DateTimeOptions.Format = DateTimeFormat.LongDate;
-
-            this.WebChartControl1.Visible = true;
-
-            return "";
-        }
-        #endregion
-
-        protected void btnVaiTeste_ServerClick(object sender, EventArgs e)
-        {
-            teste();
-        }
+        #endregion     
     }
 }

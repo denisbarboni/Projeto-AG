@@ -14,10 +14,8 @@ D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.XtraCharts.v
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.XtraCharts.v15.1.Web.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.XtraEditors.v15.1.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Objetos.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Npgsql.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.Office.v15.1.Core.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.Sparkline.v15.1.Core.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Mono.Security.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Acesso.pdb
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\AlgGenetico.pdb
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Objetos.pdb
@@ -28,7 +26,6 @@ D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.Utils.v15.1.
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.Web.v15.1.xml
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.XtraCharts.v15.1.xml
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.XtraCharts.v15.1.Web.xml
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Npgsql.xml
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.Office.v15.1.Core.xml
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\DevExpress.Sparkline.v15.1.Core.xml
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\de\DevExpress.Data.v15.1.resources.dll
@@ -59,12 +56,6 @@ D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\de\DevExpress.XtraEdito
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\es\DevExpress.XtraEditors.v15.1.resources.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\ja\DevExpress.XtraEditors.v15.1.resources.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\ru\DevExpress.XtraEditors.v15.1.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\de\Npgsql.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\es\Npgsql.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\fi\Npgsql.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\fr\Npgsql.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\ja\Npgsql.resources.dll
-D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\zh-CN\Npgsql.resources.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\de\DevExpress.Office.v15.1.Core.resources.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\es\DevExpress.Office.v15.1.Core.resources.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\ja\DevExpress.Office.v15.1.Core.resources.dll

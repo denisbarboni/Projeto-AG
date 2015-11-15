@@ -434,50 +434,15 @@
                     <div class="tab-pane fade in" id="tab2">
                         <div class="container">
                             <div class="row">
-
+                                
                                 <div class="col-xs-12 col-sm-11 col-md-11">
-                                    <button runat="server" class="btn btn-primary btn-block" id="btnVaiTeste" onclick="return rodarAg();">Vai</button>
+                                    <button runat="server" class="btn btn-primary" id="btnVaiTeste" onclick="return rodarAg();">Rodar Algoritimo!</button>
                                     
                                     <div id="divtext1"></div>
                                     <div id="divtext2"></div>
                                     <div id="divtext3"></div>
 
-                                    <button runat="server" class="btn btn-primary btn-block" id="Button1" onserverclick="btnVaiTeste_ServerClick">Vai2</button>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-11 col-md-11">
-                                    <div id="teste" style="margin-top: 13px; text-align: center;">
-                                        <dxchartsui:WebChartControl ID="WebChartControl1" runat="server" EnableCallBacks="false" ClientInstanceName="chart" Width="1024" Height="1024">
-                                            <fillstyle>
-                                                <OptionsSerializable>
-                                                    <cc1:SolidFillOptions HiddenSerializableString="to be serialized" />
-                                                </OptionsSerializable>
-                                             </fillstyle>
-                                            <seriestemplate>
-                                                 <ViewSerializable>
-                                                    <cc1:SideBySideBarSeriesView HiddenSerializableString="to be serialized">
-                                                    </cc1:SideBySideBarSeriesView>
-                                                 </ViewSerializable>
-                                                 <LabelSerializable>
-                                                    <cc1:SideBySideBarSeriesLabel HiddenSerializableString="to be serialized">
-                                                        <FillStyle>
-                                                            <OptionsSerializable>
-                                                                <cc1:SolidFillOptions HiddenSerializableString="to be serialized" />
-                                                            </OptionsSerializable>
-                                                         </FillStyle>
-                                                     </cc1:SideBySideBarSeriesLabel>
-                                                 </LabelSerializable>
-                                                 <PointOptionsSerializable>
-                                                    <cc1:PointOptions HiddenSerializableString="to be serialized">
-                                                    </cc1:PointOptions>
-                                                 </PointOptionsSerializable>
-                                                 <LegendPointOptionsSerializable>
-                                                    <cc1:PointOptions HiddenSerializableString="to be serialized">
-                                                    </cc1:PointOptions>
-                                                 </LegendPointOptionsSerializable>
-                                            </seriestemplate>
-                                        </dxchartsui:WebChartControl>
-                                    </div>
+                                    <a runat="server" href="grafico.aspx" target="_blank" class="btn btn-block btn-primary" id="verGrafico">Ver Gráfico!</a>
                                 </div>
                             </div>
                         </div>

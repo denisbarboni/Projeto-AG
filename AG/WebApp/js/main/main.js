@@ -43,7 +43,7 @@ function btnSalvarConfig() {
     });
 };
 
-$("#btnLogar").click(function () {
+function Logar() {
     var dataString = JSON.stringify({
         user: $('#txtLogin').val(), //pega as variasis dos textbox e joga no data do json
         senha: $('#txtSenha').val()
@@ -70,7 +70,7 @@ $("#btnLogar").click(function () {
             }
         }
     });
-});
+}
 
 function altSenha() {
     var senha = $('#txtSenhaAntiga').val();
@@ -138,7 +138,7 @@ function rodarAg() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (rtn) {
-            $("#Button1").show(); 
+            $("#verGrafico").show(); 
 
             $("#divtext1").text(rtn.d.text1);
             $("#divtext2").text(rtn.d.text2);

@@ -89,11 +89,13 @@ namespace AlgGenetico
 
             //Gera o primeiro filho. 
             geneFilho1 = genePai1.Substring(0, pontoCorte1 + 1);
-            geneFilho1 += genePai2.Substring(pontoCorte1 + 1, genePai1.Length - (pontoCorte1 + 1));
+            //geneFilho1 += genePai2.Substring(pontoCorte1 + 1, genePai1.Length - (pontoCorte1 + 1));
+            geneFilho1 += genePai2.Substring(pontoCorte1 + 1);
 
             //Gera o segundo filho. 
             geneFilho2 = genePai2.Substring(0, pontoCorte1 + 1);
-            geneFilho2 += genePai1.Substring(pontoCorte1 + 1, genePai2.Length - (pontoCorte1 + 1));
+            //geneFilho2 += genePai1.Substring(pontoCorte1 + 1, genePai2.Length - (pontoCorte1 + 1));
+            geneFilho2 += genePai1.Substring(pontoCorte1 + 1);
 
             //cria o novo indiv�duo com os genes dos pais
             filhos[0] = new Individuo(geneFilho1);

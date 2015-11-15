@@ -11,7 +11,7 @@
     <title>Login</title>
 </head>
 <body>
-    <form id="form1" runat="server" class="form-horizontal">
+    <form id="form1" runat="server" class="form-horizontal" onsubmit="Logar()">
         <div class="container">
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-4 ">
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary btn-block" id="btnLogar">Logar</button>
+                        <button type="button" class="btn btn-primary btn-block" id="btnLogar" onclick="Logar()">Logar</button>
                     </div>
                 </div>
             </div>
