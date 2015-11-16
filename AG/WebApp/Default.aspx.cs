@@ -17,10 +17,17 @@ namespace WebApp
     public partial class Default : System.Web.UI.Page
     {
         static Configuracao config;
-        static int idUserStatic;
+        int idUserStatic;
 
-        static Page pg;
-        static Type tp;
+        Page pg;
+        Type tp;
+
+        List<Maquina> lstMaq;
+        List<Setor> lstSetor;
+        List<Sku> lstSku;
+        List<Unidade> lstUnidade;
+        List<Job> lstJob;
+        List<Velocidade> lstVelocidade;
 
         static List<Genes> lstGenes;
 
@@ -50,7 +57,7 @@ namespace WebApp
             tp = this.GetType();
             //this.WebChartControl1.Visible = false;
 
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "visiblefalsegrafico", "$( document ).ready(function() {\n $('#verGrafico').hide(); \n});\n\n", true);
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "visiblefalsegrafico", "$( document ).ready(function() {\n $('#verGrafico').hide(); $('#btnVaiTeste2').hide(); \n});\n\n", true);
         }
 
         #region CarregarConfigs
@@ -126,7 +133,7 @@ namespace WebApp
                     config.TotalPopulacao = Convert.ToInt32(populacao);
                     config.TotalGeracao = Convert.ToInt32(geracao);
 
-                    config.IdConfig = idUserStatic; //add a ID na config pois ainda nao existe no banco
+                    config.IdConfig = Convert.ToInt32(HttpContext.Current.Session["idUsuario"]); //add a ID na config pois ainda nao existe no banco
 
                     dao.AddConfig(config); //não existe, insert!
                 }
@@ -201,9 +208,11 @@ namespace WebApp
         private void carregarMaq(int id)
         {
             DAO dao = new DAO();
+            lstMaq = new List<Maquina>();
 
             foreach (Maquina maq in dao.GetMaq(id))
             {
+                lstMaq.Add(maq);
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheMaqs" + maq.Id_Maquina, "$( document ).ready(function() {\n $(\"#tblMaquina\").append('<tr id=\"rowMaq" + maq.Id_Maquina + "\" ><td style=\"width:85%; \"><div class=\"form-group has-feedback\" ><input type=\"text\" id =\"txtNomeMaquina" + maq.Id_Maquina + "\" name=\"txtNomeMaquina" + maq.Id_Maquina + "\" placeholder =\"Nome da Máquina\" class=\"form-control\" value =\"" + maq.Descricao + "\" disabled/><span class=\"glyphicon form-control-feedback\" id=\"spanNomeMaquina" + maq.Id_Maquina + "\"></span></div></td><td style=\"width:15%; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowMaq\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowMaq\"></button></td></tr>');\n $(\"#spanNomeMaquina" + maq.Id_Maquina + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success');\n});\n\n", true);
             }
         }
@@ -217,7 +226,7 @@ namespace WebApp
 
                 if (dao.AddEdtMaq(new Maquina()
                 {
-                    idUser = idUserStatic,
+                    idUser = Convert.ToInt32(HttpContext.Current.Session["idUsuario"]),
                     Descricao = nome,
                     Id_Maquina = Convert.ToInt32(id)
                 }))
@@ -262,9 +271,11 @@ namespace WebApp
         private void carregarSetor(int id)
         {
             DAO dao = new DAO();
+            lstSetor = new List<Setor>();
 
             foreach (Setor set in dao.GetSetor(id))
             {
+                lstSetor.Add(set);
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheSetores" + set.Id_Setor, "$( document ).ready(function() {\n $(\"#tblSetor\").append('<tr id=\"rowSetor" + set.Id_Setor + "\" ><td style=\"width:85%; \"><div class=\"form-group has-feedback\" ><input type=\"text\" id =\"txtNomeSetor" + set.Id_Setor + "\" name=\"txtNomeSetor" + set.Id_Setor + "\" placeholder =\"Nome do Setor\" class=\"form-control\" value =\"" + set.Descricao + "\" disabled/><span class=\"glyphicon form-control-feedback\" id=\"spanNomeSetor" + set.Id_Setor + "\"></span></div></td><td style=\"width:15%; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowSetor\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowSetor\"></button></td></tr>');\n $(\"#spanNomeSetor" + set.Id_Setor + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
             }
         }
@@ -278,7 +289,7 @@ namespace WebApp
 
                 if (dao.AddEdtSetor(new Setor()
                 {
-                    idUser = idUserStatic,
+                    idUser = Convert.ToInt32(HttpContext.Current.Session["idUsuario"]),
                     Descricao = nome,
                     Id_Setor = Convert.ToInt32(id)
                 }))
@@ -323,9 +334,11 @@ namespace WebApp
         private void carregarSku(int id)
         {
             DAO dao = new DAO();
+            lstSku = new List<Sku>();
 
             foreach (Sku sku in dao.GetSku(id))
             {
+                lstSku.Add(sku);
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheSkus" + sku.Id_Sku, "$( document ).ready(function() { \n $(\"#tblSku\").append('<tr id=\"rowSku" + sku.Id_Sku + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeSku" + sku.Id_Sku + "\" name=\"txtNomeSku" + sku.Id_Sku + "\" placeholder=\"Nome do Sku\" class=\"form-control\" value=\"" + sku.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtPesoSku" + sku.Id_Sku + "\" name=\"txtPesoSku" + sku.Id_Sku + "\" placeholder=\"Peso do Sku\" class=\"form-control\" value=\"" + sku.Peso_Caixa + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanPesoSku" + sku.Id_Sku + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowSku\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowSku\"></button></td></tr>'); $(\"#spanNomeSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanPesoSku" + sku.Id_Sku + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
             }
         }
@@ -339,7 +352,7 @@ namespace WebApp
 
                 if (dao.AddEdtSku(new Sku()
                 {
-                    idUser = idUserStatic,
+                    idUser = Convert.ToInt32(HttpContext.Current.Session["idUsuario"]),
                     Descricao = nome,
                     Id_Sku = Convert.ToInt32(id),
                     Peso_Caixa = Convert.ToDouble(peso)
@@ -385,9 +398,11 @@ namespace WebApp
         private void carregarUnidade(int id)
         {
             DAO dao = new DAO();
+            lstUnidade = new List<Unidade>();
 
             foreach (Unidade un in dao.GetUnidade(id))
             {
+                lstUnidade.Add(un);
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheUnidade" + un.Codigo_Un, "$( document ).ready(function() { \n $(\"#tblUnidade\").append('<tr id=\"rowUnidade" + un.Codigo_Un + "\"><td style=\"width:55 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtCodUnidade" + un.Codigo_Un + "\" name=\"txtCodUnidade" + un.Codigo_Un + "\" placeholder=\"Código da Unidade\" class=\"form-control\" value=\"" + un.Codigo_Un + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanCodUnidade" + un.Codigo_Un + "\"></span></div></td><td style=\"width: 30 %; \"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtNomeUnidade" + un.Codigo_Un + "\" name=\"txtNomeUnidade" + un.Codigo_Un + "\" placeholder=\"Nome da Unidade\" class=\"form-control\" value=\"" + un.Descricao + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanNomeUnidade" + un.Codigo_Un + "\"></span></div></td><td style=\"width: 15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowUnidade\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowUnidade\"></button></td></tr>'); $(\"#spanCodUnidade" + un.Codigo_Un + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanNomeUnidade" + un.Codigo_Un + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
             }
         }
@@ -401,7 +416,7 @@ namespace WebApp
 
                 if (dao.AddEdtUnidade(new Unidade()
                 {
-                    idUser = idUserStatic,
+                    idUser = Convert.ToInt32(HttpContext.Current.Session["idUsuario"]),
                     Descricao = nome,
                     Codigo_Un = cod
                 }))
@@ -426,7 +441,7 @@ namespace WebApp
             {
                 DAO dao = new DAO();
 
-                int rtn = dao.RemUnidade(cod, idUserStatic);
+                int rtn = dao.RemUnidade(cod, Convert.ToInt32(HttpContext.Current.Session["idUsuario"]));
 
                 if (rtn > 0)
                     return "True";
@@ -446,9 +461,11 @@ namespace WebApp
         private void carregarJob(int id)
         {
             DAO dao = new DAO();
+            lstJob = new List<Job>();
 
             foreach (Job job in dao.GetJob(id))
             {
+                lstJob.Add(job);
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + job.Id_Job, "$( document ).ready(function() { \n $(\"#tblJob\").append('<tr id=\"rowJob" + job.Id_Job + "\"><td><div class=\"form-group has-feedback\"><select id=\"selJobSku" + job.Id_Job + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanJobSku" + job.Id_Job + "\"></span></div></td><td><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtQtdeJob" + job.Id_Job + "\" name=\"txtQtdeJob" + job.Id_Job + "\" placeholder=\"Quantidade da Job\" class=\"form-control\" value=\"" + job.Qtde + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanQtdeJob" + job.Id_Job + "\"></span></div></td><td style=\"width:15 %; \"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowJob\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowJob\"></button></td></tr>'); \n $(\"#spanJobSku" + job.Id_Job + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanQtdeJob" + job.Id_Job + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
 
                 var seletor = "#selJobSku" + job.Id_Job;
@@ -463,11 +480,11 @@ namespace WebApp
             {
                 DAO dao = new DAO();
 
-                List<Sku> lstSku = dao.GetSku(idUserStatic);
+                List<Sku> lstSku2 = lstSku;
 
                 var sel = seletor.Substring(1);
 
-                foreach (Sku sku in lstSku)
+                foreach (Sku sku in lstSku2)
                 {
                     if (sku.Id_Sku == idSku)
                         ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheJobs" + sel + "" + sku.Id_Sku, "$(document).ready(function() { \n $(\"" + seletor + "\").append('<option name=\"selJobSku\" value=\"" + sku.Id_Sku + "\" selected>" + sku.Descricao + "</option>'); \n});\n", true);
@@ -486,7 +503,7 @@ namespace WebApp
         {
             DAO dao = new DAO();
 
-            return dao.GetSku(idUserStatic);
+            return dao.GetSku(Convert.ToInt32(HttpContext.Current.Session["idUsuario"]));
         }
 
         [WebMethod]
@@ -498,7 +515,7 @@ namespace WebApp
 
                 if (dao.AddEdtJob(new Job()
                 {
-                    idUser = idUserStatic,
+                    idUser = Convert.ToInt32(HttpContext.Current.Session["idUsuario"]),
                     Id_Job = idjob,
                     Sku = new Sku() { Id_Sku = idsku },
                     Qtde = Convert.ToDouble(qtde)
@@ -544,9 +561,11 @@ namespace WebApp
         private void carregarVelocidade(int id)
         {
             DAO dao = new DAO();
+            lstVelocidade = new List<Velocidade>();
 
             foreach (Velocidade vel in dao.GetVel(id))
             {
+                lstVelocidade.Add(vel);
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelocidades" + vel.Id_Velocidade, "$( document ).ready(function() { \n $(\"#tblVelocidade\").append('<tr id=\"rowVelocidade" + vel.Id_Velocidade + "\"><td><div class=\"form-group has-feedback\"><select id=\"selVelMaq" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelMaq" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 22%;\"><div class=\"form-group has-feedback\"><select id=\"selVelSetor" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelSetor" + vel.Id_Velocidade + "\"></span></div></td><td><div class=\"form-group has-feedback\"><select id=\"selVelSku" + vel.Id_Velocidade + "\" class=\"form-control\" disabled></select><span class=\"glyphicon form-control-feedback\" id=\"spanVelSku" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 25%;\"><div class=\"form-group has-feedback\"><input type=\"text\" id=\"txtVelVelocidade" + vel.Id_Velocidade + "\" name=\"txtVelVelocidade" + vel.Id_Velocidade + "\" placeholder=\"Velocidade por hora\" class=\"form-control\" value=\"" + vel.Velocidade_Hr + "\" disabled /><span class=\"glyphicon form-control-feedback\" id=\"spanVelVelocidade" + vel.Id_Velocidade + "\"></span></div></td><td style=\"width: 15%;\"><button class=\"btn btn-primary glyphicon glyphicon-pencil edtRowVelocidade\"></button> <button class=\"btn btn-danger glyphicon glyphicon-remove remRowVelocidade\"></button></td></tr>'); \n$(\"#spanVelMaq" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelSetor" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelSku" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); $(\"#spanVelVelocidade" + vel.Id_Velocidade + "\").removeClass('glyphicon-remove').addClass('glyphicon-ok').addClass('has-success'); \n});\n\n", true);
 
                 var seletor = "#selVelMaq" + vel.Id_Velocidade;
@@ -565,11 +584,11 @@ namespace WebApp
             {
                 DAO dao = new DAO();
 
-                List<Maquina> lstMaq = dao.GetMaq(idUserStatic);
-
+                List<Maquina> lstMaq2 = lstMaq;//dao.GetMaq(idUserStatic);
+                
                 var sel = seletor.Substring(1);
 
-                foreach (Maquina maq in lstMaq)
+                foreach (Maquina maq in lstMaq2)
                 {
                     if (maq.Id_Maquina == idMaq)
                         ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelMaq" + sel + "" + maq.Id_Maquina, "$(document).ready(function() { \n$(\"" + seletor + "\").append('<option name=\"selVelMaq\" value=\"" + maq.Id_Maquina + "\" selected>" + maq.Descricao + "</option>'); \n});", true);
@@ -589,11 +608,11 @@ namespace WebApp
             {
                 DAO dao = new DAO();
 
-                List<Setor> lstSetor = dao.GetSetor(idUserStatic);
+                List<Setor> lstSetor2 = lstSetor;//dao.GetSetor(idUserStatic);
 
                 var sel = seletor.Substring(1);
 
-                foreach (Setor set in lstSetor)
+                foreach (Setor set in lstSetor2)
                 {
                     if (set.Id_Setor == idSetor)
                         ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelSetor" + sel + "" + set.Id_Setor, "$(document).ready(function() { \n$(\"" + seletor + "\").append('<option name=\"selVelSetor\" value=\"" + set.Id_Setor + "\" selected>" + set.Descricao + "</option>'); \n});", true);
@@ -613,11 +632,11 @@ namespace WebApp
             {
                 DAO dao = new DAO();
 
-                List<Sku> lstSku = dao.GetSku(idUserStatic);
+                List<Sku> lstSku2 = lstSku;//dao.GetSku(idUserStatic);
 
                 var sel = seletor.Substring(1);
 
-                foreach (Sku sku in lstSku)
+                foreach (Sku sku in lstSku2)
                 {
                     if (sku.Id_Sku == idSku)
                         ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "PreencheVelSku" + sel + "" + sku.Id_Sku, "$(document).ready(function() { \n$(\"" + seletor + "\").append('<option name=\"selVelSku\" value=\"" + sku.Id_Sku + "\" selected>" + sku.Descricao + "</option>'); \n});", true);
@@ -636,7 +655,7 @@ namespace WebApp
         {
             DAO dao = new DAO();
 
-            return dao.GetMaq(idUserStatic);
+            return dao.GetMaq(Convert.ToInt32(HttpContext.Current.Session["idUsuario"]));
         }
 
         [WebMethod]
@@ -644,7 +663,7 @@ namespace WebApp
         {
             DAO dao = new DAO();
 
-            return dao.GetSetor(idUserStatic);
+            return dao.GetSetor(Convert.ToInt32(HttpContext.Current.Session["idUsuario"]));
         }
 
         [WebMethod]
@@ -652,7 +671,7 @@ namespace WebApp
         {
             DAO dao = new DAO();
 
-            return dao.GetSku(idUserStatic);
+            return dao.GetSku(Convert.ToInt32(HttpContext.Current.Session["idUsuario"]));
         }
 
         [WebMethod]
@@ -664,7 +683,7 @@ namespace WebApp
 
                 if (dao.AddEdtVel(new Velocidade()
                 {
-                    idUser = idUserStatic,
+                    idUser = Convert.ToInt32(HttpContext.Current.Session["idUsuario"]),
                     Id_Velocidade = idvel,
                     Maquina = new Maquina() { Id_Maquina = maq },
                     Setor = new Setor() { Id_Setor = setor },
@@ -718,7 +737,7 @@ namespace WebApp
 
                 int rtn = dao.AlterarSenha(new AlterarSenha()
                 {
-                    idUser = idUserStatic,
+                    idUser = Convert.ToInt32(HttpContext.Current.Session["idUsuario"]),
                     Senha = senha,
                     SenhaNova = newsenha,
                     SenhaNova2 = newsenha2
@@ -752,7 +771,7 @@ namespace WebApp
             //Define a solu��o
             AlgGenetico.Algoritimo.Solucao = Convert.ToInt32(config.SolucaoMax);
             // Ler o arquivo com os genes e respectivos valores e configura as vari�veis de Jobs e Maquinas que est�o no arquivo TXT
-            AlgGenetico.Algoritimo.lerArquivo(idUserStatic);
+            AlgGenetico.Algoritimo.lerArquivo(Convert.ToInt32(HttpContext.Current.Session["idUsuario"]));
             //taxa de crossover de 60%
             AlgGenetico.Algoritimo.TaxaDeCrossover = config.TaxaCrossover;
             //taxa de muta��o de 3%
@@ -800,12 +819,12 @@ namespace WebApp
 
             if (geracao == numMaxGeracoes)
             {
-                text3 = "Número Maximo de Gerações atingido! Solução acima foi a melhor encontrada!";
+                text3 = "Número Maximo de Gerações atingido! Solução acima foi a melhor encontrada!\n\n";
             }
 
             if (temSolucao)
             {
-                text3 = "Encontrado resultado na geração " + geracao;
+                text3 = "Encontrado resultado na geração " + geracao + "\n\n";
             }
 
             var t = populacao.getIndivduo(0).Genes;
@@ -819,7 +838,7 @@ namespace WebApp
                 var maq = t.Substring(i, 4).Substring(3, 1);
 
                 dao = new DAO();
-                var vlr = dao.getValorGene(sku, maq, idUserStatic);
+                var vlr = dao.getValorGene(sku, maq, Convert.ToInt32(HttpContext.Current.Session["idUsuario"]));
 
                 DateTime inicio;
                 DateTime fim;
@@ -839,7 +858,7 @@ namespace WebApp
             }
 
             dao = new DAO();
-            dao.setarResultado(lstGenes, idUserStatic);
+            dao.setarResultado(lstGenes, Convert.ToInt32(HttpContext.Current.Session["idUsuario"]));
 
             return new RodouAG() { text1 = text1, text2 = text2, text3 = text3 };
         }

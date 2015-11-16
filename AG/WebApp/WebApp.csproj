@@ -75,6 +75,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\style.css" />
     <Content Include="Default.aspx" />
+    <Content Include="favicon.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="grafico.aspx" />
     <Content Include="js\tbls\AddRemEdtTableVelocidade.js" />

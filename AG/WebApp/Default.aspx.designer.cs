@@ -85,6 +85,15 @@ namespace WebApp {
         protected global::System.Web.UI.WebControls.Label lblUserNavBar;
         
         /// <summary>
+        /// Controle graficoAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor graficoAnterior;
+        
+        /// <summary>
         /// Controle btnVaiTeste.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace WebApp {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnVaiTeste;
+        
+        /// <summary>
+        /// Controle btnVaiTeste2.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnVaiTeste2;
         
         /// <summary>
         /// Controle verGrafico.

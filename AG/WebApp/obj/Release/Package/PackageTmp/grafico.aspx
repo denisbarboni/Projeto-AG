@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="grafico.aspx.cs" Inherits="WebApp.grafico" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="grafico.aspx.cs" Inherits="WebApp.grafico" Culture="pt-br" UICulture="pt-br" %>
 <%@ PreviousPageType VirtualPath="~/Default.aspx" %>
 
 <%@ Register Assembly="DevExpress.XtraCharts.v15.1.Web, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraCharts.Web" TagPrefix="dxchartsui" %> 
@@ -54,7 +54,7 @@
     <title>Gráfico</title>
 </head>
 <body>
-<dxchartsui:WebChartControl ID="WebChartControl1" runat="server" EnableCallBacks="false" ClientInstanceName="chart" Width="800" Height="800"> 
+<dxchartsui:WebChartControl ID="WebChartControl1" runat="server" EnableCallBacks="false" ClientInstanceName="chart" Width="800" Height="1024"> 
     <fillstyle> 
         <OptionsSerializable> 
             <cc1:SolidFillOptions HiddenSerializableString="to be serialized" /> 

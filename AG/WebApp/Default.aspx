@@ -118,7 +118,7 @@
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-wrench"></span>
                                 </div>
-                                <asp:TextBox ID="txtCrossover" runat="server" CssClass="form-control" placeholder="0.0 até 1.0" required ClientIDMode="Static" MaxLength="3"></asp:TextBox>
+                                <asp:TextBox ID="txtCrossover" runat="server" CssClass="form-control" placeholder="0.0 até 1.0" required ClientIDMode="Static" MaxLength="4"></asp:TextBox>
                             </div>
                         </div>
                         <div class="form-group">
@@ -127,7 +127,7 @@
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-wrench"></span>
                                 </div>
-                                <asp:TextBox ID="txtMutacao" runat="server" CssClass="form-control" placeholder="0.0 até 1.0" required ClientIDMode="Static" MaxLength="3"></asp:TextBox>
+                                <asp:TextBox ID="txtMutacao" runat="server" CssClass="form-control" placeholder="0.0 até 1.0" required ClientIDMode="Static" MaxLength="4"></asp:TextBox>
                             </div>
                         </div>
                         <div class="form-group">
@@ -233,14 +233,14 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span class="glyphicon glyphicon-wrench text-primary"></span><a href="#tabtab3" data-toggle="tab">Sku</a>
+                                                                <span class="glyphicon glyphicon-wrench text-primary"></span><a href="#tabtab3" data-toggle="tab">Produto</a>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+<%--                                                     <tr>
                                                             <td>
                                                                 <span class="glyphicon glyphicon-wrench text-primary"></span><a href="#tabtab4" data-toggle="tab">Unidade</a>
                                                             </td>
-                                                        </tr>
+                                                        </tr>--%>
                                                         <tr>
                                                             <td>
                                                                 <span class="glyphicon glyphicon-wrench text-primary"></span><a href="#tabtab5" data-toggle="tab">Job</a>
@@ -322,7 +322,7 @@
                                                 <table class="table table-hover" id="tblSku">
                                                     <thead>
                                                         <tr>
-                                                            <th style="width: 55%">Sku</th>
+                                                            <th style="width: 55%">Produto</th>
                                                             <th style="width: 30%">Peso</th>
                                                             <th>&nbsp</th>
                                                         </tr>
@@ -332,10 +332,10 @@
                                                     </tbody>
                                                 </table>
                                                 <%--<button class="btn btn-primary pull-right" id="btnTesteForeach">teste</button>--%>
-                                                <button class="btn btn-primary pull-right" id="addSku">Adicionar Sku</button>
+                                                <button class="btn btn-primary pull-right" id="addSku">Adicionar Produto</button>
                                             </div>
 
-                                            <div class="tab-pane fade in" id="tabtab4" style="padding-bottom: 25px;">
+                                            <%--<div class="tab-pane fade in" id="tabtab4" style="padding-bottom: 25px;">
                                                 <table class="table table-hover" id="tblUnidade">
                                                     <thead>
                                                         <tr>
@@ -345,17 +345,16 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <%--aqui vai os setores via jquery--%>
                                                     </tbody>
                                                 </table>
                                                 <button class="btn btn-primary pull-right" id="addUnidade">Adicionar Unidade</button>
-                                            </div>
+                                            </div>--%>
 
                                             <div class="tab-pane fade in" id="tabtab5" style="padding-bottom: 25px;">
                                                 <table class="table table-hover" id="tblJob">
                                                     <thead>
                                                         <tr>
-                                                            <th>Sku do Job</th>
+                                                            <th>Produto do Job</th>
                                                             <th>Quantidade</th>
                                                             <th>&nbsp</th>
                                                         </tr>
@@ -373,7 +372,7 @@
                                                         <tr>
                                                             <th>Máquina</th>
                                                             <th>Setor</th>
-                                                            <th>Sku</th>
+                                                            <th>Produto</th>
                                                             <th>Velocidade</th>
                                                             <th>&nbsp</th>
                                                             <%--  style="width: 20%" --%>
@@ -436,13 +435,17 @@
                             <div class="row">
                                 
                                 <div class="col-xs-12 col-sm-11 col-md-11">
-                                    <button runat="server" class="btn btn-primary" id="btnVaiTeste" onclick="return rodarAg();">Rodar Algoritimo!</button>
-                                    
+                                    <div>
+                                        <a runat="server" href="grafico.aspx" target="_blank" class="btn btn-primary" id="graficoAnterior">Ver Gráfico Anterior!</a>
+                                        <button runat="server" class="btn btn-primary" id="btnVaiTeste" onclick="return rodarAg();">Rodar Algoritimo!</button>
+                                    </div>
                                     <div id="divtext1"></div>
                                     <div id="divtext2"></div>
                                     <div id="divtext3"></div>
 
-                                    <a runat="server" href="grafico.aspx" target="_blank" class="btn btn-block btn-primary" id="verGrafico">Ver Gráfico!</a>
+                                    <div>
+                                        <button runat="server" class="btn btn-primary" id="btnVaiTeste2" onclick="return rodarAg();">Rodar Algoritimo Novamente!</button> <a runat="server" href="grafico.aspx" target="_blank" class="btn btn-primary" id="verGrafico">Ver Gráfico!</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

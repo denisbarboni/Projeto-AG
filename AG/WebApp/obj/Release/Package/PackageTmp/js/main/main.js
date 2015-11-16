@@ -125,7 +125,10 @@ function altSenha() {
 function rodarAg() {
     var solucao = $("#txtDefineSolucao").val();
 
+    $("#graficoAnterior").hide();
+    $("#btnVaiTeste2").hide();
     $("#btnVaiTeste").hide();
+    $("#verGrafico").hide();
 
     $("#divtext1").text("Iniciando... Aptidão da solução: " + solucao);
     $("#divtext2").text("");
@@ -138,6 +141,7 @@ function rodarAg() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (rtn) {
+            $("#btnVaiTeste2").show();
             $("#verGrafico").show(); 
 
             $("#divtext1").text(rtn.d.text1);
