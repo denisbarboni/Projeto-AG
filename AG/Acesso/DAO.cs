@@ -446,7 +446,7 @@ namespace Acesso
             {
                 conn.Close();
             }
-        }
+        } 
 
         public Boolean AddEdtSetor(Setor setor)
         {
@@ -1231,7 +1231,7 @@ namespace Acesso
                 conn = new SqlConnection(strConn);
                 conn.Open();
 
-                var query = "SELECT sku.peso_caixa * quantidade * velocidade_hora FROM maquina, sku, job, velocidade WHERE maquina.id_maquina = velocidade.id_maquina and sku.id_sku = velocidade.id_sku and job.id_sku = sku.id_sku and sku.nome_sku = @dsku and maquina.nome = @dmaq and velocidade.IdUser = @idUser";
+                var query = "SELECT sku.peso_caixa * job.quantidade * velocidade.velocidade_hora FROM maquina, sku, job, velocidade WHERE maquina.id_maquina = velocidade.id_maquina and sku.id_sku = velocidade.id_sku and job.id_sku = sku.id_sku and sku.nome_sku = @dsku and maquina.nome = @dmaq and velocidade.IdUser = @idUser";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@dsku", dSku);

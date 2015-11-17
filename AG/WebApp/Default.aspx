@@ -6,7 +6,7 @@
 
 <%@ Register Assembly="DevExpress.XtraCharts.v15.1, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraCharts" TagPrefix="cc1" %>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -439,6 +439,7 @@
                                         <a runat="server" href="grafico.aspx" target="_blank" class="btn btn-primary" id="graficoAnterior">Ver Gráfico Anterior!</a>
                                         <button runat="server" class="btn btn-primary" id="btnVaiTeste" onclick="return rodarAg();">Rodar Algoritimo!</button>
                                     </div>
+                                    <center><div id="aguarde"><img src="img/ajax-loader.gif" /></div></center>
                                     <div id="divtext1"></div>
                                     <div id="divtext2"></div>
                                     <div id="divtext3"></div>

@@ -57,7 +57,7 @@ namespace WebApp
             tp = this.GetType();
             //this.WebChartControl1.Visible = false;
 
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "visiblefalsegrafico", "$( document ).ready(function() {\n $('#verGrafico').hide(); $('#btnVaiTeste2').hide(); \n});\n\n", true);
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "visiblefalsegrafico", "$( document ).ready(function() {\n $('#verGrafico').hide(); $('#btnVaiTeste2').hide(); $('#aguarde').hide(); \n});\n\n", true);
         }
 
         #region CarregarConfigs
@@ -795,7 +795,7 @@ namespace WebApp
             AlgGenetico.Populacao populacao = new AlgGenetico.Populacao(numGenes, tamPop);
 
             bool temSolucao = false;
-            int geracao = 0;
+            int geracao = 0; 
 
             text1 = "Iniciando... Aptidão da solução: " + AlgGenetico.Algoritimo.Solucao;
 
@@ -843,14 +843,14 @@ namespace WebApp
                 DateTime inicio;
                 DateTime fim;
 
-                inicio = DateTime.Now.Date.AddHours(DateTime.Now.Hour + DateTime.Now.Minute);
-                fim = DateTime.Now.Date.AddHours((DateTime.Now.Hour + vlr) + DateTime.Now.Minute);
+                inicio = DateTime.Now.Date.AddHours(DateTime.Now.Hour).AddMinutes(DateTime.Now.Minute);
+                fim = DateTime.Now.Date.AddHours(DateTime.Now.Hour).AddMinutes(vlr * 60).AddMinutes(DateTime.Now.Minute);
 
                 foreach (var item in lstGenes)
                 {
                     if(maq == item.Maq) {
                         inicio = item.Final.AddMinutes(30);
-                        fim = inicio.AddHours(vlr);
+                        fim = inicio.AddMinutes(60 * vlr);
                     }
                 }
 

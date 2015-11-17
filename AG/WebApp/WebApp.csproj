@@ -78,6 +78,7 @@
     <Content Include="favicon.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="grafico.aspx" />
+    <Content Include="img\ajax-loader.gif" />
     <Content Include="js\tbls\AddRemEdtTableVelocidade.js" />
     <Content Include="js\tbls\AddRemEdtTableJob.js" />
     <Content Include="js\tbls\AddRemEdtTableUnidade.js" />
@@ -152,6 +153,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

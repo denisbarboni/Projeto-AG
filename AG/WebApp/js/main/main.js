@@ -57,6 +57,7 @@ function Logar() {
         dataType: "json",
         success: function (rtn) {
             if (rtn.d == "False") {
+                $('#lblErroLogin').text("Verifique seu usuário e/ou senha. Caso contrário, seu usuário pode estar em manutenção!");
                 $('#modalErroLogin').modal('show'); //se falso, chama um modal para aviso
                 $('#txtSenha').val("")
             }
@@ -125,10 +126,11 @@ function altSenha() {
 function rodarAg() {
     var solucao = $("#txtDefineSolucao").val();
 
-    $("#graficoAnterior").hide();
+    $("#graficoAnterior").hide(); 
     $("#btnVaiTeste2").hide();
     $("#btnVaiTeste").hide();
     $("#verGrafico").hide();
+    $("#aguarde").show();
 
     $("#divtext1").text("Iniciando... Aptidão da solução: " + solucao);
     $("#divtext2").text("");
@@ -142,7 +144,8 @@ function rodarAg() {
         dataType: "json",
         success: function (rtn) {
             $("#btnVaiTeste2").show();
-            $("#verGrafico").show(); 
+            $("#verGrafico").show();
+            $("#aguarde").hide();
 
             $("#divtext1").text(rtn.d.text1);
             $("#divtext2").text(rtn.d.text2);
