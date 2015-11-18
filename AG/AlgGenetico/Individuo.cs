@@ -42,8 +42,10 @@ namespace AlgGenetico
             int posAleatoria = 0;
 
             Random r = new Random();
+
+            var teste = r.NextDouble();
             //se for mutar, cria um gene aleat�rio
-            if (r.NextDouble() <= Algoritimo.TaxaDeMutacao)
+            if (teste <= Algoritimo.TaxaDeMutacao)
             {
 
                 string maquinas = Algoritimo.Maquinas;
@@ -121,7 +123,7 @@ namespace AlgGenetico
 
                 foreach (var item in Algoritimo.lst)
                 {
-                    custo[item.Sku.Descricao + "" + item.Maq.Descricao] = item.Job.Qtde * item.Sku.Peso_Caixa * item.Vel.Velocidade_Hr;
+                    custo[item.Sku.Descricao + "" + item.Maq.Descricao] = (item.Job.Qtde * item.Sku.Peso_Caixa) * item.Vel.Velocidade_Hr;
                 }
 
             //    file.Close();
@@ -222,6 +224,7 @@ namespace AlgGenetico
                 }
                 //			System.out.println(genes.substring(i, i+4)+";"+valorGene+";");
             }
+            //aptidao = maquinaA + maquinaB + maquinaC + maquinaD + maquinaE + maquinaF + maquinaG + maquinaH + maquinaI + maquinaJ + maquinaK + maquinaL + maquinaM + maquinaN + maquinaO + maquinaP + maquinaQ + maquinaR + maquinaS;
             aptidao = maquinaA > maquinaB ? maquinaA : maquinaB;
             aptidao = aptidao > maquinaC ? aptidao : maquinaC;
             aptidao = aptidao > maquinaD ? aptidao : maquinaD;

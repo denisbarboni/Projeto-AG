@@ -190,13 +190,13 @@
             <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
                 <div class="btn-group" role="group">
                     <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab">
-                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                         <div class="hidden-xs">Cadastro</div>
                     </button>
                 </div>
                 <div class="btn-group" role="group">
                     <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab">
-                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                         <div class="hidden-xs">Algoritimo</div>
                     </button>
                 </div>

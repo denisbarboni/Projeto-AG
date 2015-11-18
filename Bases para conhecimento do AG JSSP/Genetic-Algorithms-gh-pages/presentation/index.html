@@ -1,0 +1,533 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Genetic Algorithms - An Introduction</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<script>
+			// If the query includes 'print-pdf' we'll use the PDF print sheet
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	
+	<body>
+		
+		<div class="reveal">
+      <small id="source-info" style="position: fixed; top: 0; right: 0;"></small>
+
+			<!-- Used to fade in a background when a specific slide state is reached -->
+			<div class="state-background"></div>
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Genetic Algorithms</h1>
+          <h3>a.k.a. Playing God...ehrm...Darwin</h3>
+					<hr />
+					<p>Jan Monschke</p>
+					<p><a href="https://twitter.com/thedeftone">@thedeftone</a></p>
+					<p><a href="https://github.com/janmonschke">github.com/janmonschke</a></p>
+          <p class="fragment">made with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a> <3 </p>
+				</section>
+				
+				<section>
+					<h2>What's it about?</h2>
+					<blockquote>
+						A problem-solving technique that works like natural evolution. Literally!
+					</blockquote>
+					<hr />
+					<p class="fragment">Biologist B-Bingo:</p>
+					<ul>
+						<li class="fragment">Population</li>
+						<li class="fragment">Genetic Drift</li>
+						<li class="fragment">Mutation</li>
+						<li class="fragment">Genome</li>
+						<li class="fragment">Survival of the fittest</li>
+					</ul>
+				</section>
+				<section>
+					<p>
+						<img src="images/dogdoc.gif" alt="http://forgif.me/system/image/1866/image.gif" style="width: 400px"/>
+					</p>
+					<h4>How biologists see it</h4>
+
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<h1></h1>
+					<h3>Srsly, it's not as complicated as it sounds</h3>
+				</section>
+
+				<section>
+					<h3>Example: Travelling Salesman Problem</h3>
+					<p>
+						It fits great for a GA-example because it's a <a href="https://en.wikipedia.org/wiki/NP-hard">NP-hard</a> problem!
+					</p>
+					<blockquote class="fragment">
+						A salesman has to find the shortest way that connects a set of cities. The salesman is only allowed to visit each city once. It doesn't matter where the salesman starts. In the end, the salesman has to return to the starting point again.
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>In other words</h2>
+					<p>
+						<a href="http://xkcd.com/399/"><img src="images/xkcd_travelling_salesman_problem.png" alt="http://imgs.xkcd.com/comics/travelling_salesman_problem.png" /></a>
+					</p>
+				</section>
+
+				<section>
+					<h2>Genetic Algorithm Skeleton</h2>
+					<ol>
+						<li class="fragment">Generate a random population of genomes</li>
+						<li class="fragment">Rank the genomes according to their fitness</li>
+						<li class="fragment">Select / Mate / Mutate population</li>
+						<li class="fragment"><code>repeatFrom(2) unless solution.isGood()</code></li>
+					</ol>
+				</section>
+
+				<section>
+          <section>
+            <h2>Let's dive into the code</h2>
+            <h5>1) Random Population</h5>
+            <pre><code contenteditable>
+class Population
+  genomes: []
+
+  constructor: (@populationSize, @maxGenerationCount) ->
+    @genomes.push new Genome() for i in [0...@populationSize]
+
+class Genome
+  values: []
+
+  constructor: (@values = @initial()) ->
+
+  initial: ->
+    # cities represented as numbers from 0-14
+    # [0,3,4] means the route 0 -> 3 -> 4 -> 0
+    return [RANDOMARRAY FROM [0-14]]
+            </code></pre>
+
+          </section>
+
+
+          <section>
+  					<pre><code contenteditable>
+var Genome, Population;
+
+Population = (function() {
+  Population.prototype.genomes = [];
+})();
+
+Genome = (function() {
+
+  Genome.prototype.values = [];
+
+  function Genome(values) {
+    this.values = values != null ? values : this.initial();
+  }
+
+  Genome.prototype.inital = function(){
+    return [RANDOMARRAY FROM [0-14]]
+  }
+})();
+					 </code></pre>
+
+				  </section>
+				</section>
+
+        <section>
+          <h2>Ranking</h2>
+          <h4>Which solutions are good?</h4>
+          <ol>
+            <li class="fragment">A Genome's fitness is needed to compare them</li>
+            <li class="fragment">Fitness as in: "How close to the goal am I?"</li>
+            <li class="fragment">In our case: Fitness = Sum of all paths</li>
+            <li class="fragment">Since in our case a lower fitness means, a solution is better, we'll call it cost</code></li>
+          </ol>
+        </section>
+
+        <section>
+          <section>
+            <h2>Calculating the cost and ranking</h2>
+            <pre><code contenteditable>
+class Genome
+  cost: ->
+    cost = 0
+    for city, index in @values
+      # A,B,C: A->B
+      if index+1 < @values.length
+        cost += distances[city][@values[index+1]]
+      else
+        # A,B,C: C->A
+        cost += distances[city][@values[0]]
+    cost
+
+class Population
+  rank: ->
+    @genomes = _.sortBy @genomes, (genome) -> genome.cost()
+            </code></pre>
+
+          </section>
+          <section>
+            <pre><code contenteditable>
+Genome.prototype.cost = function() {
+  var city, cost, index, _i, _len, _ref;
+  cost = 0;
+  _ref = this.values;
+  for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
+    city = _ref[index];
+    if (index + 1 < this.values.length) {
+      cost += distances[city][this.values[index + 1]];
+    } else {
+      cost += distances[city][this.values[0]];
+    }
+  }
+  return cost;
+};
+
+Population.prototype.rank = function() {
+  return this.genomes = _.sortBy(this.genomes, function(genome) {
+    return genome.cost();
+  });
+};
+           </code></pre>
+
+          </section>
+        </section>
+
+
+				<section>
+					<h2>Wrap-up</h2>
+          <h4>What do we have now?</h4>
+					<ol>
+            <li class="fragment">Genomes with random arrays</li>
+            <li class="fragment">We can calculate a cost from that</li>
+            <li class="fragment">The Population is sorted</li>
+            <li class="fragment">The fun ist just about to come ;)</code></li>
+          </ol>
+				</section>
+
+        <section>
+          <h2>A tale about birds and bees</h2>
+          <img src="images/how_computers_are_made.jpeg" alt="http://static.fjcdn.com/pictures/Birds+and+Bees_028d03_3949321.jpg" class="fragment" />
+        </section>
+
+        <section>
+          <h2>The Next Generation</h2>
+          <ol>
+            <li class="fragment">Select two Genomes</li>
+            <li class="fragment">We're scientists, so we skip all the family and relationship stuff</li>
+            <li class="fragment">Create two offsprings via crossover</li>
+            <li class="fragment">Mutate these two offsprings</li>
+            <li class="fragment">Add them to the next generation</code></li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Selection</h2>
+          <p>The method of selectioning depends heavily on the problem. Find it out by trial & error.</p>
+          <ol>
+            <li class="fragment">Simple Selection -> Select neighbor Genome</li>
+            <li class="fragment"><a href="http://en.wikipedia.org/wiki/Tournament_selection">Tournament Selection</a> -> Select x random Genomes and pick the best of them</li>
+            <li class="fragment"><a href="http://en.wikipedia.org/wiki/Stochastic_universal_sampling">Roulette Selection</a> -> Chance of being picked depends on fitness (the fitter-> higher chance)</li>
+          </ol>
+          <hr class="fragment" />
+          <p class="fragment">Why don't we just select the best solutions?</p>
+        </section>
+
+        <section>
+          <p>It is important to keep variety in the population or otherwise we may not find the optimal solution. (aka a local maximum)</p>
+          <img src="images/local_maximum.png" alt="http://betterceo.com/wp-content/uploads/2011/09/Local-Maximum0021.png" class="fragment" />
+        </section>
+
+        <section>
+          <section>
+            <h2>Tournament selection</h2>
+            <pre><code contenteditable>
+class Population
+  tournamentSelect: ->
+    participants = []
+    # select random participants
+    for index in [0..@tournamentParticipants]
+      randomIndex = Math.floor @genomes.length * Math.random()
+      participants.push @genomes[randomIndex]
+    # rank participants
+    participants = _.sortBy participants, (genome)->genome.cost()
+    participants[0]
+            </code></pre>
+
+          </section>
+          <section>
+            <pre><code contenteditable>
+Population.prototype.tournamentSelect = function() {
+  var index, participants, randomIndex, _i, _ref;
+  participants = [];
+  for (index = _i = 0, _ref = this.tournamentParticipants; 0 <= _ref ? _i <= _ref : _i >= _ref; index = 0 <= _ref ? ++_i : --_i) {
+    randomIndex = Math.floor(this.genomes.length * Math.random());
+    participants.push(this.genomes[randomIndex]);
+  }
+  participants = _.sortBy(participants, function(genome) {
+    return genome.cost();
+  });
+  return participants[0];
+};
+           </code></pre>
+
+          </section>
+        </section>
+
+        <section>
+          <h2>Crossover</h2>
+          <p>Not so sexy at all</p>
+          <img src="images/crossover.gif" alt="http://www.tc.bham.ac.uk/~roy/Images/crossover.gif" />
+        </section>
+
+        <section>
+          <h2>Crossover</h2>
+          <ol>
+            <li>Not so easy for the TSP</li>
+            <li class="fragment">Genomes can easily become invalid by slicing</li>
+            <li class="fragment">Needs extra validation</li>
+            <li class="fragment"><a href="http://lev4projdissertation.googlecode.com/svn/trunk/reading/aiRev99.pdf">There are papers on it</a></li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Mutation</h2>
+          <p>Needed to keep variety (we talked about it ;))</p>
+          <div class="fragment">
+            <img src="images/goldfish.jpeg" alt="http://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Goldfish3.jpg/300px-Goldfish3.jpg" />
+            <hr />
+            <p>It turns this into...</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Mutation</h2>
+          <p>...this...</p>
+          <img src="images/blinky.jpeg" alt="http://cubcarson.files.wordpress.com/2011/04/simpsons-fish.jpg?w=343" />
+        </section>
+
+        <section>
+          <h2>Mutation</h2>
+          <p>...by doing this:</p>
+          <code>[<span>1</span>,<span>3</span>,<span>2</span>,<span>0</span>]</code>
+          <div><code class="fragment">genome.mutate()</code></div>
+          <code class="fragment">[<span style="background-color: red;">2</span>,<span>3</span>,<span style="background-color: red;">1</span>,<span>0</span>]</code>
+        </section>
+
+        <section>
+          <section>
+            <h2>Le mutation code</h2>
+            <pre><code contenteditable>
+Class Genome
+  mutate: ->
+    indexA = @getRandomIndex @values
+    indexB = @getRandomIndex @values
+    buff = @values[indexA]
+    @values[indexA] = @values[indexB]
+    @values[indexB] = buff
+            </code></pre>
+
+          </section>
+          <section>
+            <pre><code contenteditable>
+Genome.prototype.mutate = function() {
+  var buff, indexA, indexB;
+  indexA = this.getRandomIndex(this.values);
+  indexB = this.getRandomIndex(this.values);
+  buff = this.values[indexA];
+  this.values[indexA] = this.values[indexB];
+  return this.values[indexB] = buff;
+};
+           </code></pre>
+
+          </section>
+        </section>
+
+        <section>
+          <h2>Elitism</h2>
+          <p>The x best Genomes are directly transferred to the next generation.</p>
+          <img src="images/like_a_sir.jpeg" alt="http://i3.kym-cdn.com/entries/icons/original/000/006/550/feel-like-a-sir-template.jpg" />
+        </section>
+
+        <section>
+        <section>
+          <h2>Next Generation Code</h2>
+          <pre><code contenteditable>
+for index in [0...@genomes.length-skip] by 2
+  # Perform a tournament selection
+  a = @tournamentSelect()
+  b = @tournamentSelect()
+
+  # perform a crossover
+  children = a.crossover b, @mixingRatio
+  a = children[0]
+  b = children[1]
+
+  # mutate the genomes
+  a.mutate() if Math.random() < @mutationChance
+  b.mutate() if Math.random() < @mutationChance
+
+  # add the new genomes to the next generation
+  nextGeneration.push a
+  nextGeneration.push b
+        </pre></code>
+        </section>
+
+        <section>
+          <h2>Next Generation Code</h2>
+          <pre><code contenteditable>
+for (index = _i = 0, _ref = this.genomes.length - skip; _i < _ref; index = _i += 2) {
+  a = this.tournamentSelect();
+  b = this.tournamentSelect();
+
+  children = a.crossover(b, this.mixingRatio);
+  a = children[0];
+  b = children[1];
+  if (Math.random() < this.mutationChance) {
+    a.mutate();
+  }
+  if (Math.random() < this.mutationChance) {
+    b.mutate();
+  }
+  nextGeneration.push(a);
+  nextGeneration.push(b);
+}
+        </pre></code>
+        </section>
+      </section>
+
+      <section>
+          <h2>When does it stop?</h2>
+          <p>Again, this highly depends on the problem</p>
+          <ol>
+            <li class="fragment">After a max number of generations</li>
+            <li class="fragment">When a certain goal has been reached</li>
+            <li class="fragment">When the best solution hasn't changed in x generations</li>
+          </ol>
+        </section>
+
+        <section>
+          <h1>Demo time</h1>
+          
+          <a href="../index.html">Click me for a demo</a>
+          
+        </section>
+
+        <section>
+          <h2>What is it useful for?</h2>
+          <ul>
+            <li>Finding the optimal mix of parameters for an algorithm</li>
+            <li><a href="http://www.jorislaarman.com/bone-furniture.html">Find the most efficient structure for a chair</a></li>
+            <li>Timetabling / Scheduling</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>thanks</h2>
+          <img src="images/darwinism.jpeg" alt="http://picsfunnypics.com/images/funny13.jpg" />
+          <p>Questions?</p>
+        </section>
+
+        <section>
+          <h2>Further Readings</h2>
+          <ul>
+            <li><a href="https://github.com/janmonschke/Genetic-Algorithms">The code</a></li>
+            <li><a href="../index.html">The demo</a></li>
+            <li><a href="http://burakkanber.com/blog/machine-learning-genetic-algorithms-part-1-javascript/">Machine Learning: Genetic Algorithms Part 1 (JS)</a></li>
+            <li><a href="http://burakkanber.com/blog/machine-learning-genetic-algorithms-in-javascript-part-2/">Machine Learning: Genetic Algorithms Part 2 (JS)</a></li>
+          </ul>
+        </section>
+
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Presentation progress bar -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				
+				theme: Reveal.getQueryHash().theme || 'default', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/linear(2d)
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+				]
+			});
+      
+      var sourceInfo = document.getElementById('source-info');
+
+      var imgs = document.getElementsByTagName('img');
+      for (var i = imgs.length - 1; i >= 0; i--) {
+        var current = imgs[i];
+        current.addEventListener('mouseover', function(ev){
+          sourceInfo.innerHTML = 'source: ' + this.getAttribute('alt');;
+        });
+        current.addEventListener('mouseout', function(){
+          sourceInfo.innerHTML = '';
+        });
+      };
+			
+		</script>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19046336-4']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+	</body>
+</html>

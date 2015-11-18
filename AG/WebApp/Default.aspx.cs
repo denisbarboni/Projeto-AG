@@ -113,6 +113,7 @@ namespace WebApp
 
                 if (config != null)
                 {
+                    config = new Configuracao();
                     //Monta a config
                     config.SolucaoMax = Convert.ToDouble(solucao);
                     config.TaxaCrossover = Convert.ToDouble(crossover);

@@ -19,7 +19,8 @@ namespace Acesso
         public DAO()
         {
             //strConn = String.Format("Server={0};Port={1};Userid={2};Password={3};Database={4};", server, port, user, pass, db);
-            strConn = "Server=tcp:xd08uqfyjs.database.windows.net,1433;Database=algjssp;User ID=algjssp@xd08uqfyjs;Password=*Ximbalaie3#;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            strConn = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=algjssp_local;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            //strConn = "Server=tcp:xd08uqfyjs.database.windows.net,1433;Database=algjssp;User ID=algjssp@xd08uqfyjs;Password=*Ximbalaie3#;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         }
 
         #region Plano e login
@@ -1231,7 +1232,7 @@ namespace Acesso
                 conn = new SqlConnection(strConn);
                 conn.Open();
 
-                var query = "SELECT sku.peso_caixa * job.quantidade * velocidade.velocidade_hora FROM maquina, sku, job, velocidade WHERE maquina.id_maquina = velocidade.id_maquina and sku.id_sku = velocidade.id_sku and job.id_sku = sku.id_sku and sku.nome_sku = @dsku and maquina.nome = @dmaq and velocidade.IdUser = @idUser";
+                var query = "SELECT (sku.peso_caixa * job.quantidade) * velocidade.velocidade_hora FROM maquina, sku, job, velocidade WHERE maquina.id_maquina = velocidade.id_maquina and sku.id_sku = velocidade.id_sku and job.id_sku = sku.id_sku and sku.nome_sku = @dsku and maquina.nome = @dmaq and velocidade.IdUser = @idUser";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@dsku", dSku);
