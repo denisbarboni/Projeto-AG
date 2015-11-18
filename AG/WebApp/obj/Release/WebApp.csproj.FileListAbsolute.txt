@@ -68,3 +68,4 @@ D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\obj\Release\WebApp.csprojRe
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\obj\Release\WebApp.dll.licenses
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\obj\Release\WebApp.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\obj\Release\WebApp.pdb
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\NewRelic.Api.Agent.dll

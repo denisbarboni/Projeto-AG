@@ -50,6 +50,10 @@
     <Reference Include="DevExpress.XtraCharts.v15.1.Web, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v15.1, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NewRelic.Api.Agent, Version=5.9.74.0, Culture=neutral, PublicKeyToken=06552fced0b33d87, processorArchitecture=MSIL">
+      <HintPath>..\packages\NewRelic.Azure.WebSites.x64.5.9.74.0\lib\NewRelic.Api.Agent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -88,6 +92,58 @@
     <Content Include="js\main\main.js" />
     <Content Include="js\main\validateConfig.js" />
     <Content Include="login.aspx" />
+    <Content Include="newrelic\Extensions\CoreInstrumentation.xml" />
+    <Content Include="newrelic\Extensions\JetBrains.Annotations.dll" />
+    <Content Include="newrelic\Extensions\JetBrains.Annotations.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Agent.AttributeFilter.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Agent.Configuration.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Agent.Core.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Agent.LabelsService.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Agent.LazyMap.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Collections.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Core.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Dispatchers.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Memoization.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.CallStack.AsyncLocal.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.TransactionContext.Asp.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.TransactionContext.Default.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.TransactionContext.Wcf3.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.Asp35.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.Asp35.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.HttpClient.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.HttpClient.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.MongoDb.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.MongoDb.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.Mvc3.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.Mvc3.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.NServiceBus.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.NServiceBus.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.Owin.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.Owin.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.ServiceStackRedis.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.ServiceStackRedis.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.StackExchangeRedis.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.StackExchangeRedis.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.Wcf3.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.Wcf3.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.WebApi1.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.WebApi1.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.WebApi2.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.WebApi2.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.WebOptimization.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.WebOptimization.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.WebServices.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Providers.Wrapper.WebServices.Instrumentation.xml" />
+    <Content Include="newrelic\Extensions\NewRelic.Reflection.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.SystemExtensions.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.SystemInterfaces.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Testing.Assertions.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.Trie.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.TypeInstantiation.dll" />
+    <Content Include="newrelic\Extensions\NewRelic.WeakActions.dll" />
+    <Content Include="newrelic\NewRelic.Agent.Core.dll" />
+    <Content Include="newrelic\NewRelic.Agent.Extensions.dll" />
+    <Content Include="newrelic\NewRelic.Profiler.dll" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -128,6 +184,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="js\jquery.min.map" />
+    <Content Include="newrelic\newrelic.config" />
+    <Content Include="newrelic\Extensions\extension.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="newrelic\newrelic.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\algjssp.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
