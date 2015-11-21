@@ -7,6 +7,27 @@ body, html{
 	-webkit-font-smoothing: antialiased !important;
 	color: #5a5a5a;
 }
+/*FORMATAÇÃO LOGIN*/
+
+.modal-footer {
+	height: 70px;
+	margin: 0;
+}
+.modal-footer .btn {
+	font-weight: bold;
+}
+.modal-footer .progress {
+	display: none;
+	height: 32px;
+	margin: 0;
+}
+.input-group-addon {
+	color: #fff;
+	background: #3276B1;
+}
+
+/* FORMATAÇÃO CADASTRO */
+
 
 /*FORMATAÇÃO DOS PLANOS*/
 
@@ -331,7 +352,7 @@ ul.about-list li span{
 	position: relative;
 	left: 17%;
 }
-#team{ margin:0 auto}
+#{ margin:0 auto}
 
 #team .item{
     padding: 0;
