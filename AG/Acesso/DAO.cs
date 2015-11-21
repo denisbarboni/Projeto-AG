@@ -19,8 +19,8 @@ namespace Acesso
         public DAO()
         {
             //strConn = String.Format("Server={0};Port={1};Userid={2};Password={3};Database={4};", server, port, user, pass, db);
-            strConn = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=algjssp_local;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            //strConn = "Server=tcp:xd08uqfyjs.database.windows.net,1433;Database=algjssp;User ID=algjssp@xd08uqfyjs;Password=*Ximbalaie3#;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            //strConn = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=algjssp_local;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            strConn = "Server=tcp:xd08uqfyjs.database.windows.net,1433;Database=algjssp;User ID=algjssp@xd08uqfyjs;Password=*Ximbalaie3#;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         }
 
         #region Plano e login
