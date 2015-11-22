@@ -99,3 +99,4 @@ D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\ja\DevExpress.Sparkline
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\ru\DevExpress.Sparkline.v15.1.Core.resources.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\Acesso.pdb
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\AlgGenetico.pdb
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\NewRelic.Api.Agent.dll

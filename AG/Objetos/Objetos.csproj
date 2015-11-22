@@ -45,6 +45,7 @@
     <Compile Include="Job.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="RodouAG.cs" />
+    <Compile Include="Usuario.cs" />
     <Compile Include="VelMaqJobsSku.cs" />
     <Compile Include="Maquina.cs" />
     <Compile Include="Plano.cs" />

@@ -2,3 +2,4 @@ D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Objetos\bin\Release\Objetos.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Objetos\bin\Release\Objetos.pdb
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Objetos\obj\Release\Objetos.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Objetos\obj\Release\Objetos.pdb
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\Objetos\obj\Release\Objetos.csprojResolveAssemblyReference.cache
