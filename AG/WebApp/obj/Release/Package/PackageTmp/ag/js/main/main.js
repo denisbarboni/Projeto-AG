@@ -170,7 +170,7 @@ function btnCadastrar() {
 
     $.ajax({ //chama o webmethod logar
         type: "POST",
-        url: "index.aspx/CadUser",
+        url: "Default.aspx/CadUser",
         data: dataCad,
         contentType: "application/json; charset=utf-8",
         dataType: "json",

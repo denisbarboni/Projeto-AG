@@ -69,3 +69,5 @@ D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\obj\Release\WebApp.dll.lice
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\obj\Release\WebApp.dll
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\obj\Release\WebApp.pdb
 D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\NewRelic.Api.Agent.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\log4net.dll
+D:\Dropbox\Projetos C#\Algoritimo Genetico\AG\WebApp\bin\log4net.xml

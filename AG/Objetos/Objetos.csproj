@@ -43,6 +43,7 @@
     <Compile Include="Configuracao.cs" />
     <Compile Include="Genes.cs" />
     <Compile Include="Job.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="RodouAG.cs" />
     <Compile Include="Usuario.cs" />
