@@ -395,7 +395,7 @@
                                                         <div class="input-group-addon">
                                                             <span class="glyphicon glyphicon-lock"></span>
                                                         </div>
-                                                        <input id="txtSenhaAntiga" type="text" class="form-control" placeholder="Senha Antiga" required maxlength="30" />
+                                                        <input id="txtSenhaAntiga" type="password" class="form-control" placeholder="Senha Antiga" required maxlength="30" />
                                                     </div>
                                                 </div>
 
@@ -405,7 +405,7 @@
                                                         <div class="input-group-addon">
                                                             <span class="glyphicon glyphicon-lock"></span>
                                                         </div>
-                                                        <input id="txtSenhaNova" type="text" class="form-control" placeholder="Senha Nova" required maxlength="30" />
+                                                        <input id="txtSenhaNova" type="password" class="form-control" placeholder="Senha Nova" required maxlength="30" />
                                                     </div>
                                                 </div>
 
@@ -415,7 +415,7 @@
                                                         <div class="input-group-addon">
                                                             <span class="glyphicon glyphicon-lock"></span>
                                                         </div>
-                                                        <input id="txtSenhaNovaNovamente" type="text" class="form-control" placeholder="Senha nova novamente" required maxlength="30" />
+                                                        <input id="txtSenhaNovaNovamente" type="password" class="form-control" placeholder="Senha nova novamente" required maxlength="30" />
                                                     </div>
                                                 </div>
 

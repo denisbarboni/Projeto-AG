@@ -36,7 +36,7 @@ namespace WebApp
             if (HttpContext.Current.Session["logado"] == null || HttpContext.Current.Session["logado"].ToString() != "True")
             {
                 HttpContext.Current.Session.Abandon();
-                HttpContext.Current.Response.Redirect("Login.aspx");
+                HttpContext.Current.Response.Redirect("../Default.aspx");
             }
             else
             {
@@ -85,7 +85,7 @@ namespace WebApp
             HttpContext.Current.Session.Clear();
             HttpContext.Current.Session.RemoveAll();
             HttpContext.Current.Session.Abandon();
-            HttpContext.Current.Response.Redirect("../index.aspx");
+            HttpContext.Current.Response.Redirect("../Default.aspx");
         }
 
         protected void sairNavbar_ServerClick(object sender, EventArgs e)
@@ -113,7 +113,6 @@ namespace WebApp
 
                 if (config != null)
                 {
-                    config = new Configuracao();
                     //Monta a config
                     config.SolucaoMax = Convert.ToDouble(solucao);
                     config.TaxaCrossover = Convert.ToDouble(crossover);
@@ -122,10 +121,13 @@ namespace WebApp
                     config.TotalPopulacao = Convert.ToInt32(populacao);
                     config.TotalGeracao = Convert.ToInt32(geracao);
 
+                    config.IdConfig = Convert.ToInt32(HttpContext.Current.Session["idUsuario"]);
+
                     dao.EdtConfig(config); //existe, update!
                 }
                 else
                 {
+                    config = new Configuracao();
                     //Monta a config
                     config.SolucaoMax = Convert.ToDouble(solucao);
                     config.TaxaCrossover = Convert.ToDouble(crossover);

@@ -110,7 +110,7 @@ function altSenha() {
                     dataType: "json",
                     success: function () {
                         setTimeout(function () {
-                            window.location.href = "../index.aspx"
+                            window.location.href = "../Default.aspx"
                         }, 1500);
                     }
                 });
@@ -150,6 +150,45 @@ function rodarAg() {
             $("#divtext1").text(rtn.d.text1);
             $("#divtext2").text(rtn.d.text2);
             $("#divtext3").text(rtn.d.text3);
+        }
+    });
+}
+
+function btnCadastrar() {
+
+    var u = $('#txtCadUsuario').val();
+    var s = $('#txtCadSenha').val();
+
+    var dataCad = JSON.stringify({
+        nome: $('#txtCadNome').val(),
+        sobrenome: $('#txtCadSobrenome').val(),
+        user: $('#txtCadUsuario').val(),
+        senha: $('#txtCadSenha').val(),
+        senha2: $('#txtCadSenha2').val(),
+        email: $('#txtCadEmail').val()
+    });
+
+    $.ajax({ //chama o webmethod logar
+        type: "POST",
+        url: "index.aspx/CadUser",
+        data: dataCad,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (rtn) {
+            if (rtn.d == "True") {
+                alert("Cadastrado com sucesso!");
+
+                $('#txtLogin').val(u);
+                $('#txtSenha').val(s);
+
+                Logar();
+            }
+            else if (rtn.d == "False") {
+                alert("Houve um erro! Tente novamente!");
+            }
+            else {
+                alert(rtn.d);
+            }
         }
     });
 }

@@ -51,7 +51,7 @@
     <Reference Include="DevExpress.XtraEditors.v15.1, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NewRelic.Api.Agent, Version=5.9.74.0, Culture=neutral, PublicKeyToken=06552fced0b33d87, processorArchitecture=MSIL">
-      <HintPath>..\packages\NewRelic.Azure.WebSites.x64.5.9.74.0\lib\NewRelic.Api.Agent.dll</HintPath>
+      <HintPath>..\packages\NewRelic.Azure.WebSites.5.9.74.0\lib\NewRelic.Api.Agent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DataVisualization" />
@@ -127,7 +127,7 @@
     <Content Include="img\team\02.jpg" />
     <Content Include="img\team\03.jpg" />
     <Content Include="img\team\04.jpg" />
-    <Content Include="index.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.1.11.1.js" />
@@ -224,21 +224,17 @@
     <Compile Include="ag\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ag\js\jquery.min.map" />
-    <Content Include="newrelic\newrelic.config" />
-    <Content Include="newrelic\Extensions\extension.xsd">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="css\.DS_Store" />
     <Content Include="fonts\.DS_Store" />
     <Content Include="fonts\font-awesome\.DS_Store" />
@@ -280,9 +276,14 @@
     <Content Include="img\.DS_Store" />
     <Content Include="img\client\.DS_Store" />
     <Content Include="js\.DS_Store" />
+    <Content Include="newrelic\newrelic.config" />
+    <Content Include="newrelic\Extensions\extension.xsd">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="newrelic\newrelic.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\algjssp %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\algjssp.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

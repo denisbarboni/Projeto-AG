@@ -19,7 +19,7 @@ namespace WebApp
             if (HttpContext.Current.Session["logado"] == null || HttpContext.Current.Session["logado"].ToString() != "True")
             {
                 HttpContext.Current.Session.Abandon();
-                HttpContext.Current.Response.Redirect("Login.aspx");
+                HttpContext.Current.Response.Redirect("../Default.aspx");
             }
             else
             {

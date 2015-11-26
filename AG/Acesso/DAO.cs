@@ -102,6 +102,32 @@ namespace Acesso
                 conn.Close();
             }
         }
+
+        public int AddUser(Usuario user)
+        {
+            try
+            {
+                conn = new SqlConnection(strConn);
+                conn.Open();
+
+                var query = "INSERT INTO usuario VALUES (@login, @senha, @idPlano);";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@login", user.User);
+                cmd.Parameters.AddWithValue("@senha", user.Senha);
+                cmd.Parameters.AddWithValue("@idPlano", user.Plano.IdPlano);
+
+                return cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         #endregion
 
         #region Config
@@ -154,7 +180,7 @@ namespace Acesso
                 conn = new SqlConnection(strConn);
                 conn.Open();
 
-                var query = "INSERT INTO configuracao VALUES (@SolucaoMax, @TaxaCrossover, @TaxaMutacao, true, @TotalPopulacao, @totalGeracao);";
+                var query = "INSERT INTO configuracao VALUES (@id, @SolucaoMax, @TaxaCrossover, @TaxaMutacao, 1, @TotalPopulacao, @totalGeracao);";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
