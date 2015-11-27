@@ -51,22 +51,21 @@ Servidor Web	Azure<br>
 Para implantação do projeto é necessário a configurações de um servidor WEB para hospedagem da aplicação e um servidor de banco de dados. A configuração da aplicação é somente a comunicação com o banco de dados. Feito isso, o sistema estará pronto para utilização.
 
 #ATIVIDADES REALIZADAS NO PERÍODO
-Nessa liberação foram contemplados os seguintes itens:
-Cód 	Título	Tarefa	Situação	Observação
-1	Esboço da página inicial	Layout para montagem da página inicial do sistema	Concluído	
-2	Login do usuário no serviço prestado	Acesso ao serviço onde o usuário poderá logar com seu usuário e senha para cadastrar os dados necessários para a ação do algoritimo genético.	Concluído	
-3	Cadastro das máquinas, setores, unidades, skus, Jobs e velocidades usadas no algoritimo genético	Disponibilizar o acesso do usuário nas opções de cadastro do sistema, onde o mesmo poderá cadastrar as informações necessárias para a execução do algoritimo genético futuramente.
-	Concluído	
-4	Execução do algoritimo genético.	Disponibilizar o acesso do usuário junto ao algoritimo genético, onde o mesmo irá apurar a melhor solução de acordo com as configurações definidas.	Concluido 	
-5	Disponibilização da aplicação no Servidor Web	Disponibilizar acesso por meio do servidor web	Concluído	
-6	Acesso as ferrametas administrativas	Disponibilizar acesso para as ferramentas administrativas	Concluído parcialmente	Falta configurar o logentries 
-7.	FERRAMENTA DE MONITORAMENTO
+Nessa liberação foram contemplados os seguintes itens<br>
+Esboço da página inicial	Layout para montagem da página inicial do sistema	Concluído	<br>
+Login do usuário no serviço prestado	Acesso ao serviço onde o usuário poderá logar com seu usuário e senha para cadastrar os dados necessários para a ação do algoritimo genético.	Concluído	<br>
+	Cadastro das máquinas, setores, unidades, skus, Jobs e velocidades usadas no algoritimo genético	Disponibilizar o acesso do usuário nas opções de cadastro do sistema, onde o mesmo poderá cadastrar as informações necessárias para a execução do algoritimo genético futuramente.	Concluído	<br>
+Execução do algoritimo genético.	Disponibilizar o acesso do usuário junto ao algoritimo genético, onde o mesmo irá apurar a melhor solução de acordo com as configurações definidas.	Concluido 	<br>
+Disponibilização da aplicação no Servidor Web	Disponibilizar acesso por meio do servidor web	Concluído	<br>
+Acesso as ferrametas administrativas	Disponibilizar acesso para as ferramentas administrativas	Concluído parcialmente	Falta configurar o logentries <br>
+
+#FERRAMENTA DE MONITORAMENTO
 A ferramenta de monitoramento escolhida para a aplicação é o New Relic. Trata-se de uma ferramenta multi-plataforma (PHP, Java, .NET, Ruby e Python) capaz de monitorar, este caso, a a aplicação.
-O principal propósito do New Relic é auxiliar no diagnóstico de possíveis problemas no código da aplicação, facilitando a identificação de gargalos que prejudiquem sua performance. A partir de gráficos de desempenho de fácil compreensão, é possível acompanhar resumos dos tempos de resposta da aplicação, transações com o banco de dados, conexões com serviços externos, visualizar relatórios de disponibilidade e de erros recorrentes, configurar alertas, entre outros.
+O principal propósito do New Relic é auxiliar no diagnóstico de possíveis problemas no código da aplicação, facilitando a identificação de gargalos que prejudiquem sua performance. A partir de gráficos de desempenho de fácil compreensão, é possível acompanhar resumos dos tempos de resposta da aplicação, transações com o banco de dados, conexões com serviços externos, visualizar relatórios de disponibilidade e de erros recorrentes, configurar alertas, entre outros.<br>
 A Integração com a aplicação foi teoricamente simples, pois, como para a aplicação está sendo usado um servidor da Microsoft, o Azure, add-ons podem ser adicionados na aplicação com certa facilidade.
 O acesso na ferramenta é feita pelo site HTTP://RPM.NEWRELIC.COM, pois se trata de um serviço SaaS.
-8.	FERRAMENTA DE LOG
-A ferramenta de log escolhida para a aplicação foi o uso de FTP e também do Logentries. O log entries trata-se de uma ferramenta que auxilia o desenvolvedor a ver os logs da aplicação em tempo real e de forma analítica.
+#FERRAMENTA DE LOG
+A ferramenta de log escolhida para a aplicação foi o uso de FTP e também do Logentries. O log entries trata-se de uma ferramenta que auxilia o desenvolvedor a ver os logs da aplicação em tempo real e de forma analítica.<br>
 Já o acesso via FTP mostra os logs crus, ou seja, não existe ferramenta para deixar de forma analítica os logs, porém, esses logs são bem completos, pois se trata do recurso do próprio Azure.
-9.	TESTE
+#TESTE
 Os testes realizados foram decorrentes para mostrar o funcionamento da aplicação, utilizando a ferramenta Selenium IDE, onde foram realizados testes automatizados.
